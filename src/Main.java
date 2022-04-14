@@ -7,6 +7,7 @@ public class Main {
 		
 		// Geia sas magkes
 		System.out.println("TRELO GLENTI");
+		System.out.println("PAME LIGO OMADAAAAAA");
 	}
 
 }
