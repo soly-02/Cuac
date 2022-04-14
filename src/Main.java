@@ -6,6 +6,7 @@ public class Main {
 
 		
 		// Geia sas magkes
+		System.out.println("TRELO GLENTI");
 	}
 
 }
