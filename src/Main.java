@@ -8,6 +8,7 @@ public class Main {
 		// Geia sas magkes
 		System.out.println("TRELO GLENTI");
 		System.out.println("PAME LIGO OMADAAAAAA");
+		System.out.println("HELLOOO!!!");
 		
 		GUI Interface= new GUI(); // Gui initialization 
 		
