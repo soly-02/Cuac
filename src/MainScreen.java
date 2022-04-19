@@ -1,4 +1,3 @@
-package cuac.windows;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import cuac.windows.SignUp_Register.ButtonListener;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -106,26 +104,40 @@ public class MainScreen extends JFrame {
 				
 				String action = e.getActionCommand();
 				if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2"))
-				   // anoigw thn dhlwsh thesewn
+				{// anoigw thn dhlwsh thesewn
 					
-					//MainScreen mainScr= new MainScreen();
-				 //    mainScr.setVisible(true);
-					System.out.println("yolo1");
+					EnterSeat eSeat= new EnterSeat();   
+				    eSeat.setVisible(true);
+				}
+				
+				
 				else if (action.equals("Covid Wallet"))
 					// anoigw to covid wallet
+                 {
+					
+					CovidWallet CovWal= new CovidWallet();
+					CovWal.setVisible(true);
+				}
 					
 					
 					
-					System.out.println("yolo2");
 				else if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2"))
 					// anoigw to infection page
+                      {
 					
+					InfectionScreen InfScr= new InfectionScreen();
+					InfScr.setVisible(true);
+				}
 					
-					System.out.println("yolo3");
+				
 				
 				else if (action.equals("\u0395\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2"))
 					// anoigw ths notifications 
-					System.out.println("yolo4");
+                {
+					
+				NotificationsScreen NotScr= new NotificationsScreen();
+				NotScr.setVisible(true);
+			}
 				
 			}
 

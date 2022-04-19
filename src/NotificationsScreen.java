@@ -1,4 +1,4 @@
-package cuac.windows;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -10,7 +10,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class InfectionScreen extends JFrame {
+public class NotificationsScreen extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,9 +19,9 @@ public class InfectionScreen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InfectionScreen() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 760, 513);
+	public NotificationsScreen() {
+		
+		setBounds(100, 100, 740, 493);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -29,21 +29,21 @@ public class InfectionScreen extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 51));
-		panel.setBounds(0, 0, 746, 476);
+		panel.setBounds(0, 0, 726, 456);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		JLabel lblE = new JLabel("E\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2");
+		lblE.setForeground(Color.WHITE);
+		lblE.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblE.setBounds(10, 43, 221, 41);
+		panel.add(lblE);
+		
 		JLabel user_email = new JLabel("dummie@uom.edu.gr");
-		user_email.setBounds(10, 11, 167, 21);
 		user_email.setForeground(Color.WHITE);
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		user_email.setBounds(10, 11, 167, 21);
 		panel.add(user_email);
-		
-		JLabel lblCovidWallet = new JLabel("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2");
-		lblCovidWallet.setForeground(Color.WHITE);
-		lblCovidWallet.setFont(new Font("Tahoma", Font.BOLD, 22));
-		lblCovidWallet.setBounds(10, 43, 221, 41);
-		panel.add(lblCovidWallet);
 	}
 
 }

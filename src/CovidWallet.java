@@ -1,4 +1,4 @@
-package cuac.windows;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -20,7 +20,7 @@ public class CovidWallet extends JFrame {
 	 * Create the frame.
 	 */
 	public CovidWallet() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 686, 504);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
