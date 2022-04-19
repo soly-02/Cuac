@@ -1,4 +1,4 @@
-package cuac.windows;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -9,9 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JComboBox;
 
-public class EnterSeat extends JFrame {
+public class InfectionScreen extends JFrame {
 
 	private JPanel contentPane;
 
@@ -20,9 +19,9 @@ public class EnterSeat extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EnterSeat() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 867, 585);
+	public InfectionScreen() {
+		
+		setBounds(100, 100, 760, 513);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -30,7 +29,7 @@ public class EnterSeat extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 51));
-		panel.setBounds(0, -11, 853, 548);
+		panel.setBounds(0, 0, 746, 476);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -40,12 +39,12 @@ public class EnterSeat extends JFrame {
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		panel.add(user_email);
 		
-		JLabel SeatAssign = new JLabel("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2");
-		SeatAssign.setForeground(new Color(255, 255, 255));
-		SeatAssign.setFont(new Font("Tahoma", Font.BOLD, 22));
-		SeatAssign.setBounds(10, 43, 221, 41);
-		panel.add(SeatAssign);
-		
-		
+		JLabel lblCovidWallet = new JLabel("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2");
+		lblCovidWallet.setForeground(Color.WHITE);
+		lblCovidWallet.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblCovidWallet.setBounds(10, 43, 221, 41);
+		panel.add(lblCovidWallet);
+		 
 	}
+
 }

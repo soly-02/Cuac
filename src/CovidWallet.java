@@ -1,4 +1,4 @@
-package cuac.windows;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -10,7 +10,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 
-public class InfectionScreen extends JFrame {
+
+public class CovidWallet extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,9 +20,9 @@ public class InfectionScreen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InfectionScreen() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 760, 513);
+	public CovidWallet() {
+		
+		setBounds(100, 100, 686, 504);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -29,7 +30,7 @@ public class InfectionScreen extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 51));
-		panel.setBounds(0, 0, 746, 476);
+		panel.setBounds(0, 0, 672, 467);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -39,11 +40,13 @@ public class InfectionScreen extends JFrame {
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		panel.add(user_email);
 		
-		JLabel lblCovidWallet = new JLabel("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2");
+		JLabel lblCovidWallet = new JLabel("Covid Wallet");
 		lblCovidWallet.setForeground(Color.WHITE);
 		lblCovidWallet.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblCovidWallet.setBounds(10, 43, 221, 41);
 		panel.add(lblCovidWallet);
+		
+		 
 	}
 
 }
