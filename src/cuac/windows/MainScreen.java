@@ -1,4 +1,4 @@
-
+package cuac.windows;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import cuac.windows.SignUp_Register.ButtonListener;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -15,7 +16,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 
 public class MainScreen extends JFrame {
 
@@ -27,7 +27,7 @@ public class MainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public MainScreen() {
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 871, 599);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,69 +98,40 @@ public class MainScreen extends JFrame {
 	}
 	
 	
-	/*	 class ButtonListener implements ActionListener {
-		 
-		 
-			
-			public void actionPerformed(ActionEvent e) {
-				
-				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
-				// mas stelnei sthn arxikh othoni
-				EnterSeat eseat= new EnterSeat();
-				 eseat.setVisible(true);
-			
-			}
-
-	
-	
-}
-	*/
-	
-	
-	
-	
-	class ButtonListener implements ActionListener {
+	 class ButtonListener implements ActionListener {
 		 
 		 
 			
 			public void actionPerformed(ActionEvent e) {
 				
 				String action = e.getActionCommand();
-				if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2")) {
-					EnterSeat eseat= new EnterSeat();    //prwth epilogh enterSeats dhlwsh theshs
-					 eseat.setVisible(true);
+				if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2"))
+				   // anoigw thn dhlwsh thesewn
 					
-				}
-				else if (action.equals("Covid Wallet")) {
+					//MainScreen mainScr= new MainScreen();
+				 //    mainScr.setVisible(true);
+					System.out.println("yolo1");
+				else if (action.equals("Covid Wallet"))
 					// anoigw to covid wallet
 					
-				CovidWallet cw= new CovidWallet();
-				cw.setVisible(true);
-				}	
 					
+					
+					System.out.println("yolo2");
 				else if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2"))
 					// anoigw to infection page
-				{
-					InfectionScreen infectionScr= new InfectionScreen();
-					infectionScr.setVisible(true);
 					
 					
-				}
-					
-					
+					System.out.println("yolo3");
 				
 				else if (action.equals("\u0395\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2"))
-				{
-					
-					NotificationsScreen NotifScr = new NotificationsScreen();
-					NotifScr.setVisible(true);
-					
-				}
+					// anoigw ths notifications 
+					System.out.println("yolo4");
+				
 			}
 
 	
 	
-}  
+}
 	
 	
 	

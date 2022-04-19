@@ -1,4 +1,4 @@
-
+package cuac.windows;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -9,9 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JComboBox;
 
-public class EnterSeat extends JFrame {
+public class NotificationsScreen extends JFrame {
 
 	private JPanel contentPane;
 
@@ -20,9 +19,9 @@ public class EnterSeat extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EnterSeat() {
-		
-		setBounds(100, 100, 867, 585);
+	public NotificationsScreen() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 740, 493);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -30,22 +29,21 @@ public class EnterSeat extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 51));
-		panel.setBounds(0, -11, 853, 548);
+		panel.setBounds(0, 0, 726, 456);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		JLabel lblE = new JLabel("E\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2");
+		lblE.setForeground(Color.WHITE);
+		lblE.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblE.setBounds(10, 43, 221, 41);
+		panel.add(lblE);
+		
 		JLabel user_email = new JLabel("dummie@uom.edu.gr");
-		user_email.setBounds(10, 11, 167, 21);
 		user_email.setForeground(Color.WHITE);
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		user_email.setBounds(10, 11, 167, 21);
 		panel.add(user_email);
-		
-		JLabel SeatAssign = new JLabel("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2");
-		SeatAssign.setForeground(new Color(255, 255, 255));
-		SeatAssign.setFont(new Font("Tahoma", Font.BOLD, 22));
-		SeatAssign.setBounds(10, 43, 221, 41);
-		panel.add(SeatAssign);
-		
-		
 	}
+
 }
