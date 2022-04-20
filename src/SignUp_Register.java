@@ -31,8 +31,11 @@ public class SignUp_Register extends JFrame {
 	private JPanel contentPane;
 	//To email kai to password molis patietai kapoio koympi(sign in/ register) stelnontai san string ston server.
 	// an ola einai komple vazei mesa ton xristi alliws error kai 3anadokimazei
-	private JTextField email;
-	private JPasswordField password;
+	private JTextField emailField;
+	private JPasswordField passwordField;
+	
+	private String email="dummy@uom.edu.gr";  // kanonika auta tha erxontai apo to input tou user
+	private String password="MySeecr3tpassw0rd";
 
 
 
@@ -56,15 +59,15 @@ public class SignUp_Register extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		email = new JTextField();
-		email.setBounds(129, 72, 229, 36);
-		panel.add(email);
-		email.setColumns(10);
+		emailField = new JTextField();
+		emailField.setBounds(129, 72, 229, 36);
+		panel.add(emailField);
+		emailField.setColumns(10);
 		
-		password = new JPasswordField();
-		password.setColumns(10);
-		password.setBounds(129, 182, 229, 36);
-		panel.add(password);
+		passwordField = new JPasswordField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(129, 182, 229, 36);
+		panel.add(passwordField);
 		
 		JButton signIn = new JButton("Sign In");
 		signIn.setForeground(new Color(255, 255, 255));
@@ -104,9 +107,17 @@ public class SignUp_Register extends JFrame {
 				
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
 				// mas stelnei sthn arxikh othoni
-				 MainScreen mainScr= new MainScreen();
-				 mainScr.setVisible(true);
-				 dispose ();
+				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
+				User u = new User(email, password); // new user = attempt a connection to the server
+				if(!(u.sendCredentials(email, password))) { //an ta sendCredentials epistrefoun sfalma
+					//pop up ena parathyro pou na leei lathos credentials
+				}
+				else {
+					MainScreen mainScr= new MainScreen();
+					mainScr.setVisible(true);
+					dispose ();
+				}
+				 
 			}
 
 	
