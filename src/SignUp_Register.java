@@ -113,7 +113,7 @@ public class SignUp_Register extends JFrame {
 					//pop up ena parathyro pou na leei lathos credentials
 				}
 				else {
-					MainScreen mainScr= new MainScreen();
+					MainScreen mainScr= new MainScreen();  //TODO constructors in GUI screens to pass user's data
 					mainScr.setVisible(true);
 					dispose ();
 				}

@@ -13,7 +13,7 @@ public class User {
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
 	
-	public User(String email, String password) { 
+	public User(String email, String password) {  // isws xreiastei k alla attributes
 		this.email = email;
 		this.password = password;
 		
@@ -22,8 +22,7 @@ public class User {
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         } catch (IOException e) { // an kati paei lathos
-            // Gracefully close everything.
-        	System.out.println("Error");
+        	System.out.println("Error creating client socket");
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
 	}
@@ -33,23 +32,23 @@ public class User {
 			bufferedWriter.write(email + ", " + password);  //edw stelnontai ta credentials
 			bufferedWriter.newLine();
 			bufferedWriter.flush();
-			
+			System.out.println("credentials sent");
 			//apo edw kai katw einai h apanthsh tou server
 			String msgFromServer;
 			try {
                msgFromServer = bufferedReader.readLine();  //blocking method
-               
+              // System.out.println(msgFromServer);
                 if(msgFromServer.equals("user not found")) {
                 	return false;
                 }
             } catch (IOException e) {
-                
+            	System.out.println("Error reading server's message");
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 return false;
             }
 		} catch(IOException e) {
            
-			System.out.println("Error");
+			System.out.println("Error while sending data to server");
             closeEverything(socket, bufferedReader, bufferedWriter);
             return false;
          
@@ -57,6 +56,8 @@ public class User {
 		return true; // an de symbei kanena exception kai o server de dosei "user not found" ola kala
 		
 	}
+	
+	//TODO method pou perimenei gia notifications
 	
 	
 	public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
@@ -75,5 +76,9 @@ public class User {
             e.printStackTrace();
         }
     }
+	
+	public String getEmail() {
+		return this.email;
+	}
 
 }
