@@ -9,12 +9,36 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.HeadlessException;
 
 public class CovidWallet extends JFrame {
 
 	private JPanel contentPane;
-
 	
+	private String kind;
+	
+/*-------------- C O N S T R U C T O R------------------*/
+	public CovidWallet(String kind) throws HeadlessException {
+		//super();
+		this.kind = kind;
+	}
+
+
+
+
+
+
+	/*--------------- Getters Setters------------------*/
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+			this.kind = kind;
+		}
+
+
 
 	/**
 	 * Create the frame.
@@ -45,5 +69,11 @@ public class CovidWallet extends JFrame {
 		lblCovidWallet.setBounds(10, 43, 221, 41);
 		panel.add(lblCovidWallet);
 	}
+
+
+
+
+
+
 
 }
