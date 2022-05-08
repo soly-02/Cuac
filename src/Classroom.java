@@ -1,16 +1,26 @@
 import java.util.ArrayList;
 
 public class Classroom {
+<<<<<<< HEAD
 
 	private int classId;
 	private int classSize;
 	private ArrayList <SeatInfo> classInfo = new ArrayList();
+=======
+	private int classId;
+	private int classSize;
+	private ArrayList<SeatInfo> classInfo = new ArrayList();
+>>>>>>> master
 	
 	public Classroom(int classId) {
 		this.classId= classId;
 		if (classId==1) {
+<<<<<<< HEAD
 			this.classSize=88;
 			
+=======
+			this.classSize = 88; 
+>>>>>>> master
 			//Making of class 1 (aithousa 1)
 			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
 			classInfo.add(s1);
@@ -93,6 +103,7 @@ public class Classroom {
 			classInfo.add(s35);
 			SeatInfo s36= new SeatInfo(36,24,25,26,34,35,37,38,46,47,48);
 			classInfo.add(s36);
+<<<<<<< HEAD
 			SeatInfo s37= new SeatInfo(37,25,26,27,35,36,38,47,48,49,0);
 			classInfo.add(s37);
 			SeatInfo s38= new SeatInfo(38,26,27,36,37,48,49,0,0,0,0);
@@ -105,18 +116,34 @@ public class Classroom {
 			
 			
 			
+=======
+			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
+			classInfo.add(s1);
+			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
+			classInfo.add(s1);
+>>>>>>> master
 			
 		}
 	}
 	
 	
 	
+<<<<<<< HEAD
 	public class SeatInfo{
 		private int seatId;
 		private ArrayList <Integer> nearbySeats= new ArrayList<Integer>();
 		
 		public SeatInfo (int seatId, int ns1, int ns2, int ns3, int ns4,
 				int ns5,int ns6, int ns7, int ns8, int ns9, int ns10){
+=======
+	public class SeatInfo {
+		private int seatId;
+		private ArrayList <Integer> nearbySeats = new ArrayList<Integer>();
+		
+		public SeatInfo(int seatId, int ns1,int ns2,int ns3,int ns4,
+				int ns5,int ns6,int ns7,int ns8,int ns9,int ns10) {
+	
+>>>>>>> master
 			this.seatId= seatId;
 			nearbySeats.add(ns1);
 			nearbySeats.add(ns2);
@@ -128,6 +155,7 @@ public class Classroom {
 			nearbySeats.add(ns8);
 			nearbySeats.add(ns9);
 			nearbySeats.add(ns10);
+<<<<<<< HEAD
 			
 			
 			
@@ -139,4 +167,12 @@ public class Classroom {
 	
 	
 	
+=======
+	}
+		
+
+	}
+	
+>>>>>>> master
 }
+
