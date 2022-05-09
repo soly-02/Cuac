@@ -91,10 +91,24 @@ public class Classroom {
 			classInfo.add(s35);
 			SeatInfo s36= new SeatInfo(36,24,25,26,34,35,37,38,46,47,48);
 			classInfo.add(s36);
-			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
-			classInfo.add(s1);
-			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
-			classInfo.add(s1);
+			SeatInfo s37= new SeatInfo(37,25,26,27,35,36,38,47,48,49,0);
+			classInfo.add(s37);
+			SeatInfo s38= new SeatInfo(38,26,27,36,37,48,49,0,0,0,0);
+			classInfo.add(s38);
+			SeatInfo s39= new SeatInfo(39,28,29,40,41,50,51,0,0,0,0);
+			classInfo.add(s39);
+			SeatInfo s40= new SeatInfo(40,28,29,30,39,41,42,50,51,52,0);
+			classInfo.add(s40);
+			SeatInfo s41= new SeatInfo(41,29,30,31,39,40,42,43,51,52,53);
+			classInfo.add(s41);
+			SeatInfo s42= new SeatInfo(42,30,31,32,40,41,43,44,52,53,54);
+			classInfo.add(s42);
+			SeatInfo s43= new SeatInfo(43,31,32,33,41,42,44,53,54,55,0);
+			classInfo.add(s43);
+			SeatInfo s44= new SeatInfo(44,32,33,42,43,54,55,0,0,0,0);
+			classInfo.add(s44);
+			
+			// ****************4TH ROW DONE****************
 			
 		}
 	}
