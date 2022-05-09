@@ -97,7 +97,7 @@ public class Classroom {
 			classInfo.add(s37);
 			SeatInfo s38= new SeatInfo(38,26,27,36,37,48,49,0,0,0,0);
 			classInfo.add(s38);
-<<<<<<< HEAD
+
 			SeatInfo s39= new SeatInfo(39,28,29,40,41,50,51,0,0,0,0);
 			classInfo.add(s39);
 			SeatInfo s40= new SeatInfo(40,28,29,30,39,41,42,50,51,52,0);
@@ -112,16 +112,7 @@ public class Classroom {
 			classInfo.add(s44);
 			
 			// ****************4TH ROW DONE****************
-=======
-			
-			
-			
-			
-			
-			
-			
-			
->>>>>>> master2
+
 			
 		}
 	}
