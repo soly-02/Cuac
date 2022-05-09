@@ -16,28 +16,29 @@ public class User {
 	public User(String email, String password) {  // isws xreiastei k alla attributes
 		this.email = email;
 		this.password = password;
-		
+	}
+	
+	public boolean connect() {
 		try {
 			socket = new Socket("localhost", 5000);  //attempt a connection
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            System.out.println("Connection established");  
         } catch (IOException e) { // an kati paei lathos
         	System.out.println("Error creating client socket");
             closeEverything(socket, bufferedReader, bufferedWriter);
+            return false;
         }
+		return true;
 	}
 	
 	public boolean sendCredentials(String email, String password) {
-		try {
-			bufferedWriter.write(email + ", " + password);  //edw stelnontai ta credentials
-			bufferedWriter.newLine();
-			bufferedWriter.flush();
+		if(send(email + ", " + password)) {  //edw stelnontai ta credentials
 			System.out.println("credentials sent");
 			//apo edw kai katw einai h apanthsh tou server
 			String msgFromServer;
 			try {
                msgFromServer = bufferedReader.readLine();  //blocking method
-              // System.out.println(msgFromServer);
                 if(msgFromServer.equals("user not found")) {
                 	return false;
                 }
@@ -46,15 +47,9 @@ public class User {
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 return false;
             }
-		} catch(IOException e) {
-           
-			System.out.println("Error while sending data to server");
-            closeEverything(socket, bufferedReader, bufferedWriter);
-            return false;
-         
-        }
+		}
 		return true; // an de symbei kanena exception kai o server de dosei "user not found" ola kala
-		
+			
 	}
 	
 	//TODO method pou perimenei gia notifications
@@ -79,6 +74,23 @@ public class User {
 	
 	public String getEmail() {
 		return this.email;
+	}
+	
+	public boolean send(String MsgToSend) {
+		try {
+			bufferedWriter.write(MsgToSend);
+			bufferedWriter.newLine();
+			bufferedWriter.flush();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Failed to send message");
+			closeEverything(socket, bufferedReader, bufferedWriter);
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+		
 	}
 
 }

@@ -36,13 +36,15 @@ public class SignUp_Register extends JFrame {
 	
 	private String email="dummy@uom.edu.gr";  // kanonika auta tha erxontai apo to input tou user
 	private String password="MySeecr3tpassw0rd";
-
+	private User u;
 
 
 	/**
 	 * Create the frame.
 	 */
 	public SignUp_Register() {
+		u =new User(email, password);
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\sofia\\OneDrive\\Desktop\\\u039F\u03BC\u03B1\u03B4\u03B9\u03BA\u03AE\\Project Managers\\UOMLOGOGR22.png"));
 		setTitle("Cuac");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,7 +110,10 @@ public class SignUp_Register extends JFrame {
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
 				// mas stelnei sthn arxikh othoni
 				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
-				User u = new User(email, password); // new user = attempt a connection to the server
+				if(!u.connect()) {
+					//pop-up oti den yparxei syndesh ston server
+					return;
+				}
 				if(!(u.sendCredentials(email, password))) { //an ta sendCredentials epistrefoun sfalma
 					//pop up ena parathyro pou na leei lathos credentials
 				}
@@ -117,8 +122,9 @@ public class SignUp_Register extends JFrame {
 					mainScr.setVisible(true);
 					dispose ();
 				}
+			
 				 
-			}
+		}
 
 	
 	

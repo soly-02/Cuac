@@ -33,33 +33,23 @@ public class ClientHandler implements Runnable{
     @Override
     public void run() {
         String messageFromClient;
-        String messageToClient;
         // Continue to listen for messages while a connection with the client is still established.
         while (socket.isConnected()) {
             try {
                 messageFromClient = bufferedReader.readLine(); //read client's message
-                //System.out.println(messageFromClient);
                 if(messageFromClient.contains(", ")) {  //an einai se morfi (username, password) shmainei oti tha kanoume login 
                 	if(!(registry.login(messageFromClient))) {
-                		messageToClient = "user not found";
-                		bufferedWriter.write(messageToClient);
-                        bufferedWriter.newLine();
-                        bufferedWriter.flush();
+                		sendMsg("user not found");
                 	}
                 	else {
-                		messageToClient = "user found";
-                		bufferedWriter.write(messageToClient);
-                        bufferedWriter.newLine();
-                        bufferedWriter.flush();
+                		sendMsg("user found");
                 	}
-                	//System.out.println(messageToClient);
                 }
                 else { // alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove
                 	removeClientHandler();
                 	System.out.println("client removed " + socket);
                 }
             } catch (IOException e) { // an yparxei sfalma opoudhpote parapanw tote kapoios client termatistike
-                // Close everything gracefully.
             	System.out.println("A client QUIT " + socket);
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
@@ -87,4 +77,18 @@ public class ClientHandler implements Runnable{
             e.printStackTrace();
         }
     }
+    public void sendMsg(String MsgToSend) {
+		try {
+			bufferedWriter.write(MsgToSend);
+			bufferedWriter.newLine();
+			bufferedWriter.flush();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Failed to send message to client");
+			closeEverything(socket, bufferedReader, bufferedWriter);
+			e.printStackTrace();
+		} 
+		
+	}
 }

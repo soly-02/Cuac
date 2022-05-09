@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
 public class Classroom {
+
 	private int classId;
 	private int classSize;
-	private ArrayList<SeatInfo> classInfo = new ArrayList();
+	private ArrayList <SeatInfo> classInfo = new ArrayList();
 	
 	public Classroom(int classId) {
 		this.classId= classId;
 		if (classId==1) {
-			this.classSize = 88; 
+			this.classSize=88;
+			
 			//Making of class 1 (aithousa 1)
 			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
 			classInfo.add(s1);
@@ -95,6 +97,7 @@ public class Classroom {
 			classInfo.add(s37);
 			SeatInfo s38= new SeatInfo(38,26,27,36,37,48,49,0,0,0,0);
 			classInfo.add(s38);
+<<<<<<< HEAD
 			SeatInfo s39= new SeatInfo(39,28,29,40,41,50,51,0,0,0,0);
 			classInfo.add(s39);
 			SeatInfo s40= new SeatInfo(40,28,29,30,39,41,42,50,51,52,0);
@@ -109,19 +112,28 @@ public class Classroom {
 			classInfo.add(s44);
 			
 			// ****************4TH ROW DONE****************
+=======
+			
+			
+			
+			
+			
+			
+			
+			
+>>>>>>> master2
 			
 		}
 	}
 	
 	
 	
-	public class SeatInfo {
+	public class SeatInfo{
 		private int seatId;
-		private ArrayList <Integer> nearbySeats = new ArrayList<Integer>();
+		private ArrayList <Integer> nearbySeats= new ArrayList<Integer>();
 		
-		public SeatInfo(int seatId, int ns1,int ns2,int ns3,int ns4,
-				int ns5,int ns6,int ns7,int ns8,int ns9,int ns10) {
-	
+		public SeatInfo (int seatId, int ns1, int ns2, int ns3, int ns4,
+				int ns5,int ns6, int ns7, int ns8, int ns9, int ns10){
 			this.seatId= seatId;
 			nearbySeats.add(ns1);
 			nearbySeats.add(ns2);
@@ -133,10 +145,16 @@ public class Classroom {
 			nearbySeats.add(ns8);
 			nearbySeats.add(ns9);
 			nearbySeats.add(ns10);
+			
+			
+			
+			
+			
+		}
 	}
-		
-
-	}
+	
+	
+	
 	
 }
 
