@@ -2,6 +2,7 @@
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,21 +15,25 @@ public class CovidWallet extends JFrame{
 	//Constructors and variables
 	private JFrame frame = new JFrame();
 	private JPanel panel = new JPanel();
+	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
 	private ButtonListener click = new ButtonListener(); //ButtonListener assigned to the button.
 	private File file = new File(""); //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
+	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
 	
 	//Constructor for CovidWallet window.
 	public CovidWallet() {
 		
-		frame.setTitle("PDFReader");
-		
-		panel.setBackground(new Color(0, 0, 51));
+		frame.setTitle("Covid Wallet"); //Sets the title.
+		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
 		
-		uploadFile.addActionListener(click);
+		certificateSelection = new JComboBox<String>(kind);
+		panel.add(certificateSelection);
+		certificateSelection.addActionListener(null); //Note to self: create the actionListener class.
 		
+		uploadFile.addActionListener(click);
 		panel.add(uploadFile);
 				
 		frame.setVisible(true);
@@ -49,7 +54,7 @@ public class CovidWallet extends JFrame{
 
 			if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
 			  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
-			  
+			  //file.getAbsolutePath();
 			  //System.out.println(file.getAbsolutePath());
 			  
 			} else {
