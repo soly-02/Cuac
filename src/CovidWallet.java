@@ -24,6 +24,7 @@ public class CovidWallet extends JFrame{
 	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
 	private ButtonListener click = new ButtonListener(); //ButtonListener assigned to the button.
+	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = new File(""); //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
@@ -124,7 +125,7 @@ public class CovidWallet extends JFrame{
 		
 		certificateSelection = new JComboBox<String>(kind);
 		panel.add(certificateSelection);
-		certificateSelection.addActionListener(null); //Note to self: create the actionListener class.
+		certificateSelection.addActionListener(select);
 		
 		uploadFile.addActionListener(click);
 		panel.add(uploadFile);
@@ -132,6 +133,16 @@ public class CovidWallet extends JFrame{
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setSize(300, 300);
+	}
+	
+	class ComboBoxListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			certificateSelection.getSelectedItem();
+			
+		}
+		
 	}
 	
 	class ButtonListener implements ActionListener {
@@ -147,7 +158,7 @@ public class CovidWallet extends JFrame{
 
 			if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
 			  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
-			  //file.getAbsolutePath();
+			  filePath = file.getAbsolutePath();
 			  //System.out.println(file.getAbsolutePath());
 			  
 			} else {
@@ -196,6 +207,11 @@ public class CovidWallet extends JFrame{
 		}
 		
 	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+	
 }
 
 
