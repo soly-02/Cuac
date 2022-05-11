@@ -23,6 +23,8 @@ public class CovidWallet extends JFrame{
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
 	
+	//test
+	
 	//Constructor for CovidWallet window.
 	public CovidWallet() {
 		
