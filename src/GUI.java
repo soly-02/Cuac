@@ -12,8 +12,7 @@ import java.awt.event.ActionListener;
 			 
 			 SignUp_Register frame = new SignUp_Register();
 				frame.setVisible(true);
-				MainScreen mainScr= new MainScreen();  //TODO constructors in GUI screens to pass user's data
-				mainScr.setVisible(true);
+				
 			 
 		 }
 		 

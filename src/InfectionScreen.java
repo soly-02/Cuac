@@ -6,26 +6,31 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class InfectionScreen extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField Μερα;
-	private JTextField Μήνας;
-	private JTextField Έτος;
-
+	private JTextField day;
+	private JTextField month;
+	private JTextField year;
+	private User u;
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public InfectionScreen() {
-		
+	public InfectionScreen(User u) {
+		this.u=u;
 		setBounds(100, 100, 760, 513);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -38,7 +43,7 @@ public class InfectionScreen extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel user_email = new JLabel("dummie@uom.edu.gr");
+		JLabel user_email = new JLabel(u.getEmail());
 		user_email.setBounds(10, 11, 167, 21);
 		user_email.setForeground(Color.WHITE);
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -56,30 +61,33 @@ public class InfectionScreen extends JFrame {
 		lblNewLabel.setBounds(176, 132, 384, 50);
 		panel.add(lblNewLabel);
 		
-		Μερα = new JTextField();
-		Μερα.setFont(new Font("Microsoft YaHei", Font.PLAIN, 22));
-		Μερα.setBounds(118, 239, 126, 41);
-		panel.add(Μερα);
-		Μερα.setColumns(10);
+		day = new JTextField();
+		day.setFont(new Font("Microsoft YaHei", Font.PLAIN, 22));
+		day.setBounds(118, 239, 126, 41);
+		panel.add(day);
+		day.setColumns(10);
 		
-		Μήνας = new JTextField();
-		Μήνας.setFont(new Font("Microsoft YaHei", Font.PLAIN, 22));
-		Μήνας.setColumns(10);
-		Μήνας.setBounds(317, 239, 126, 41);
-		panel.add(Μήνας);
+		month = new JTextField();
+		month.setFont(new Font("Microsoft YaHei", Font.PLAIN, 22));
+		month.setColumns(10);
+		month.setBounds(317, 239, 126, 41);
+		panel.add(month);
 		
-		Έτος = new JTextField();
-		Έτος.setFont(new Font("Microsoft YaHei", Font.PLAIN, 22));
-		Έτος.setColumns(10);
-		Έτος.setBounds(514, 239, 126, 41);
-		panel.add(Έτος);
+		year = new JTextField();
+		year.setFont(new Font("Microsoft YaHei", Font.PLAIN, 22));
+		year.setColumns(10);
+		year.setBounds(514, 239, 126, 41);
+		panel.add(year);
 		
 		JButton okButton = new JButton("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039A\u03C1\u03BF\u03CD\u03C3\u03BC\u03B1\u03C4\u03BF\u03C2");
 		okButton.setForeground(Color.WHITE);
 		okButton.setFont(new Font("Microsoft YaHei", Font.BOLD, 20));
 		okButton.setBackground(Color.RED);
-		okButton.setBounds(254, 337, 255, 50);
+		okButton.setBounds(224, 337, 298, 50);
 		panel.add(okButton);
+		
+		 ButtonListener bb= new ButtonListener();
+		 okButton.addActionListener(bb);
 		
 		JLabel lblNewLabel_1 = new JLabel("\u039C\u03AD\u03C1\u03B1");
 		lblNewLabel_1.setForeground(Color.WHITE);
@@ -100,4 +108,24 @@ public class InfectionScreen extends JFrame {
 		panel.add(lblNewLabel_1_2);
 	}
 
+	class ButtonListener implements ActionListener {
+		 
+		
+		
+		public void actionPerformed(ActionEvent e) {
+			 
+			u.getInfection().setCovidStatus(true);
+			u.getInfection().setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
+			System.out.println(u.getInfection().getInfectionDate());
+			dispose();
+			
+		}
+
+
+
+}
+	
+	
+	
+	
 }

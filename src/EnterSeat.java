@@ -5,9 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -19,20 +24,23 @@ import javax.swing.UIManager;
 public class EnterSeat extends JFrame {
 
 	private JPanel contentPane;
+	private JRadioButton rb1;
+	private JRadioButton rb2;
+	private JRadioButton rb3;
 	private JTextField startTime;
 	private JTextField endTime;
 	private JTextField dayEnter;
 	private JTextField monthEnter;
 	private JTextField yearEnter;
 	private JTextField seatEnter;
-
+    private User u;
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public EnterSeat() {
-		
+	public EnterSeat(User u) {
+		 this.u = u;
 		 ButtonGroup G1;
 		
 		setBounds(100, 100, 867, 585);
@@ -47,7 +55,7 @@ public class EnterSeat extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel user_email = new JLabel("dummie@uom.edu.gr");
+		JLabel user_email = new JLabel(u.getEmail());
 		user_email.setBounds(10, 11, 167, 21);
 		user_email.setForeground(Color.WHITE);
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -65,17 +73,17 @@ public class EnterSeat extends JFrame {
 		lblNewLabel.setBounds(136, 110, 207, 57);
 		panel.add(lblNewLabel);
 		
-		JRadioButton rb1 = new JRadioButton("\u0391\u03BC\u03C6\u03B9\u03B8\u03AD\u03B1\u03C4\u03C1\u03BF 12");
+		rb1 = new JRadioButton("\u0391\u03BC\u03C6\u03B9\u03B8\u03AD\u03B1\u03C4\u03C1\u03BF 12");
 		rb1.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
 		rb1.setBounds(372, 110, 199, 21);
 		panel.add(rb1);
 		
-		JRadioButton rb2 = new JRadioButton("\u0395\u03C1\u03B3\u03B1\u03C3\u03C4\u03AE\u03C1\u03B9\u03BF 234");
+		rb2 = new JRadioButton("\u0395\u03C1\u03B3\u03B1\u03C3\u03C4\u03AE\u03C1\u03B9\u03BF 234");
 		rb2.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
 		rb2.setBounds(372, 134, 199, 21);
 		panel.add(rb2);
 		
-		JRadioButton rb3 = new JRadioButton("\u039A\u03A5\u0394");
+		rb3 = new JRadioButton("\u039A\u03A5\u0394");
 		rb3.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
 		rb3.setBounds(372, 158, 199, 21);
 		panel.add(rb3);
@@ -153,6 +161,9 @@ public class EnterSeat extends JFrame {
 		 okButton.setBounds(372, 486, 103, 35);
 		 panel.add(okButton);
 		 
+		 ButtonListener bb= new ButtonListener();
+		 okButton.addActionListener(bb);
+		 
 		 JLabel lblNewLabel_1_1_1_2 = new JLabel("\u039C\u03AD\u03C1\u03B1 ");
 		 lblNewLabel_1_1_1_2.setForeground(Color.WHITE);
 		 lblNewLabel_1_1_1_2.setFont(new Font("Microsoft YaHei", Font.BOLD, 15));
@@ -171,4 +182,44 @@ public class EnterSeat extends JFrame {
 		 lblNewLabel_1_1_1_2_2.setBounds(670, 308, 70, 46);
 		 panel.add(lblNewLabel_1_1_1_2_2);
 	}
+	
+	
+	
+	
+	class ButtonListener implements ActionListener {
+		 
+		 int classId;
+		
+		public void actionPerformed(ActionEvent e) {
+			 
+			
+			// Check which class was selected
+			if (rb1.isSelected()) {
+				classId=1;
+			}
+			else if (rb2.isSelected()) {
+				classId=2;
+			}
+			else if (rb3.isSelected()) {
+				classId=3;
+			}
+			else 
+				classId=0;
+			
+			if (classId!= 0) {
+				
+				String code = classId+"/"+ startTime.getText()+"/"+ endTime.getText()+"/"+ dayEnter.getText()+ "/"+
+				monthEnter.getText()+ "/"+ yearEnter.getText()+"/"+seatEnter.getText() + "/"+ u.getEmail();
+				System.out.println(code);
+				// EDW PREPEI NA EXW KLASH APO TON SERVER GIA NA STEILW TON CODE PX SERVER.SEND(String code)
+			    dispose();
+			}
+			
+			
+			
+		}
+
+
+
+}
 }

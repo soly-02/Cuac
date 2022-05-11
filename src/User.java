@@ -4,18 +4,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+
 
 public class User {
 	
 	private String email;
 	private String password;
+	private ArrayList <String> myNotifications= new ArrayList();
+	private String myPDFPath;
+	private Infection i;
 	private Socket socket;
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
 	
-	public User(String email, String password) {  // isws xreiastei k alla attributes
+	public User(String email, String password, Infection i) {  // isws xreiastei k alla attributes
 		this.email = email;
 		this.password = password;
+		this.i=i;
 	}
 	
 	public boolean connect() {
@@ -75,6 +81,16 @@ public class User {
 	public String getEmail() {
 		return this.email;
 	}
+	
+	//---------GIA TRIAL MONO------------
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public Infection getInfection() {
+		return this.i;
+	}
+	//-----------------------------------
 	
 	public boolean send(String MsgToSend) {
 		try {

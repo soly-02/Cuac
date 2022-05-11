@@ -34,8 +34,7 @@ public class SignUp_Register extends JFrame {
 	private JTextField emailField;
 	private JPasswordField passwordField;
 	
-	private String email="dummy@uom.edu.gr";  // kanonika auta tha erxontai apo to input tou user
-	private String password="MySeecr3tpassw0rd";
+	
 	private User u;
 
 
@@ -43,7 +42,7 @@ public class SignUp_Register extends JFrame {
 	 * Create the frame.
 	 */
 	public SignUp_Register() {
-		u =new User(email, password);
+		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\sofia\\OneDrive\\Desktop\\\u039F\u03BC\u03B1\u03B4\u03B9\u03BA\u03AE\\Project Managers\\UOMLOGOGR22.png"));
 		setTitle("Cuac");
@@ -66,11 +65,17 @@ public class SignUp_Register extends JFrame {
 		panel.add(emailField);
 		emailField.setColumns(10);
 		
+	 //	email= emailField.getText();
+		
+		
 		passwordField = new JPasswordField();
 		passwordField.setColumns(10);
 		passwordField.setBounds(129, 182, 229, 36);
 		panel.add(passwordField);
 		
+		// password = String.valueOf(passwordField.getPassword());   //DEN EIMAI SIGOYRH GIA AYTO
+		
+		 
 		JButton signIn = new JButton("Sign In");
 		signIn.setForeground(new Color(255, 255, 255));
 		signIn.setFont(new Font("Microsoft Tai Le", Font.BOLD, 17));
@@ -107,6 +112,15 @@ public class SignUp_Register extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				
+				Infection i = new Infection();
+				u =new User(emailField.getText(), String.valueOf(passwordField.getPassword()),i);
+				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
+				mainScr.setVisible(true);
+				dispose ();
+				
+			/* ------**BAGG TA BAZW OLA SE SXOLIA GIA NA KANW ELEGXOYS **************------------	
+			 * 
+			 * 
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
 				// mas stelnei sthn arxikh othoni
 				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
@@ -118,12 +132,12 @@ public class SignUp_Register extends JFrame {
 					//pop up ena parathyro pou na leei lathos credentials
 				}
 				else {
-					MainScreen mainScr= new MainScreen();  //TODO constructors in GUI screens to pass user's data
+					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
 					mainScr.setVisible(true);
 					dispose ();
 				}
 			
-				 
+				 */
 		}
 
 	

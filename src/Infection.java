@@ -2,14 +2,16 @@
 public class Infection {
 
 	private boolean covidStatus;
+	private String date;
 
 	//to Countdown 8a to kanei h elena leei
 	
 	/*-------------- C O N S T R U C T O R------------------*/
 	
-	public Infection(boolean covidStatus) {
+	public Infection() {
 		//super();
-		this.covidStatus = covidStatus;
+		this.covidStatus = false;
+        this.date = "0";	
 	}
 
 
@@ -27,7 +29,13 @@ public class Infection {
 		this.covidStatus = covidStatus;
 	}
 	
+	public void setInfectionDate(String date) {
+		this.date = date;
+	}
 	
+	public String getInfectionDate() {
+		return date;
+	}
 	
 	
 	

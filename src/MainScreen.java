@@ -18,13 +18,14 @@ import java.awt.event.ActionEvent;
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
-
+	private User u;
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public MainScreen() {
+	public MainScreen(User u) {
+		this.u = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 871, 599);
 		contentPane = new JPanel();
@@ -38,7 +39,7 @@ public class MainScreen extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel user_email = new JLabel("dummie@uom.edu.gr");
+		JLabel user_email = new JLabel(u.getEmail());
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		user_email.setBounds(10, 11, 167, 38);
 		user_email.setForeground(new Color(255, 255, 255));
@@ -106,7 +107,7 @@ public class MainScreen extends JFrame {
 				if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2"))
 				{// anoigw thn dhlwsh thesewn
 					
-					EnterSeat eSeat= new EnterSeat();   
+					EnterSeat eSeat= new EnterSeat(u);   
 				    eSeat.setVisible(true);
 				}
 				
@@ -115,7 +116,7 @@ public class MainScreen extends JFrame {
 					// anoigw to covid wallet
                  {
 					
-					CovidWallet CovWal= new CovidWallet();
+					CovidWallet CovWal= new CovidWallet(u);
 					CovWal.setVisible(true);
 				}
 					
@@ -125,7 +126,7 @@ public class MainScreen extends JFrame {
 					// anoigw to infection page
                       {
 					
-					InfectionScreen InfScr= new InfectionScreen();
+					InfectionScreen InfScr= new InfectionScreen(u);
 					InfScr.setVisible(true);
 				}
 					
@@ -135,7 +136,7 @@ public class MainScreen extends JFrame {
 					// anoigw ths notifications 
                 {
 					
-				NotificationsScreen NotScr= new NotificationsScreen();
+				NotificationsScreen NotScr= new NotificationsScreen(u);
 				NotScr.setVisible(true);
 			}
 				

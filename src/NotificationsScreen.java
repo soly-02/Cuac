@@ -13,13 +13,15 @@ import java.awt.Font;
 public class NotificationsScreen extends JFrame {
 
 	private JPanel contentPane;
-
+	private User u;
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public NotificationsScreen() {
+	public NotificationsScreen(User u) {
+		
+		this.u=u;
 		
 		setBounds(100, 100, 740, 493);
 		contentPane = new JPanel();
@@ -39,7 +41,7 @@ public class NotificationsScreen extends JFrame {
 		lblE.setBounds(10, 43, 221, 41);
 		panel.add(lblE);
 		
-		JLabel user_email = new JLabel("dummie@uom.edu.gr");
+		JLabel user_email = new JLabel(u.getEmail());
 		user_email.setForeground(Color.WHITE);
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		user_email.setBounds(10, 11, 167, 21);
