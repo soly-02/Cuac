@@ -40,7 +40,7 @@ public class CovidWallet extends JFrame{
 		
 		certificateSelection = new JComboBox<String>(kind);
 		panel.add(certificateSelection);
-		certificateSelection.addActionListener(select); //Note to self: create the actionListener class.
+		certificateSelection.addActionListener(select);
 		
 		uploadFile.addActionListener(click);
 		panel.add(uploadFile);
@@ -62,8 +62,7 @@ public class CovidWallet extends JFrame{
 
 			if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
 			  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
-			  //file.getAbsolutePath();
-			  //System.out.println(file.getAbsolutePath());
+			  filePath = file.getAbsolutePath();
 			  
 			} else {
 			  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
@@ -117,7 +116,9 @@ public class CovidWallet extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			certificateSelection.getSelectedItem();
+			if(certificateSelection.getSelectedItem() == "Πιστοποιητικό Εμβολιασμού") {
+				
+			}
 			
 		}
 		
