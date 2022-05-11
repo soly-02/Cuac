@@ -145,6 +145,20 @@ public class MainScreen extends JFrame {
 	
 	
 }
+	 
+	 public class CovidCountdown {
+		 
+		 String dateInfection;// h mera poy kollise
+		 
+		 public void CovidCountdown() {
+			 dateInfection = u.getInfection().getInfectionDate();
+			 
+			 
+			 
+		 }
+		 
+		 
+	 }
 	
 	
 	
