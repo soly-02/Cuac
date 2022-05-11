@@ -1,12 +1,11 @@
 
 import java.awt.Color;
 
-<<<<<<< HEAD
+
 
 import java.awt.Color;
 
-=======
->>>>>>> Couak/PDF_reader
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -28,7 +27,7 @@ public class CovidWallet extends JFrame{
 	private File file = new File(""); //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
-<<<<<<< HEAD
+
 	private User u;
 	
 	//Constructor for CovidWallet window.
@@ -109,13 +108,12 @@ public class CovidWallet extends JFrame{
 			}else { //If not, it returns a blank string.
 				return "";
 			}
-		}
+		
 		
 	}
 }
 
-=======
-	
+
 	//Constructor for CovidWallet window.
 	public CovidWallet() {
 		
@@ -215,4 +213,4 @@ public class CovidWallet extends JFrame{
 }
 
 
->>>>>>> Couak/PDF_reader
+
