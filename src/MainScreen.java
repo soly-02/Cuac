@@ -58,6 +58,9 @@ public class MainScreen extends JFrame {
 		Quarantine_Countdown.setHorizontalAlignment(SwingConstants.TRAILING);
 		Quarantine_Countdown.setBounds(551, 15, 195, 31);
 		panel.add(Quarantine_Countdown);
+		CovidCountdown c= new CovidCountdown(); //NEO COUNTDOWN
+		
+		
 		
 		JButton EnterSeat = new JButton("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2");
 		EnterSeat.setBackground(new Color(255, 255, 255));
@@ -152,9 +155,9 @@ public class MainScreen extends JFrame {
 		 
 		 public void CovidCountdown() {
 			 dateInfection = u.getInfection().getInfectionDate();
-			 
-			 
-			 
+			 String[] nums= dateInfection.split("/"); 
+			// nums[0]= ""+Integer.valueOf(nums[0])+5;
+			// System.out.println("aaaa"+nums[0]);
 		 }
 		 
 		 
