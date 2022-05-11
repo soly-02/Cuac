@@ -13,6 +13,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.awt.event.ActionEvent;
 
 public class MainScreen extends JFrame {
@@ -158,7 +160,17 @@ public class MainScreen extends JFrame {
 			 String[] nums= dateInfection.split("/"); 
 			// nums[0]= ""+Integer.valueOf(nums[0])+5;
 			// System.out.println("aaaa"+nums[0]);
+			 
+			 final LocalDate target = LocalDate.of(2022, 5, 1); // temp Target date (year, month, day) date of infection+5 (to be converted)
+		     final long result = calculateDaysLeft(target);
+		     System.out.println(result);
 		 }
+
+		    private static long calculateDaysLeft(LocalDate fromDate) {
+		        final LocalDate today = LocalDate.now(); // The current date
+		        return fromDate.until(today, ChronoUnit.DAYS); // "until" function comes from Java DateTime API
+		    }
+		 
 		 
 		 
 	 }
