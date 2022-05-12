@@ -30,6 +30,8 @@ public class CovidWallet extends JFrame{
 
 	private User u;
 	
+	//test
+	
 	//Constructor for CovidWallet window.
 	public CovidWallet(User u) {
 		
