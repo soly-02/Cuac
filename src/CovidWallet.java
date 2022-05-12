@@ -26,7 +26,7 @@ public class CovidWallet extends JFrame{
 	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = new File(""); //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
-	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
+	private String[] kind = {"Ξ ΞΉΟƒΟ„ΞΏΟ€ΞΏΞΉΞ·Ο„ΞΉΞΊΟ Ξ•ΞΌΞ²ΞΏΞ»ΞΉΞ±ΟƒΞΌΞΏΟ", "Ξ ΞΉΟƒΟ„ΞΏΟ€ΞΏΞΉΞ·Ο„ΞΉΞΊΟ ΞΟΟƒΞ·ΟƒΞ·Ο‚", "Rapid Test"};//Array containing the different kinds of certificates.
 
 	private User u;
 	
@@ -118,7 +118,7 @@ public class CovidWallet extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(certificateSelection.getSelectedItem() == "Πιστοποιητικό Εμβολιασμού") {
+			if(certificateSelection.getSelectedItem() == "ΓΓ©Γ³Γ΄Γ―Γ°Γ―Γ©Γ§Γ΄Γ©ΓªΓΌ Γ…Γ¬ΓΆΓ―Γ«Γ©Γ΅Γ³Γ¬Γ―Γ½") {
 				
 			}
 			
