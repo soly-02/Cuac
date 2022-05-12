@@ -118,7 +118,7 @@ public class CovidWallet extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(certificateSelection.getSelectedItem() == "Ðéóôïðïéçôéêü Åìâïëéáóìïý") {
+			if(certificateSelection.getSelectedItem() == "Πιστοποιητικό Εμβολιασμού") {
 				
 			}
 			
