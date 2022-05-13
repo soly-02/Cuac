@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -21,7 +22,7 @@ public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
 	private User u;
-	
+	private MainScreen m;
 
 	/**
 	 * Create the frame.
@@ -131,7 +132,7 @@ public class MainScreen extends JFrame {
 					// anoigw to infection page
                       {
 					
-					InfectionScreen InfScr= new InfectionScreen(u);
+					InfectionScreen InfScr= new InfectionScreen(u,m);
 					InfScr.setVisible(true);
 				}
 					
@@ -153,13 +154,24 @@ public class MainScreen extends JFrame {
 	 
 	 public class CovidCountdown {
 		 
+		
 		 String dateInfection;// h mera poy kollise
 		 
 		 public void CovidCountdown() {
+			 
+			
 			 dateInfection = u.getInfection().getInfectionDate();
 			 String[] nums= dateInfection.split("/"); 
-			// nums[0]= ""+Integer.valueOf(nums[0])+5;
-			// System.out.println("aaaa"+nums[0]);
+			 
+			 
+			 int[] array = new int[nums.length];
+			 
+			 for (int i = 0; i < nums.length; i++) {
+		            array[i] = Integer.parseInt(nums[i]);
+		        }
+			 
+			 
+			System.out.println(u.getInfection().getInfectionDate());
 			 
 			 final LocalDate target = LocalDate.of(2022, 5, 1); // temp Target date (year, month, day) date of infection+5 (to be converted)
 		     final long result = calculateDaysLeft(target);
@@ -172,6 +184,23 @@ public class MainScreen extends JFrame {
 		    }
 		 
 		 
+		 
+	 }
+	 
+	 public MainScreen getMe() {
+		 return m;
+	 }
+	 public void setMe(MainScreen m) {
+		 this.m= m;
+	 }
+	 
+	 
+		 
+		 public void refresh() {
+			 
+			 SwingUtilities.updateComponentTreeUI(contentPane);
+			 
+			 
 		 
 	 }
 	
