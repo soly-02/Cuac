@@ -17,11 +17,13 @@ public class User {
 	private Socket socket;
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
+	private MainScreen mainScr;
 	
 	public User(String email, String password, Infection i) {  // isws xreiastei k alla attributes
 		this.email = email;
 		this.password = password;
 		this.i=i;
+	
 	}
 	
 	public boolean connect() {  // kata th syndesh userID tha einai to email 
@@ -83,7 +85,17 @@ public class User {
 		return this.email;
 	}
 	
+	
+	
+	
 	//---------GIA TRIAL MONO------------
+	
+	public void setNexEmail() {
+		this.email= "babinos";
+		
+	}
+	
+	
 	public String getPassword() {
 		return this.password;
 	}
@@ -91,6 +103,22 @@ public class User {
 	public Infection getInfection() {
 		return this.i;
 	}
+	
+	
+	public void getMainScreen(MainScreen m) {
+		mainScr=m;
+		
+		
+	}
+	
+	public void startCovidCountdown() {
+		mainScr.refresh();
+		
+		
+	}
+	
+	
+	
 	//-----------------------------------
 	
 	public void send(String MsgToSend) {

@@ -23,7 +23,7 @@ public class MainScreen extends JFrame {
 	private JPanel contentPane;
 	private User u;
 	private MainScreen m;
-
+    private JLabel user_email;
 	/**
 	 * Create the frame.
 	 */
@@ -42,7 +42,7 @@ public class MainScreen extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel user_email = new JLabel(u.getEmail());
+		user_email = new JLabel(u.getEmail());
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		user_email.setBounds(10, 11, 167, 38);
 		user_email.setForeground(new Color(255, 255, 255));
@@ -61,6 +61,8 @@ public class MainScreen extends JFrame {
 		Quarantine_Countdown.setHorizontalAlignment(SwingConstants.TRAILING);
 		Quarantine_Countdown.setBounds(551, 15, 195, 31);
 		panel.add(Quarantine_Countdown);
+		
+		
 		CovidCountdown c= new CovidCountdown(); //NEO COUNTDOWN
 		
 		
@@ -132,7 +134,7 @@ public class MainScreen extends JFrame {
 					// anoigw to infection page
                       {
 					
-					InfectionScreen InfScr= new InfectionScreen(u,m);
+					InfectionScreen InfScr= new InfectionScreen(u);
 					InfScr.setVisible(true);
 				}
 					
@@ -186,23 +188,36 @@ public class MainScreen extends JFrame {
 		 
 		 
 	 }
-	 
-	 public MainScreen getMe() {
-		 return m;
-	 }
-	 public void setMe(MainScreen m) {
-		 this.m= m;
-	 }
+
 	 
 	 
 		 
 		 public void refresh() {
+			 //GIA NA ARXISEI TO COUNTDOWN DOKIMH ME REFRESH TO EMAIL
+			 u.setNexEmail();
+			 user_email.setText(u.getEmail());
+			user_email.revalidate();
 			 
-			 SwingUtilities.updateComponentTreeUI(contentPane);
+			    
+			    System.out.println("egine;"+ u.getEmail());
+			
 			 
 			 
 		 
 	 }
+		 
+		 // ****  KWDIKAS ISWS GIA META, NA KANEI REFRESH TO MAINSCREEN ANA 30 DEUTERA  ***
+		 
+	/*	 ActionListener task = new ActionListener() {
+	            public void actionPerformed(ActionEvent evt) {
+	                // Do stuff
+	            }
+	};
+	Timer timer = new Timer(30 ,task); // Execute task each 30 miliseconds
+	timer.setRepeats(true);
+	timer.start();
+		 
+		 */
 	
 	
 	

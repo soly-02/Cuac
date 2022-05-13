@@ -66,7 +66,7 @@ public class SignUp_Register extends JFrame {
 		panel.add(emailField);
 		emailField.setColumns(10);
 		
-	 //	email= emailField.getText();
+	
 		
 		
 		passwordField = new JPasswordField();
@@ -74,7 +74,7 @@ public class SignUp_Register extends JFrame {
 		passwordField.setBounds(129, 182, 229, 36);
 		panel.add(passwordField);
 		
-		// password = String.valueOf(passwordField.getPassword());   //DEN EIMAI SIGOYRH GIA AYTO
+	
 		
 		 
 		JButton signIn = new JButton("Sign In");
@@ -118,6 +118,8 @@ public class SignUp_Register extends JFrame {
 				u = new User(email, password, i);
 				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
 				mainScr.setVisible(true);
+				u.getMainScreen(mainScr);
+				
 				dispose ();
 				
 			// ------**BAGG TA BAZW OLA SE SXOLIA GIA NA KANW ELEGXOYS **************------------	

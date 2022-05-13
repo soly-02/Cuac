@@ -117,8 +117,7 @@ public class InfectionScreen extends JFrame {
 			u.getInfection().setCovidStatus(true);
 			u.getInfection().setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
 			System.out.println(u.getInfection().getInfectionDate());
-			MainScreen mainScr= new MainScreen(u);  //SVISE TO META SOFIA
-			mainScr.setVisible(true);
+			u.startCovidCountdown();
 			dispose();
 			
 		}
