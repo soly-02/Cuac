@@ -33,8 +33,10 @@ public class SignUp_Register extends JFrame {
 	// an ola einai komple vazei mesa ton xristi alliws error kai 3anadokimazei
 	private JTextField emailField;
 	private JPasswordField passwordField;
+	private String email;
+	private String password;
 	
-	
+	Infection i;
 	private User u;
 
 
@@ -42,7 +44,6 @@ public class SignUp_Register extends JFrame {
 	 * Create the frame.
 	 */
 	public SignUp_Register() {
-		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\sofia\\OneDrive\\Desktop\\\u039F\u03BC\u03B1\u03B4\u03B9\u03BA\u03AE\\Project Managers\\UOMLOGOGR22.png"));
 		setTitle("Cuac");
@@ -111,33 +112,35 @@ public class SignUp_Register extends JFrame {
 		 
 			
 			public void actionPerformed(ActionEvent e) {
-				
-				Infection i = new Infection();
-				u =new User(emailField.getText(), String.valueOf(passwordField.getPassword()),i);
+				i = new Infection();
+				email = emailField.getText();
+				password = String.valueOf(passwordField.getPassword());
+				u = new User(email, password, i);
 				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
 				mainScr.setVisible(true);
 				dispose ();
 				
-			/* ------**BAGG TA BAZW OLA SE SXOLIA GIA NA KANW ELEGXOYS **************------------	
-			 * 
-			 * 
+			// ------**BAGG TA BAZW OLA SE SXOLIA GIA NA KANW ELEGXOYS **************------------	
+			  
+			  
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
 				// mas stelnei sthn arxikh othoni
 				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
-				if(!u.connect()) {
-					//pop-up oti den yparxei syndesh ston server
-					return;
-				}
-				if(!(u.sendCredentials(email, password))) { //an ta sendCredentials epistrefoun sfalma
-					//pop up ena parathyro pou na leei lathos credentials
-				}
-				else {
-					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
-					mainScr.setVisible(true);
-					dispose ();
-				}
+//				if(!u.connect()) {
+//					//pop-up oti den yparxei syndesh ston server
+//					return;
+//				}
+//				if(!(u.sendCredentials())) { //an ta sendCredentials epistrefoun sfalma
+//					//pop up ena parathyro pou na leei lathos credentials
+//					//delete User object
+//				}
+//				else {
+//					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
+//					mainScr.setVisible(true);
+//					dispose ();
+//				}
 			
-				 */
+				 
 		}
 
 	

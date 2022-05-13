@@ -12,6 +12,10 @@ public class Classroom {
 			this.classSize=88;
 			
 			//Making of class 1 (aithousa 1)
+			
+
+			// ****************1ST ROW****************
+			
 			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
 			classInfo.add(s1);
 			SeatInfo s2= new SeatInfo(2,1,3,4,12,13,14,0,0,0,0);
@@ -34,8 +38,8 @@ public class Classroom {
 			classInfo.add(s10);
 			SeatInfo s11= new SeatInfo(11,9,10,21,22,0,0,0,0,0,0);
 			classInfo.add(s11);
-			
-			// ****************1ST ROW DONE****************
+
+			// **************** 2ND ROW****************
 			
 			SeatInfo s12= new SeatInfo(12,1,2,13,14,23,24,0,0,0,0);
 			classInfo.add(s12);
@@ -59,8 +63,8 @@ public class Classroom {
 			classInfo.add(s21);
 			SeatInfo s22= new SeatInfo(22,10,12,20,21,32,33,0,0,0,0);
 			classInfo.add(s22);
-			
-			// **************** 2ND ROW DONE****************
+
+			// ****************3RD ROW****************
 			
 			SeatInfo s23= new SeatInfo(23,12,13,24,25,34,35,0,0,0,0);
 			classInfo.add(s23);
@@ -84,8 +88,8 @@ public class Classroom {
 			classInfo.add(s32);
 			SeatInfo s33= new SeatInfo(33,21,22,31,32,43,44,0,0,0,0);
 			classInfo.add(s33);
-			
-			// ****************3RD ROW DONE****************
+
+			// ****************4TH ROW****************
 			
 			SeatInfo s34= new SeatInfo(34,23,24,35,36,45,46,0,0,0,0);
 			classInfo.add(s34);
@@ -97,7 +101,6 @@ public class Classroom {
 			classInfo.add(s37);
 			SeatInfo s38= new SeatInfo(38,26,27,36,37,48,49,0,0,0,0);
 			classInfo.add(s38);
-
 			SeatInfo s39= new SeatInfo(39,28,29,40,41,50,51,0,0,0,0);
 			classInfo.add(s39);
 			SeatInfo s40= new SeatInfo(40,28,29,30,39,41,42,50,51,52,0);
@@ -110,9 +113,106 @@ public class Classroom {
 			classInfo.add(s43);
 			SeatInfo s44= new SeatInfo(44,32,33,42,43,54,55,0,0,0,0);
 			classInfo.add(s44);
-			
-			// ****************4TH ROW DONE****************
 
+			// ****************5TH ROW****************
+			
+			SeatInfo s45= new SeatInfo(45,34,35,46,47,56,57,0,0,0,0);
+			classInfo.add(s45);
+			SeatInfo s46= new SeatInfo(46,34,35,36,45,47,48,56,57,58,0);
+			classInfo.add(s46);
+			SeatInfo s47= new SeatInfo(47,35,36,37,45,46,48,49,57,58,59);
+			classInfo.add(s47);
+			SeatInfo s48= new SeatInfo(48,36,37,38,46,47,49,58,59,60,0);
+			classInfo.add(s48);
+			SeatInfo s49= new SeatInfo(49,37,38,47,48,59,60,0,0,0,0);
+			classInfo.add(s49);
+			SeatInfo s50= new SeatInfo(50,39,40,51,52,61,62,0,0,0,0);
+			classInfo.add(s50);
+			SeatInfo s51= new SeatInfo(51,39,40,41,50,52,53,61,62,63,0);
+			classInfo.add(s51);
+			SeatInfo s52= new SeatInfo(52,40,41,32,50,51,53,54,62,63,64);
+			classInfo.add(s52);
+			SeatInfo s53= new SeatInfo(53,41,42,43,51,52,54,55,63,64,65);
+			classInfo.add(s53);
+			SeatInfo s54= new SeatInfo(54,42,43,44,52,53,55,64,65,66,0);
+			classInfo.add(s54);
+			SeatInfo s55= new SeatInfo(55,43,44,53,54,65,66,0,0,0,0);
+			classInfo.add(s55);
+			
+			// ****************6TH ROW****************
+			
+			SeatInfo s56= new SeatInfo(56,45,46,57,58,67,68,0,0,0,0);
+			classInfo.add(s56);
+			SeatInfo s57= new SeatInfo(57,45,46,47,56,58,59,67,68,69,0);
+			classInfo.add(s57);
+			SeatInfo s58= new SeatInfo(58,46,47,48,56,57,59,60,68,69,70);
+			classInfo.add(s58);
+			SeatInfo s59= new SeatInfo(59,47,48,49,57,58,60,69,70,71,0);
+			classInfo.add(s59);
+			SeatInfo s60= new SeatInfo(60,48,49,58,59,70,71,0,0,0,0);
+			classInfo.add(s60);
+			SeatInfo s61= new SeatInfo(61,50,51,62,63,72,73,0,0,0,0);
+			classInfo.add(s61);
+			SeatInfo s62= new SeatInfo(62,50,51,52,61,63,64,72,73,74,0);
+			classInfo.add(s62);
+			SeatInfo s63= new SeatInfo(63,51,52,53,61,62,64,65,73,74,75);
+			classInfo.add(s63);
+			SeatInfo s64= new SeatInfo(64,52,53,54,62,63,65,66,74,75,76);
+			classInfo.add(s64);
+			SeatInfo s65= new SeatInfo(65,53,54,55,63,64,66,75,76,77,0);
+			classInfo.add(s65);
+			SeatInfo s66= new SeatInfo(66,54,55,64,65,76,77,0,0,0,0);
+			classInfo.add(s66);
+
+			// ****************7TH ROW****************
+			
+			SeatInfo s67 = new SeatInfo(67,56,57,68,69,78,79,0,0,0,0);
+			classInfo.add(s67);
+			SeatInfo s68= new SeatInfo(68,56,57,58,67,69,70,78,79,80,0);
+			classInfo.add(s68);
+			SeatInfo s69= new SeatInfo(69,57,58,59,67,68,70,71,79,80,81);
+			classInfo.add(s69);
+			SeatInfo s70= new SeatInfo(70,58,59,60,68,69,71,80,81,82,0);
+			classInfo.add(s70);
+			SeatInfo s71= new SeatInfo(71,59,60,69,70,81,82,0,0,0,0);
+			classInfo.add(s71);
+			SeatInfo s72= new SeatInfo(72,61,62,73,74,83,84,0,0,0,0);
+			classInfo.add(s72);
+			SeatInfo s73= new SeatInfo(73,61,62,63,72,74,75,83,84,85,0);
+			classInfo.add(s73);
+			SeatInfo s74= new SeatInfo(74,62,63,64,72,73,75,76,84,85,86);
+			classInfo.add(s74);
+			SeatInfo s75= new SeatInfo(75,63,64,65,73,74,76,77,85,86,87);
+			classInfo.add(s75);
+			SeatInfo s76= new SeatInfo(76,64,65,66,74,75,77,86,87,88,0);
+			classInfo.add(s76);
+			SeatInfo s77= new SeatInfo(77,65,66,75,76,87,88,0,0,0,0);
+			classInfo.add(s77);
+			
+			// ****************8TH ROW****************
+			
+			SeatInfo s78 = new SeatInfo(78,67,68,79,80,0,0,0,0,0,0);
+			classInfo.add(s78);
+			SeatInfo s79= new SeatInfo(79,67,68,69,78,80,81,0,0,0,0);
+			classInfo.add(s79);
+			SeatInfo s80= new SeatInfo(69,68,69,70,78,79,81,82,0,0,0);
+			classInfo.add(s80);
+			SeatInfo s81= new SeatInfo(81,69,70,71,79,80,82,0,0,0,0);
+			classInfo.add(s81);
+			SeatInfo s82= new SeatInfo(82,70,71,80,81,82,0,0,0,0,0);
+			classInfo.add(s82);
+			SeatInfo s83= new SeatInfo(83,72,73,84,85,0,0,0,0,0,0);
+			classInfo.add(s83);
+			SeatInfo s84= new SeatInfo(84,72,73,74,83,85,86,0,0,0,0);
+			classInfo.add(s84);
+			SeatInfo s85= new SeatInfo(85,73,74,75,83,84,86,87,0,0,0);
+			classInfo.add(s85);
+			SeatInfo s86= new SeatInfo(86,74,75,76,84,85,87,88,0,0,0);
+			classInfo.add(s86);
+			SeatInfo s87= new SeatInfo(87,75,76,77,85,86,88,0,0,0,0);
+			classInfo.add(s87);
+			SeatInfo s88= new SeatInfo(88,76,77,86,87,0,0,0,0,0,0);
+			classInfo.add(s88);
 			
 		}
 	}

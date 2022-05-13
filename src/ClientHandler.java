@@ -14,6 +14,7 @@ public class ClientHandler implements Runnable{
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private Registry registry = new Registry();
+    private String userID; //!!!userID tha einai to email
 
     // Creating the client handler from the socket the server passes.
     public ClientHandler(Socket socket) {
@@ -21,7 +22,7 @@ public class ClientHandler implements Runnable{
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
- 
+            this.userID = bufferedReader.readLine(); // waits for the user's email. See User.connect method
             // Add the new client handler to the array
             clientHandlers.add(this);
         } catch (IOException e) {
@@ -32,23 +33,31 @@ public class ClientHandler implements Runnable{
     //h methodos run trexei gia kathe client pou syndeetai, dexetai ola ta messages tou client kai kalei thn antistoixh methodo sto registry 
     @Override
     public void run() {
-        String messageFromClient;
-        // Continue to listen for messages while a connection with the client is still established.
+        String[] messageFromClient;
+        
         while (socket.isConnected()) {
             try {
-                messageFromClient = bufferedReader.readLine(); //read client's message
-                if(messageFromClient.contains(", ")) {  //an einai se morfi (username, password) shmainei oti tha kanoume login 
-                	if(!(registry.login(messageFromClient))) {
-                		sendMsg("user not found");
+                messageFromClient = bufferedReader.readLine().split(":"); //read client's message
+                
+                // to messageFromClient exei tin morfi "query:message"
+                // me to split pernoume to query kai blepoume ti thelei na kanei o client
+                switch(messageFromClient[0]) {
+                	case "login":
+                		if(!(registry.login(messageFromClient[1]))) {
+                			sendMsg("user not found");
+                			System.out.println( "attempted login failed. Removing client");
+                			removeClientHandler();
+                		}
+                		else {
+                			sendMsg("user found");
+                		}
+                		break;
+                	default:
+                		// alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove
+                		removeClientHandler();
+                		System.out.println("client removed. Message unclear" + socket);	
                 	}
-                	else {
-                		sendMsg("user found");
-                	}
-                }
-                else { // alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove
-                	removeClientHandler();
-                	System.out.println("client removed " + socket);
-                }
+               
             } catch (IOException e) { // an yparxei sfalma opoudhpote parapanw tote kapoios client termatistike
             	System.out.println("A client QUIT " + socket);
                 closeEverything(socket, bufferedReader, bufferedWriter);
