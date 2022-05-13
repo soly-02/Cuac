@@ -11,6 +11,7 @@ public class Server {
     }
 	
 	public void startServer() {
+		System.out.println("Server is running");
         try {
             
             while (!serverSocket.isClosed()) { // Listen for connections on port 5000. Main loop
@@ -45,7 +46,7 @@ public class Server {
 			serverSocket = new ServerSocket(5000);
 			Server server = new Server(serverSocket);
 		    server.startServer();
-		    System.out.println("Server is running");
+		    
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Cannot start server. QUITING");

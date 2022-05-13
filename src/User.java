@@ -24,12 +24,13 @@ public class User {
 		this.i=i;
 	}
 	
-	public boolean connect() {
+	public boolean connect() {  // kata th syndesh userID tha einai to email 
 		try {
 			socket = new Socket("localhost", 5000);  //attempt a connection
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             System.out.println("Connection established");  
+            send(this.email);  // to socket einai etoimo, klhthike o constructor tou ClientHandler kai perimenei to userID giauto stelnoume to email. See ClientHandler constructor
         } catch (IOException e) { // an kati paei lathos
         	System.out.println("Error creating client socket");
             closeEverything(socket, bufferedReader, bufferedWriter);
@@ -38,22 +39,22 @@ public class User {
 		return true;
 	}
 	
-	public boolean sendCredentials(String email, String password) {
-		if(send(email + ", " + password)) {  //edw stelnontai ta credentials
-			System.out.println("credentials sent");
-			//apo edw kai katw einai h apanthsh tou server
-			String msgFromServer;
-			try {
-               msgFromServer = bufferedReader.readLine();  //blocking method
-                if(msgFromServer.equals("user not found")) {
-                	return false;
-                }
-            } catch (IOException e) {
-            	System.out.println("Error reading server's message");
+	public boolean sendCredentials() {
+		send("login:" + email + ", " + password);   //edw stelnontai ta credentials
+		System.out.println("credentials sent");
+		//apo edw kai katw einai h apanthsh tou server
+		String msgFromServer;
+		try {
+              msgFromServer = bufferedReader.readLine();  //blocking method
+               if(msgFromServer.equals("user not found")) {
+            	 System.out.println("user not found");  
+                return false;
+               }
+         } catch (IOException e) {
+        	 	System.out.println("Error reading server's message");
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 return false;
             }
-		}
 		return true; // an de symbei kanena exception kai o server de dosei "user not found" ola kala
 			
 	}
@@ -92,7 +93,7 @@ public class User {
 	}
 	//-----------------------------------
 	
-	public boolean send(String MsgToSend) {
+	public void send(String MsgToSend) {
 		try {
 			bufferedWriter.write(MsgToSend);
 			bufferedWriter.newLine();
@@ -103,9 +104,7 @@ public class User {
 			System.out.println("Failed to send message");
 			closeEverything(socket, bufferedReader, bufferedWriter);
 			e.printStackTrace();
-			return false;
 		}
-		return true;
 		
 	}
 
