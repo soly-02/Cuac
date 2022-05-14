@@ -1,2 +1,3 @@
-dummy@uom.edu.gr, MySeecr3tpassw0rd
-dymmy2@gmail.com, 123456789
+dummy@uom.edu.gr, MySecr3tPassw00rd
+dummy2@gmail.com, 123456789
+dummy3@gmail.com, 987654321, C:\Users\Vaggelis\eclipse-workspace\Couak\src\userData.txt, Notification1. 

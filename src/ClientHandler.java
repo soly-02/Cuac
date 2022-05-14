@@ -34,13 +34,16 @@ public class ClientHandler implements Runnable{
     @Override
     public void run() {
         String[] messageFromClient;
-        
+                
         while (socket.isConnected()) {
             try {
+            	registry.setFilePath("dummy3@gmail.com, C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\userData.txt");
                 messageFromClient = bufferedReader.readLine().split(":"); //read client's message
                 
                 // to messageFromClient exei tin morfi "query:message"
                 // me to split pernoume to query kai blepoume ti thelei na kanei o client
+                //amesws meta to ":" einai to email gia na kseroume poios zitise ti
+                //genika messageFromClient[1]=email
                 switch(messageFromClient[0]) {
                 	case "login":
                 		if(!(registry.login(messageFromClient[1]))) {
@@ -51,6 +54,12 @@ public class ClientHandler implements Runnable{
                 		else {
                 			sendMsg("user found");
                 		}
+                		break;
+                	case "getfilePath":
+                		sendMsg(registry.getFilePath(messageFromClient[1]));
+                		break;
+                	case "setfilePath":
+                		registry.setFilePath(messageFromClient[1]);
                 		break;
                 	default:
                 		// alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove
