@@ -16,6 +16,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 
 public class MainScreen extends JFrame {
@@ -24,6 +27,7 @@ public class MainScreen extends JFrame {
 	private User u;
 	private MainScreen m;
     private JLabel user_email;
+    JLabel Quarantine_Countdown;
 	/**
 	 * Create the frame.
 	 */
@@ -55,7 +59,7 @@ public class MainScreen extends JFrame {
 		notification_reminder.setBounds(247, 2, 294, 55);
 		panel.add(notification_reminder);
 		
-		JLabel Quarantine_Countdown = new JLabel("COUNTDOWN 1");
+		Quarantine_Countdown = new JLabel("COUNTDOWN 1");
 		Quarantine_Countdown.setFont(new Font("Tahoma", Font.BOLD, 17));
 		Quarantine_Countdown.setForeground(new Color(255, 255, 255));
 		Quarantine_Countdown.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -157,20 +161,11 @@ public class MainScreen extends JFrame {
 	 public class CovidCountdown {
 		 
 		
-		 String dateInfection;// h mera poy kollise
+		// h mera poy kollise
 		 
 		 public void CovidCountdown() {
 			 
 			
-			 dateInfection = u.getInfection().getInfectionDate();
-			 String[] nums= dateInfection.split("/"); 
-			 
-			 
-			 int[] array = new int[nums.length];
-			 
-			 for (int i = 0; i < nums.length; i++) {
-		            array[i] = Integer.parseInt(nums[i]);
-		        }
 			 
 			 
 			System.out.println(u.getInfection().getInfectionDate());
@@ -193,18 +188,65 @@ public class MainScreen extends JFrame {
 	 
 		 
 		 public void refresh() {
+			 
 			 //GIA NA ARXISEI TO COUNTDOWN DOKIMH ME REFRESH TO EMAIL
-			 u.setNexEmail();
-			 user_email.setText(u.getEmail());
-			user_email.revalidate();
+			 Thread clock= new Thread() {
+				 String dateInfection;
+				 public void run() {
+					 
+					 try {
+						 for(;;) {
+							 
+
+							 dateInfection = u.getInfection().getInfectionDate();
+							
+							 
+							 String[] nums3= dateInfection.split("/");   // splitting the numbers and adding them in a table 
+							 int	nums[] = {-1,-1,-1};
+								
+								for (int index = 0; index < nums3.length; index++) {
+									nums[index]=Integer.parseInt(nums3[index]);
+								                     
+								}
+							 
+						 Calendar cal= new GregorianCalendar();
+						 
+						 Quarantine_Countdown.revalidate();
+						 int now_day = cal.get(Calendar.DAY_OF_MONTH);
+						 int now_month = cal.get(Calendar.MONTH ) +1;
+						 int now_year = cal.get(Calendar.YEAR);
+						 int day_of =nums[0];
+						 int month_of=nums[1]-1;
+						 int year_of= nums[2];
+						 int end_day = 0;
+						 int end_month = cal.get(Calendar.MONTH ) +1;
+						 int end_year = cal.get(Calendar.YEAR);
+						 
+						 Quarantine_Countdown.setText("Date: "+ day_of+"/"+ month_of+"/"+ year_of);
+						    
+						 
+						 
+						sleep(1000);
+						 }
+					 
+				 }
+					catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					 
+					 
+			 }
+				 
+				 
+			 };
 			 
-			    
-			    System.out.println("egine;"+ u.getEmail());
 			
-			 
-			 
+			clock.start();
+		 	 
+		 }	 
 		 
-	 }
+	 
 		 
 		 // ****  KWDIKAS ISWS GIA META, NA KANEI REFRESH TO MAINSCREEN ANA 30 DEUTERA  ***
 		 

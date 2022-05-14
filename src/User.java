@@ -90,10 +90,7 @@ public class User {
 	
 	//---------GIA TRIAL MONO------------
 	
-	public void setNexEmail() {
-		this.email= "babinos";
-		
-	}
+	
 	
 	
 	public String getPassword() {
