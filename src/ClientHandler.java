@@ -37,7 +37,6 @@ public class ClientHandler implements Runnable{
                 
         while (socket.isConnected()) {
             try {
-            	registry.setFilePath("dummy3@gmail.com, C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\userData.txt");
                 messageFromClient = bufferedReader.readLine().split(":"); //read client's message
                 
                 // to messageFromClient exei tin morfi "query:message"

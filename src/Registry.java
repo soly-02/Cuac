@@ -56,7 +56,7 @@ public class Registry {
 		return false;
 	}
 	
-	public String getFilePath(String clientMsg) throws IOException { // it returns null (as a String) if there is no path
+	public String getFilePath(String clientMsg) throws IOException { // it returns null (as a String) if there is no path for the PDF file
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		MessageArray = clientMsg.split(", ");
@@ -94,10 +94,10 @@ public class Registry {
 		return pathToPDF;
 	}
 	
-	public void setFilePath(String clientMsg) {
+	public void setFilePath(String clientMsg) { //changes the path to PDF
 		MessageArray = clientMsg.split(", ");
 		email = MessageArray[0];
-		String newLine = null;
+		String newLine = "";
 		String newPath = MessageArray[1];
 		
 		try {
@@ -112,7 +112,11 @@ public class Registry {
 	        	if((dataFromFile[0].equals(email))) { //found the user
 	        		
 		        	dataFromFile[2] = newPath; //MesageArray[1]=path given by the user
-		        	newLine = String.join("", dataFromFile);
+		        	for(int i=0; i<dataFromFile.length; i++) {
+		        		newLine += dataFromFile[i];
+		        		if(i <= dataFromFile.length - 2)
+		        			newLine += ", ";
+		        	}
 		            inputBuffer.append(newLine);
 		            inputBuffer.append('\n');
 		            continue;
