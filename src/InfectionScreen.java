@@ -13,9 +13,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class InfectionScreen extends JFrame {
 
@@ -24,7 +28,7 @@ public class InfectionScreen extends JFrame {
 	private JTextField month;
 	private JTextField year;
 	private User u;
-	
+	private JLabel lblNewLabel;
 
 	/**
 	 * Create the frame.
@@ -55,10 +59,11 @@ public class InfectionScreen extends JFrame {
 		lblCovidWallet.setBounds(10, 43, 221, 41);
 		panel.add(lblCovidWallet);
 		
-		JLabel lblNewLabel = new JLabel("\u0397\u03BC\u03B5\u03C1\u03BF\u03BC\u03B7\u03BD\u03AF\u03B1 \u03B8\u03B5\u03C4\u03B9\u03BA\u03BF\u03CD \u03C4\u03B5\u03C3\u03C4 :");
+	    lblNewLabel = new JLabel("\u0397\u03BC\u03B5\u03C1\u03BF\u03BC\u03B7\u03BD\u03AF\u03B1 \u03B8\u03B5\u03C4\u03B9\u03BA\u03BF\u03CD \u03C4\u03B5\u03C3\u03C4 :");
+	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Microsoft YaHei", Font.BOLD, 25));
-		lblNewLabel.setBounds(176, 132, 384, 50);
+		lblNewLabel.setFont(new Font("Microsoft YaHei", Font.BOLD, 20));
+		lblNewLabel.setBounds(10, 132, 726, 50);
 		panel.add(lblNewLabel);
 		
 		day = new JTextField();
@@ -114,11 +119,40 @@ public class InfectionScreen extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 			 
+			 Calendar cal_now= new GregorianCalendar();
+			 Calendar cal_of= new GregorianCalendar();
+			 Calendar cal_end= new GregorianCalendar();
+			 
+			 int now_day = cal_now.get(Calendar.DAY_OF_MONTH);
+			 int now_month = cal_now.get(Calendar.MONTH ) ;
+			 int now_year = cal_now.get(Calendar.YEAR);
+			 
+			 cal_now.set(Calendar.DAY_OF_MONTH, now_day);						 
+			 cal_now.set(Calendar.MONTH, now_month);
+			 cal_now.set(Calendar.YEAR, now_year);
+			 
+			 
+			 
+			 cal_of.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day.getText()));						 
+			 cal_of.set(Calendar.MONTH, Integer.parseInt(month.getText())-1);
+			 cal_of.set(Calendar.YEAR, Integer.parseInt(year.getText()));
+			 
+			 cal_end= (Calendar) cal_of.clone();
+			 
+			 cal_end.add(Calendar.DAY_OF_MONTH, 5);
+			 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
+			
+			 
+			 if (noOfDaysBetween>0 && noOfDaysBetween<=5) {
 			u.getInfection().setCovidStatus(true);
 			u.getInfection().setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
-			System.out.println(u.getInfection().getInfectionDate());
 			u.startCovidCountdown();
 			dispose();
+			 }
+			 else {
+				 lblNewLabel.setText("Η περίοδος αυτής της καραντίνας έχει λήξει. Ξαναπροσπαθήστε.");
+				 lblNewLabel.revalidate();
+			 }
 			
 		}
 

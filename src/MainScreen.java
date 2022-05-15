@@ -21,6 +21,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 
+
+
 public class MainScreen extends JFrame {
 
 	private JPanel contentPane;
@@ -34,7 +36,7 @@ public class MainScreen extends JFrame {
 	public MainScreen(User u) {
 		this.u = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 871, 599);
+		setBounds(100, 100, 1026, 641);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -42,13 +44,13 @@ public class MainScreen extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 51));
-		panel.setBounds(0, 0, 857, 562);
+		panel.setBounds(0, 0, 1018, 617);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		user_email = new JLabel(u.getEmail());
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		user_email.setBounds(10, 11, 167, 38);
+		user_email.setBounds(68, 20, 167, 38);
 		user_email.setForeground(new Color(255, 255, 255));
 		panel.add(user_email);
 		
@@ -56,14 +58,14 @@ public class MainScreen extends JFrame {
 		notification_reminder.setBackground(new Color(255, 255, 255));
 		notification_reminder.setForeground(new Color(255, 0, 0));
 		notification_reminder.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		notification_reminder.setBounds(247, 2, 294, 55);
+		notification_reminder.setBounds(245, 11, 294, 55);
 		panel.add(notification_reminder);
 		
-		Quarantine_Countdown = new JLabel("COUNTDOWN 1");
-		Quarantine_Countdown.setFont(new Font("Tahoma", Font.BOLD, 17));
-		Quarantine_Countdown.setForeground(new Color(255, 255, 255));
-		Quarantine_Countdown.setHorizontalAlignment(SwingConstants.TRAILING);
-		Quarantine_Countdown.setBounds(551, 15, 195, 31);
+		Quarantine_Countdown = new JLabel("");
+		Quarantine_Countdown.setFont(new Font("Tahoma", Font.BOLD, 22));
+		Quarantine_Countdown.setForeground(Color.RED);
+		Quarantine_Countdown.setHorizontalAlignment(SwingConstants.LEFT);
+		Quarantine_Countdown.setBounds(583, 13, 425, 45);
 		panel.add(Quarantine_Countdown);
 		
 		
@@ -74,27 +76,27 @@ public class MainScreen extends JFrame {
 		JButton EnterSeat = new JButton("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2");
 		EnterSeat.setBackground(new Color(255, 255, 255));
 		EnterSeat.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		EnterSeat.setBounds(287, 100, 268, 65);
+		EnterSeat.setBounds(385, 116, 268, 65);
 		panel.add(EnterSeat);
 		
 		JButton EnterCovidWallet = new JButton("Covid Wallet");
 		
 		EnterCovidWallet.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		EnterCovidWallet.setBackground(Color.WHITE);
-		EnterCovidWallet.setBounds(287, 206, 268, 65);
+		EnterCovidWallet.setBounds(385, 217, 268, 65);
 		panel.add(EnterCovidWallet);
 		
 		JButton EnterInfection = new JButton("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2");
 		
 		EnterInfection.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		EnterInfection.setBackground(Color.WHITE);
-		EnterInfection.setBounds(287, 300, 268, 65);
+		EnterInfection.setBounds(385, 317, 268, 65);
 		panel.add(EnterInfection);
 		
 		JButton EnterNotifications = new JButton("\u0395\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2");
 		EnterNotifications.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		EnterNotifications.setBackground(new Color(255, 0, 0));
-		EnterNotifications.setBounds(287, 444, 268, 65);
+		EnterNotifications.setBounds(385, 469, 268, 65);
 		panel.add(EnterNotifications);
 		
 		
@@ -209,21 +211,45 @@ public class MainScreen extends JFrame {
 								                     
 								}
 							 
-						 Calendar cal= new GregorianCalendar();
+						 Calendar cal_now= new GregorianCalendar();
+						 Calendar cal_of= new GregorianCalendar();
+						 Calendar cal_end= new GregorianCalendar();
 						 
-						 Quarantine_Countdown.revalidate();
-						 int now_day = cal.get(Calendar.DAY_OF_MONTH);
-						 int now_month = cal.get(Calendar.MONTH ) +1;
-						 int now_year = cal.get(Calendar.YEAR);
+						 int now_day = cal_now.get(Calendar.DAY_OF_MONTH);
+						 int now_month = cal_now.get(Calendar.MONTH ) ;
+						 int now_year = cal_now.get(Calendar.YEAR);
+						 
+						 cal_now.set(Calendar.DAY_OF_MONTH, now_day);						 
+						 cal_now.set(Calendar.MONTH, now_month);
+						 cal_now.set(Calendar.YEAR, now_year);
+						 
+						 
+						 
 						 int day_of =nums[0];
 						 int month_of=nums[1]-1;
 						 int year_of= nums[2];
-						 int end_day = 0;
-						 int end_month = cal.get(Calendar.MONTH ) +1;
-						 int end_year = cal.get(Calendar.YEAR);
 						 
-						 Quarantine_Countdown.setText("Date: "+ day_of+"/"+ month_of+"/"+ year_of);
-						    
+						 
+						 cal_of.set(Calendar.DAY_OF_MONTH, day_of);						 
+						 cal_of.set(Calendar.MONTH, month_of);
+						 cal_of.set(Calendar.YEAR, year_of);
+						 
+						 cal_end= (Calendar) cal_of.clone();
+						 
+						 cal_end.add(Calendar.DAY_OF_MONTH, 5);
+						 
+						
+					//	 System.out.println("Date now: "+ cal_now.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_now.get(Calendar.MONTH )+1)+"/"+ cal_now.get(Calendar.YEAR)+
+					//			                      "Date of: "+ cal_of.get(Calendar.DAY_OF_MONTH)+"/"+(cal_of.get(Calendar.MONTH )+1)+"/"+ cal_of.get(Calendar.YEAR) +
+					//	                              "Date end: "+ cal_end.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_end.get(Calendar.MONTH )+1)+"/"+ cal_end.get(Calendar.YEAR)); 
+						 
+						 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
+					//	 System.out.println("AAA "+noOfDaysBetween);
+						 if (noOfDaysBetween>0)
+						    Quarantine_Countdown.setText("Μέρες Καραντίνας Που Απομένουν: "+noOfDaysBetween);
+						
+						 Quarantine_Countdown.revalidate();
+						 
 						 
 						 
 						sleep(1000);
@@ -248,18 +274,7 @@ public class MainScreen extends JFrame {
 		 
 	 
 		 
-		 // ****  KWDIKAS ISWS GIA META, NA KANEI REFRESH TO MAINSCREEN ANA 30 DEUTERA  ***
-		 
-	/*	 ActionListener task = new ActionListener() {
-	            public void actionPerformed(ActionEvent evt) {
-	                // Do stuff
-	            }
-	};
-	Timer timer = new Timer(30 ,task); // Execute task each 30 miliseconds
-	timer.setRepeats(true);
-	timer.start();
-		 
-		 */
+		
 	
 	
 	
