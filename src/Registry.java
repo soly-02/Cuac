@@ -13,20 +13,20 @@ public class Registry {
 	//				dataFromFile			0		1			2					3					
 	private String[] MessageArray;
 	private String[] dataFromFile;
-	private String email;
+	private String email; //actually the userID
 	private String password;
-	private String userDataPath = "C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\userData.txt";
+	private String userDataPath = "C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\userData.txt"; //<----- absolute path name to work. Allakste to sto diko sas path
 	 
 	// missing constructor
 	
-	public boolean login(String clientMsg) throws IOException {
+	public boolean login(String clientMsg) throws IOException { //clientMsg=email, password
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		MessageArray = clientMsg.split(", ");
 		email = MessageArray[0];
 		password = MessageArray[1];
 		try {
-		    inputStream = new FileInputStream(userDataPath); //<----- absolute path name to work. Allakste to sto diko sas path
+		    inputStream = new FileInputStream(userDataPath); 
 		    sc = new Scanner(inputStream, "UTF-8");
 		    while (sc.hasNextLine()) {
 		        String line = sc.nextLine();
@@ -56,7 +56,7 @@ public class Registry {
 		return false;
 	}
 	
-	public String getFilePath(String clientMsg) throws IOException { // it returns null (as a String) if there is no path for the PDF file
+	public String getFilePath(String clientMsg) throws IOException { // it returns null (as a String) if there is no path for the PDF file. ClientMsg = email;
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		MessageArray = clientMsg.split(", ");
@@ -94,7 +94,7 @@ public class Registry {
 		return pathToPDF;
 	}
 	
-	public void setFilePath(String clientMsg) { //changes the path to PDF
+	public void setFilePath(String clientMsg) { //changes the path to PDF. ClientMsg=email, pathToPDF
 		MessageArray = clientMsg.split(", ");
 		email = MessageArray[0];
 		String newLine = "";
@@ -135,5 +135,43 @@ public class Registry {
 	    } catch (Exception e) {
 	        System.out.println("userData file not found");
 	    }
+	}
+	
+	public String getNotifications(String clientMsg) throws IOException { // returns all notofication of a user. It can be null. ClientMsg=email
+		MessageArray = clientMsg.split(", ");
+		email = MessageArray[0];
+		String notifications = null;
+		FileInputStream inputStream = null;
+		Scanner sc = null;
+		
+		try {
+		    inputStream = new FileInputStream(userDataPath); //<----- absolute path name to work. Allakste to sto diko sas path
+		    sc = new Scanner(inputStream, "UTF-8");
+		    while (sc.hasNextLine()) {
+		        String line = sc.nextLine();
+		        dataFromFile = line.split(", ");
+		        if((dataFromFile[0].equals(email))) { //found the user
+		        	notifications = dataFromFile[3];
+		        }
+		        //System.out.println(line);
+		    }
+		    // note that Scanner suppresses exceptions
+		    if (sc.ioException() != null) {
+		        throw sc.ioException();
+		    }
+		}catch(FileNotFoundException e) {
+			System.out.println("userData file not found");
+			
+		}
+		
+		finally {
+		    if (inputStream != null) {
+		        inputStream.close();
+		    }
+		    if (sc != null) {
+		        sc.close();
+		    }
+		}
+		return notifications;
 	}
 }

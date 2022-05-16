@@ -36,7 +36,7 @@ public class ClientHandler implements Runnable{
         String[] messageFromClient;
                 
         while (socket.isConnected()) {
-            try {
+            try {;
                 messageFromClient = bufferedReader.readLine().split(":"); //read client's message
                 
                 // to messageFromClient exei tin morfi "query:message"
@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable{
                 //amesws meta to ":" einai to email gia na kseroume poios zitise ti
                 //genika messageFromClient[1]=email
                 switch(messageFromClient[0]) {
-                	case "login":
+                	case "login":  
                 		if(!(registry.login(messageFromClient[1]))) {
                 			sendMsg("user not found");
                 			System.out.println( "attempted login failed. Removing client");
@@ -54,7 +54,7 @@ public class ClientHandler implements Runnable{
                 			sendMsg("user found");
                 		}
                 		break;
-                	case "getfilePath":
+                	case "getfilePath": 
                 		sendMsg(registry.getFilePath(messageFromClient[1]));
                 		break;
                 	case "setfilePath":
