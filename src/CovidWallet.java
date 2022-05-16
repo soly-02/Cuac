@@ -1,37 +1,40 @@
 
 import java.awt.Color;
-
-
-
-import java.awt.Color;
-
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import javax.swing.filechooser.*;
+import javax.swing.text.BadLocationException;
+
 import java.io.File;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class CovidWallet extends JFrame{
 	//Constructors and variables
 	private JFrame frame = new JFrame();
 	private JPanel panel = new JPanel();
+	private JTextField expirDate = new JTextField("DD/MM/YY");
 	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
-	private ButtonListener click = new ButtonListener(); //ButtonListener assigned to the button.
+	private JButton submitDate = new JButton("Submit");
+	private ButtonListener clickUpload = new ButtonListener(); //ButtonListener assigned to the uploadFile button.
+	private ButtonListener clickSubmit = new ButtonListener();
 	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = new File(""); //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
 
 	private User u;
-	
-	//test
-	
+		
 	//Constructor for CovidWallet window.
 	public CovidWallet(User u) {
 		
@@ -44,8 +47,13 @@ public class CovidWallet extends JFrame{
 		panel.add(certificateSelection);
 		certificateSelection.addActionListener(select);
 		
-		uploadFile.addActionListener(click);
+		uploadFile.addActionListener(clickUpload);
 		panel.add(uploadFile);
+		
+		panel.add(expirDate);
+		
+		submitDate.addActionListener(clickSubmit);
+		panel.add(submitDate);
 				
 		frame.setVisible(true);
 		frame.setSize(300, 300);
@@ -55,19 +63,34 @@ public class CovidWallet extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JFileChooser selectFile = new JFileChooser(); //Creates JFileChooser object.
+			if(e.getSource() == clickUpload) { //If the soure of the event is the clickUpload button, the following lines are executed.
+				JFileChooser selectFile = new JFileChooser(); //Creates JFileChooser object.
+				
+				selectFile.setCurrentDirectory(null); //Sets the directory that the file chooser will display by default. (Set to 'Documents')
+				selectFile.setDialogTitle("Select Certificate"); //Sets the title of the file chooser's window.
+				selectFile.setFileSelectionMode(JFileChooser.FILES_ONLY); // Only files will be displayed.
+				selectFile.setFileFilter(new myFileFilter()); // Filters out all files except for PDFs.
+	
+				if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
+				  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
+				  filePath = file.getAbsolutePath();
+				  
+				} else {
+				  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
+				}
 			
-			selectFile.setCurrentDirectory(null); //Sets the directory that the file chooser will display by default. (Set to 'Documents')
-			selectFile.setDialogTitle("Select Certificate"); //Sets the title of the file chooser's window.
-			selectFile.setFileSelectionMode(JFileChooser.FILES_ONLY); // Only files will be displayed.
-			selectFile.setFileFilter(new myFileFilter()); // Filters out all files except for PDFs.
-
-			if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
-			  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
-			  filePath = file.getAbsolutePath();
-			  
-			} else {
-			  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
+			}else if(e.getSource() == clickSubmit) {
+				Calendar issuingDate = new GregorianCalendar();
+				
+				try {
+					int day = Integer.parseInt(expirDate.getText(0, 2));
+				} catch (NumberFormatException | BadLocationException e1) {
+					e1.printStackTrace();
+				}
+				//int
+				//int
+				
+				issuingDate.set(ERROR, ALLBITS, ABORT);
 			}
 		}
 		
