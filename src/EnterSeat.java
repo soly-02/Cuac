@@ -212,6 +212,7 @@ public class EnterSeat extends JFrame {
 				monthEnter.getText()+ "/"+ yearEnter.getText()+"/"+seatEnter.getText() + "/"+ u.getEmail();
 				System.out.println(code);
 				// EDW PREPEI NA EXW KLASH APO TON SERVER GIA NA STEILW TON CODE PX SERVER.SEND(String code)
+				u.send("seatLog;" + code);
 			    dispose();
 			}
 			

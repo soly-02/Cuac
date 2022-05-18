@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -13,13 +15,14 @@ public class Registry {
 	//				dataFromFile			0		1			2					3					
 	private String[] MessageArray;
 	private String[] dataFromFile;
-	private String email; //actually the userID
+	private String email;
 	private String password;
 	private String userDataPath = "C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\userData.txt"; //<----- absolute path name to work. Allakste to sto diko sas path
+	private String seatLogPath = "C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\seatLog.txt";
 	 
 	// missing constructor
 	
-	public boolean login(String clientMsg) throws IOException { //clientMsg=email, password
+	public boolean login(String clientMsg) throws IOException { 
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		MessageArray = clientMsg.split(", ");
@@ -36,7 +39,6 @@ public class Registry {
 		        }
 		        //System.out.println(line);
 		    }
-		    // note that Scanner suppresses exceptions
 		    if (sc.ioException() != null) {
 		        throw sc.ioException();
 		    }
@@ -64,8 +66,7 @@ public class Registry {
 		String pathToPDF = null;
 		
 		try {
-		    inputStream = new FileInputStream(userDataPath); //<----- absolute path name to work. Allakste to sto diko sas path
-		    sc = new Scanner(inputStream, "UTF-8");
+		    inputStream = new FileInputStream(userDataPath);
 		    while (sc.hasNextLine()) {
 		        String line = sc.nextLine();
 		        dataFromFile = line.split(", ");
@@ -74,7 +75,6 @@ public class Registry {
 		        }
 		        //System.out.println(line);
 		    }
-		    // note that Scanner suppresses exceptions
 		    if (sc.ioException() != null) {
 		        throw sc.ioException();
 		    }
@@ -101,7 +101,6 @@ public class Registry {
 		String newPath = MessageArray[1];
 		
 		try {
-	        // input the (modified) file content to the StringBuffer "input"
 	        BufferedReader file = new BufferedReader(new FileReader(userDataPath));
 	        StringBuffer inputBuffer = new StringBuffer();
 	        String line;
@@ -127,7 +126,6 @@ public class Registry {
 	        }
 	        file.close();
 
-	        // write the new string with the replaced line OVER the same file
 	        FileOutputStream fileOut = new FileOutputStream(userDataPath);
 	        fileOut.write(inputBuffer.toString().getBytes());
 	        fileOut.close();
@@ -145,7 +143,7 @@ public class Registry {
 		Scanner sc = null;
 		
 		try {
-		    inputStream = new FileInputStream(userDataPath); //<----- absolute path name to work. Allakste to sto diko sas path
+		    inputStream = new FileInputStream(userDataPath);
 		    sc = new Scanner(inputStream, "UTF-8");
 		    while (sc.hasNextLine()) {
 		        String line = sc.nextLine();
@@ -155,7 +153,6 @@ public class Registry {
 		        }
 		        //System.out.println(line);
 		    }
-		    // note that Scanner suppresses exceptions
 		    if (sc.ioException() != null) {
 		        throw sc.ioException();
 		    }
@@ -173,5 +170,19 @@ public class Registry {
 		    }
 		}
 		return notifications;
+	}
+	
+	public void saveSeat(String seatCode) { //seatCode = classID/StartTime/EndTime/D/M/Y/SeatNum/email
+		try {			 
+            BufferedWriter out = new BufferedWriter(new FileWriter(seatLogPath, true));
+ 
+            out.write(seatCode);
+            out.newLine();
+            out.close();
+        }
+ 
+        catch (IOException e) {
+            System.out.println("seatLog.txt not found" + e);
+        }
 	}
 }

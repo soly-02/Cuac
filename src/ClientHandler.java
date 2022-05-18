@@ -36,10 +36,10 @@ public class ClientHandler implements Runnable{
         String[] messageFromClient;
                 
         while (socket.isConnected()) {
-            try {;
-                messageFromClient = bufferedReader.readLine().split(":"); //read client's message
+            try {
+                messageFromClient = bufferedReader.readLine().split(";"); //read client's message
                 
-                // to messageFromClient exei tin morfi "query:message"
+                // to messageFromClient exei tin morfi "query;message"
                 // me to split pernoume to query kai blepoume ti thelei na kanei o client
                 //amesws meta to ":" einai to email gia na kseroume poios zitise ti
                 //genika messageFromClient[1]=email
@@ -60,10 +60,13 @@ public class ClientHandler implements Runnable{
                 	case "setfilePath":
                 		registry.setFilePath(messageFromClient[1]);
                 		break;
+                	case "seatLog":
+                		registry.saveSeat(messageFromClient[1]);
+                		break;
                 	default:
                 		// alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove
                 		removeClientHandler();
-                		System.out.println("client removed. Message unclear" + socket);	
+                		System.out.println("client removed. Message unclear " + socket);	
                 	}
                
             } catch (IOException e) { // an yparxei sfalma opoudhpote parapanw tote kapoios client termatistike

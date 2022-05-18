@@ -42,7 +42,7 @@ public class User {
 	}
 	
 	public boolean sendCredentials() {
-		send("login:" + email + ", " + password);   //edw stelnontai ta credentials
+		send("login;" + email + ", " + password);   //edw stelnontai ta credentials
 		System.out.println("credentials sent");
 		//apo edw kai katw einai h apanthsh tou server
 		String msgFromServer;
