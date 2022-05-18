@@ -69,7 +69,7 @@ public class MainScreen extends JFrame {
 		panel.add(Quarantine_Countdown);
 		
 		
-		CovidCountdown c= new CovidCountdown(); //NEO COUNTDOWN
+		
 		
 		
 		
@@ -160,36 +160,11 @@ public class MainScreen extends JFrame {
 	
 }
 	 
-	 public class CovidCountdown {
-		 
-		
-		// h mera poy kollise
-		 
-		 public void CovidCountdown() {
-			 
-			
-			 
-			 
-			System.out.println(u.getInfection().getInfectionDate());
-			 
-			 final LocalDate target = LocalDate.of(2022, 5, 1); // temp Target date (year, month, day) date of infection+5 (to be converted)
-		     final long result = calculateDaysLeft(target);
-		     System.out.println(result);
-		 }
-
-		    private static long calculateDaysLeft(LocalDate fromDate) {
-		        final LocalDate today = LocalDate.now(); // The current date
-		        return fromDate.until(today, ChronoUnit.DAYS); // "until" function comes from Java DateTime API
-		    }
-		 
-		 
-		 
-	 }
-
+	
 	 
 	 
 		 
-		 public void refresh() {
+		 public void countdown() {
 			 
 			 //GIA NA ARXISEI TO COUNTDOWN DOKIMH ME REFRESH TO EMAIL
 			 Thread clock= new Thread() {

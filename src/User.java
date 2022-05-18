@@ -109,7 +109,7 @@ public class User {
 	}
 	
 	public void startCovidCountdown() {
-		mainScr.refresh();
+		mainScr.countdown();
 		
 		
 	}

@@ -11,9 +11,6 @@ public class Main {
 		//dhmhtrhs gay test 2.0
 		//dhmhtrhs lesbian test 1.1
 		// test package window
-		System.out.println("TRELO GLENTI");
-		System.out.println("PAME LIGO OMADAAAAAA");
-		System.out.println("HELLOOO!!!");
 		
 		GUI Interface= new GUI(); // Gui initialization 
 		

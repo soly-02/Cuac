@@ -1,17 +1,20 @@
 
 import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.*;
 import javax.swing.text.BadLocationException;
 
 import java.io.File;
-
+import java.time.temporal.ChronoUnit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,7 +35,11 @@ public class CovidWallet extends JFrame{
 	private File file = new File(""); //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
-
+    private JLabel Quarantine_Countdown;
+	private Calendar issuingDate;
+	
+	
+	
 	private User u;
 		
 	//Constructor for CovidWallet window.
@@ -52,24 +59,40 @@ public class CovidWallet extends JFrame{
 		
 		panel.add(expirDate);
 		
+		
+		
+		
 		submitDate.addActionListener(clickSubmit);
 		panel.add(submitDate);
+		
+		//--------SOFIA COMING THROUGH------- 
+		Quarantine_Countdown = new JLabel("ΤΕΣΤ");
+		Quarantine_Countdown.setFont(new Font("Tahoma", Font.BOLD, 22));
+		Quarantine_Countdown.setForeground(Color.RED);
+		panel.add(Quarantine_Countdown);
 				
 		frame.setVisible(true);
-		frame.setSize(300, 300);
+		frame.setSize(500, 500);
 	}
 	
 	class ButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == clickUpload) { //If the soure of the event is the clickUpload button, the following lines are executed.
+			
+			String action = e.getActionCommand();
+			
+			if(action.equals("Open File")  ) { //If the soure of the event is the clickUpload button, the following lines are executed.
 				JFileChooser selectFile = new JFileChooser(); //Creates JFileChooser object.
 				
 				selectFile.setCurrentDirectory(null); //Sets the directory that the file chooser will display by default. (Set to 'Documents')
 				selectFile.setDialogTitle("Select Certificate"); //Sets the title of the file chooser's window.
 				selectFile.setFileSelectionMode(JFileChooser.FILES_ONLY); // Only files will be displayed.
 				selectFile.setFileFilter(new myFileFilter()); // Filters out all files except for PDFs.
+				
+				
+				
+				
 	
 				if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
 				  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
@@ -79,8 +102,9 @@ public class CovidWallet extends JFrame{
 				  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
 				}
 			
-			}else if(e.getSource() == clickSubmit) {
-				Calendar issuingDate = new GregorianCalendar();
+			}else if (action.equals("Submit")) {
+			
+				 issuingDate = new GregorianCalendar(); //den xreiazetai issuing date
 				
 				try {
 					int day = Integer.parseInt(expirDate.getText(0, 2));
@@ -91,6 +115,8 @@ public class CovidWallet extends JFrame{
 				//int
 				
 				issuingDate.set(ERROR, ALLBITS, ABORT);
+				
+				countdown();
 			}
 		}
 		
@@ -153,7 +179,90 @@ public class CovidWallet extends JFrame{
 		return filePath;
 	}
 	
+	
+	
+	// TO COUNTDOWN
+	
+	 public void countdown() {
+		 
+		 
+		 
+		 //GIA NA ARXISEI TO COUNTDOWN DOKIMH ME REFRESH TO EMAIL
+		 Thread clock= new Thread() {
+			
+			 
+			 public void run() {
+				 
+				 try {
+					 for(;;) {
+						 
+						 String[] nums3= expirDate.getText().split("/");   // splitting the numbers and adding them in a table 
+						 int	nums[] = {-1,-1,-1};
+							
+							for (int index = 0; index < nums3.length; index++) {
+								nums[index]=Integer.parseInt(nums3[index]);
+							                     
+							}
+						
+						 
+					 Calendar cal_now= new GregorianCalendar();
+					 Calendar cal_end= new GregorianCalendar();
+					 
+					 int now_day = cal_now.get(Calendar.DAY_OF_MONTH);
+					 int now_month = cal_now.get(Calendar.MONTH ) ;
+					 int now_year = cal_now.get(Calendar.YEAR);
+					 
+					 cal_now.set(Calendar.DAY_OF_MONTH, now_day);						 
+					 cal_now.set(Calendar.MONTH, now_month);
+					 cal_now.set(Calendar.YEAR, now_year);
+					 
+					 int day_end =nums[0];
+					 int month_end=nums[1]-1;
+					 int year_end= nums[2];
+					 
+					 cal_end.set(Calendar.DAY_OF_MONTH, day_end);
+					 cal_end.set(Calendar.MONTH, month_end);
+					 cal_end.set(Calendar.YEAR, year_end);
+					 
+					
+				//	 System.out.println("Date now: "+ cal_now.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_now.get(Calendar.MONTH )+1)+"/"+ cal_now.get(Calendar.YEAR)+
+				//			                      "Date of: "+ cal_of.get(Calendar.DAY_OF_MONTH)+"/"+(cal_of.get(Calendar.MONTH )+1)+"/"+ cal_of.get(Calendar.YEAR) +
+				//	                              "Date end: "+ cal_end.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_end.get(Calendar.MONTH )+1)+"/"+ cal_end.get(Calendar.YEAR)); 
+					 
+					 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
+				//	 System.out.println("AAA "+noOfDaysBetween);
+					 if (noOfDaysBetween>0)
+					    Quarantine_Countdown.setText("Το πιστοποιητικό λήγει σε : "+noOfDaysBetween+ " μέρες");
+					
+					 Quarantine_Countdown.revalidate();
+					 
+					 
+					 
+					sleep(1000);
+					 }
+				 
+			 }
+				catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 
+				 
+		 }
+			 
+			 
+		 };
+		 
+		
+		clock.start();
+	 	 
+	 }	 
+	
+	
+	
+	
 }
+
 
 
 
