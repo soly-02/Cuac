@@ -242,6 +242,20 @@ public class Classroom {
 			
 			
 		}
+		
+		
+		public int getSeatId() {
+			
+			return seatId;
+		}
+			
+			
+			public ArrayList <Integer> getSeats() {
+				
+				return nearbySeats;
+			
+			
+		}
 	}
 	
 	
