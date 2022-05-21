@@ -13,7 +13,7 @@ public class ClientHandler implements Runnable{
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private Registry registry = new Registry();
+    private static Registry registry = new Registry();
     private String userID; //!!!userID tha einai to email
 
     // Creating the client handler from the socket the server passes.
@@ -41,8 +41,8 @@ public class ClientHandler implements Runnable{
                 
                 // to messageFromClient exei tin morfi "query;message"
                 // me to split pernoume to query kai blepoume ti thelei na kanei o client
-                //amesws meta to ":" einai to email gia na kseroume poios zitise ti
-                //genika messageFromClient[1]=email
+                //amesws meta to ":" einai to email (oxi panta omws) gia na kseroume poios zitise ti
+
                 switch(messageFromClient[0]) {
                 	case "login":  
                 		if(!(registry.login(messageFromClient[1]))) {
@@ -52,6 +52,14 @@ public class ClientHandler implements Runnable{
                 		}
                 		else {
                 			sendMsg("user found");
+                		}
+                		break;
+                	case "register":
+                		if(registry.register(messageFromClient[1])) {
+                			sendMsg("successfully registered");
+                		}
+                		else {
+                			sendMsg("user already exists");
                 		}
                 		break;
                 	case "getfilePath": 
@@ -64,8 +72,8 @@ public class ClientHandler implements Runnable{
                 		registry.saveSeat(messageFromClient[1]);
                 		break;
                 	default:
-                		// alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove
-                		removeClientHandler();
+                		// alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove kai kleinoume ta streams tou
+                		closeEverything(socket, bufferedReader, bufferedWriter);
                 		System.out.println("client removed. Message unclear " + socket);	
                 	}
                

@@ -11,12 +11,11 @@ import java.util.Scanner;
 
 public class Registry {
 	// Auth h klash tha diaxeirizetai ta logins, registers, logs kai ola ta arxeia tou server
-	// Kath grammh tou userData.txt einai: email, password, pathToPDF, Notification1. Notification2 ......
-	//				dataFromFile			0		1			2					3					
+	// Kath grammh tou userData.txt einai: email, password, pathToPDF, InfectionDate, Notification1. Notification2 ......
+	//				dataFromFile			0		1			2			3						4				
 	private String[] MessageArray;
 	private String[] dataFromFile;
 	private String email;
-	private String password;
 	private String userDataPath = "C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\userData.txt"; //<----- absolute path name to work. Allakste to sto diko sas path
 	private String seatLogPath = "C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\seatLog.txt";
 	 
@@ -26,8 +25,9 @@ public class Registry {
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		MessageArray = clientMsg.split(", ");
+		String password = MessageArray[1];
 		email = MessageArray[0];
-		password = MessageArray[1];
+		
 		try {
 		    inputStream = new FileInputStream(userDataPath); 
 		    sc = new Scanner(inputStream, "UTF-8");
@@ -45,8 +45,7 @@ public class Registry {
 		}catch(FileNotFoundException e) {
 			System.out.println("userData file not found");
 			
-		}
-		
+		}		
 		finally {
 		    if (inputStream != null) {
 		        inputStream.close();
@@ -56,6 +55,47 @@ public class Registry {
 		    }
 		}
 		return false;
+	}
+	
+	public boolean register(String clientMsg) throws IOException {
+		FileInputStream inputStream = null;
+		Scanner sc = null;
+		MessageArray = clientMsg.split(", ");
+		String password = MessageArray[1];
+		email = MessageArray[0];
+		
+		try {
+		    inputStream = new FileInputStream(userDataPath); 
+		    sc = new Scanner(inputStream, "UTF-8");
+		    while (sc.hasNextLine()) {  // search the file to check if user exists
+		        String line = sc.nextLine();
+		        dataFromFile = line.split(", ");
+		        if((dataFromFile[0].equals(email))) { // user already exists
+		        	return false;
+		        }
+		        //System.out.println(line);
+		    }
+		    if (sc.ioException() != null) {
+		        throw sc.ioException();
+		    }
+		}catch(FileNotFoundException e) {
+			System.out.println("userData file not found");
+			
+		}		
+		finally {
+		    if (inputStream != null) {
+		        inputStream.close();
+		    }
+		    if (sc != null) {
+		        sc.close();
+		    }
+		}
+		
+		BufferedWriter out = new BufferedWriter(new FileWriter(userDataPath, true));
+		out.write(email + ", " + password + ", null, null, null");
+        out.newLine();
+        out.close();
+		return true;
 	}
 	
 	public String getFilePath(String clientMsg) throws IOException { // it returns null (as a String) if there is no path for the PDF file. ClientMsg = email;
@@ -81,8 +121,7 @@ public class Registry {
 		}catch(FileNotFoundException e) {
 			System.out.println("userData file not found");
 			
-		}
-		
+		}		
 		finally {
 		    if (inputStream != null) {
 		        inputStream.close();
@@ -110,8 +149,8 @@ public class Registry {
 	        	
 	        	if((dataFromFile[0].equals(email))) { //found the user
 	        		
-		        	dataFromFile[2] = newPath; //MesageArray[1]=path given by the user
-		        	for(int i=0; i<dataFromFile.length; i++) {
+		        	dataFromFile[2] = newPath; //change the path
+		        	for(int i=0; i<dataFromFile.length; i++) { //convert array to string
 		        		newLine += dataFromFile[i];
 		        		if(i <= dataFromFile.length - 2)
 		        			newLine += ", ";
@@ -129,7 +168,6 @@ public class Registry {
 	        FileOutputStream fileOut = new FileOutputStream(userDataPath);
 	        fileOut.write(inputBuffer.toString().getBytes());
 	        fileOut.close();
-
 	    } catch (Exception e) {
 	        System.out.println("userData file not found");
 	    }
@@ -149,7 +187,7 @@ public class Registry {
 		        String line = sc.nextLine();
 		        dataFromFile = line.split(", ");
 		        if((dataFromFile[0].equals(email))) { //found the user
-		        	notifications = dataFromFile[3];
+		        	notifications = dataFromFile[4];
 		        }
 		        //System.out.println(line);
 		    }
@@ -159,8 +197,7 @@ public class Registry {
 		}catch(FileNotFoundException e) {
 			System.out.println("userData file not found");
 			
-		}
-		
+		}		
 		finally {
 		    if (inputStream != null) {
 		        inputStream.close();
