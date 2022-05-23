@@ -71,6 +71,9 @@ public class ClientHandler implements Runnable{
                 	case "seatLog":
                 		registry.saveSeat(messageFromClient[1]);
                 		break;
+                	case "InfectionAlert":
+                		registry.saveInfection(messageFromClient[1]);
+                		break;
                 	default:
                 		// alliws an o client de steilei string me sigkekrimeni morfi ton kanoume remove kai kleinoume ta streams tou
                 		closeEverything(socket, bufferedReader, bufferedWriter);

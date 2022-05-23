@@ -6,7 +6,10 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Registry {
@@ -14,6 +17,7 @@ public class Registry {
 	// Kath grammh tou userData.txt einai: email, password, pathToPDF, InfectionDate, Notification1. Notification2 ......
 	//				dataFromFile			0		1			2			3						4				
 	private String[] MessageArray;
+	private String[] InfectionArray;
 	private String[] dataFromFile;
 	private String email;
 	private String userDataPath = "C:\\Users\\Vaggelis\\eclipse-workspace\\Couak\\src\\userData.txt"; //<----- absolute path name to work. Allakste to sto diko sas path
@@ -222,4 +226,83 @@ public class Registry {
             System.out.println("seatLog.txt not found" + e);
         }
 	}
+	
+	public void saveInfection(String InfectionDate) { //seatCode = classID/StartTime/EndTime/D/M/Y/SeatNum/email
+				 
+		 String[] dataRead;
+		
+		     InfectionArray = InfectionDate.split("/");
+    	   	 String inEmail = InfectionArray[0];
+    	   	ArrayList<String> UserCodes = new ArrayList<String>() ;
+    		 ArrayList<String> SendMessage = new ArrayList<String>() ;// poioi htan dipla sto krousma
+    			ArrayList<Calendar> cals= new ArrayList<Calendar>();
+    		 
+    		 
+    		 
+    		 Calendar cal_of= new GregorianCalendar(); //MERA POY NOSISE
+    		 
+			 cal_of.set(Calendar.DAY_OF_MONTH, Integer.parseInt(InfectionArray[1]));						 
+			 cal_of.set(Calendar.MONTH, Integer.parseInt(InfectionArray[2]) -1);
+			 cal_of.set(Calendar.YEAR, Integer.parseInt(InfectionArray[3]));
+    		 cals.add(cal_of);
+			 
+			 
+			 Calendar cal_1= new GregorianCalendar();
+			 cal_1= (Calendar) cal_of.clone();            //MIA MERA PRIN
+			 cal_1.add(Calendar.DAY_OF_MONTH,-1);
+			 cals.add(cal_1);
+			 
+             Calendar cal_2= new GregorianCalendar();
+			 cal_2= (Calendar) cal_of.clone();              //DYO MERES PRIN
+			 cal_2.add(Calendar.DAY_OF_MONTH,-2);
+			 cals.add(cal_2);
+			 
+             Calendar cal_3= new GregorianCalendar();
+			 cal_3= (Calendar) cal_of.clone();             //TREIS MERES PRIN
+			 cal_3.add(Calendar.DAY_OF_MONTH,-3);
+			 cals.add(cal_3);
+			 int u;
+    		 
+    		try {
+    			BufferedReader  reader = new BufferedReader(new FileReader(   // PROSpATHW NA pARW TA STOIXEIA TOY XRHSTH 0
+    					"C:\\Users\\sofia\\eclipse-workspace\\Couak\\src\\seatLog.txt"));
+    			String line = reader.readLine();
+    			for (int i= 0; i< cals.size();i++) {
+    				
+    				reader = new BufferedReader(new FileReader(
+        					"C:\\Users\\sofia\\eclipse-workspace\\Couak\\src\\seatLog.txt"));
+        			 line = reader.readLine();
+    				
+    				
+    				
+    			while (line != null) {
+    				
+    				dataRead= line.split("/");
+    				if(dataRead[7].equals(inEmail) && dataRead[3].equals(InfectionArray[1])
+    						&& dataRead[4].equals(InfectionArray[2]) && dataRead[5].equals(InfectionArray[3])){
+    							
+    					      UserCodes.add(line);
+    							
+    							
+    						}
+    				line = reader.readLine();
+    			}
+    			
+    			
+    			
+    			u=i+1;
+    			InfectionArray[1]= ""+cals.get(u).get(Calendar.DATE);
+    			InfectionArray[2]= ""+cals.get(u).get(Calendar.MONTH);
+    			InfectionArray[3]= ""+cals.get(u).get(Calendar.YEAR);
+    			
+    			reader.close();
+    			}
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    		
+    		
+    			
+	}
+	
 }
