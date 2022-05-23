@@ -82,7 +82,7 @@ public class CovidWallet extends JFrame{
 			
 			String action = e.getActionCommand();
 			
-			if(action.equals("Open File")  ) { //If the soure of the event is the clickUpload button, the following lines are executed.
+			if(action.equals("Open File")  ) { //If the source of the event is the clickUpload button, the following lines are executed.
 				JFileChooser selectFile = new JFileChooser(); //Creates JFileChooser object.
 				
 				selectFile.setCurrentDirectory(null); //Sets the directory that the file chooser will display by default. (Set to 'Documents')
@@ -104,7 +104,7 @@ public class CovidWallet extends JFrame{
 			
 			}else if (action.equals("Submit")) {
 			
-				 issuingDate = new GregorianCalendar(); //den xreiazetai issuing date
+				/*issuingDate = new GregorianCalendar(); //den xreiazetai issuing date
 				
 				try {
 					int day = Integer.parseInt(expirDate.getText(0, 2));
@@ -114,7 +114,7 @@ public class CovidWallet extends JFrame{
 				//int
 				//int
 				
-				issuingDate.set(ERROR, ALLBITS, ABORT);
+				issuingDate.set(ERROR, ALLBITS, ABORT);*/
 				
 				countdown();
 			}
