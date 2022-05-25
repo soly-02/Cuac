@@ -215,7 +215,97 @@ public class Classroom {
 			classInfo.add(s88);
 			
 		}
+		
+		
+		
+		else if (classId==2) {
+			this.classSize=88;
+			
+			//Making of class 2 (aithousa 2)
+			
+			// ****************1ST ROW****************
+
+			SeatInfo s1= new SeatInfo(1,2,3,4,11,0,0,0,0,0,0);
+			classInfo.add(s1);
+			SeatInfo s2= new SeatInfo(2,1,3,4,11,0,0,0,0,0,0);
+			classInfo.add(s2);
+			SeatInfo s3= new SeatInfo(3,1,2,4,5,6,13,0,0,0,0);
+			classInfo.add(s3);
+			SeatInfo s4= new SeatInfo(4,2,3,5,1,6,13,0,0,0,0);
+			classInfo.add(s4);
+			SeatInfo s5= new SeatInfo(5,3,4,6,7,8,15,0,0,0,0);
+			classInfo.add(s5);
+			SeatInfo s6= new SeatInfo(6,7,8,3,4,5,15,0,0,0,0);
+			classInfo.add(s6);
+			SeatInfo s7= new SeatInfo(7,6,8,9,5,10,17,0,0,0,0);
+			classInfo.add(s7);
+			SeatInfo s8= new SeatInfo(8,6,7,9,10,5,17,0,0,0,0);
+			classInfo.add(s8);
+			SeatInfo s9= new SeatInfo(9,7,8,10,19,0,0,0,0,0,0);
+			classInfo.add(s9);
+			SeatInfo s10= new SeatInfo(10,8,9,7,19,0,0,0,0,0,0);
+			classInfo.add(s10);
+
+			// **************** 2ND ROW****************
+
+			SeatInfo s11= new SeatInfo(11,12,13,14,2,34,35,0,0,0,0);
+			classInfo.add(s11);			
+			SeatInfo s12= new SeatInfo(12,11,13,14,34,35,0,0,0,0,0);
+			classInfo.add(s12);
+			SeatInfo s13= new SeatInfo(13,11,12,14,4,15,16,0,0,0,0);
+			classInfo.add(s13);
+			SeatInfo s14= new SeatInfo(14,11,12,13,15,16,0,0,0,0,0);
+			classInfo.add(s14);
+			SeatInfo s15= new SeatInfo(15,13,14,16,6,17,18,0,0,0,0);
+			classInfo.add(s15);
+			SeatInfo s16= new SeatInfo(16,13,14,15,17,18,0,0,0,0,0);
+			classInfo.add(s16);
+			SeatInfo s17= new SeatInfo(17,15,16,18,8,19,20,0,0,0,0);
+			classInfo.add(s17);
+			SeatInfo s18= new SeatInfo(18,15,16,17,19,20,0,0,0,0,0);
+			classInfo.add(s18);
+			SeatInfo s19= new SeatInfo(19,20,21,22,10,17,18,0,0,0,0);
+			classInfo.add(s19);
+			SeatInfo s20= new SeatInfo(20,19,21,22,17,18,0,0,0,0,0);
+			classInfo.add(s20);
+			SeatInfo s21= new SeatInfo(21,22,19,20,0,0,0,0,0,0,0);
+			classInfo.add(s21);
+			SeatInfo s22= new SeatInfo(22,21,19,20,0,32,33,0,0,0,0);
+			classInfo.add(s22);		
+			SeatInfo s34= new SeatInfo(34,11,12,35,0,0,0,0,0,0,0);
+			classInfo.add(s34);
+			SeatInfo s35= new SeatInfo(35,11,12,34,0,0,0,0,0,0,0);
+			classInfo.add(s35);
+			
+			// ****************3RD ROW****************
+			
+			SeatInfo s23= new SeatInfo(23,24,25,0,0,0,0,0,0,0,0);
+			classInfo.add(s23);
+			SeatInfo s24= new SeatInfo(24,23,25,26,27,0,0,0,0,0,0);
+			classInfo.add(s24);
+			SeatInfo s25= new SeatInfo(25,23,24,26,27,0,0,0,0,0,0);
+			classInfo.add(s25);
+			SeatInfo s26= new SeatInfo(26,24,25,27,28,29,0,0,0,0,0);
+			classInfo.add(s26);
+			SeatInfo s27= new SeatInfo(27,24,25,26,28,29,0,0,0,0,0);
+			classInfo.add(s27);
+			SeatInfo s28= new SeatInfo(28,26,27,29,30,31,0,0,0,0,0);
+			classInfo.add(s28);
+			SeatInfo s29= new SeatInfo(29,26,27,28,30,31,0,0,0,0,0);
+			classInfo.add(s29);
+			SeatInfo s30= new SeatInfo(30,31,32,33,28,29,0,0,0,0,0);
+			classInfo.add(s30);
+			SeatInfo s31= new SeatInfo(31,30,32,33,28,29,0,0,0,0,0);
+			classInfo.add(s31);
+			SeatInfo s32= new SeatInfo(32,33,30,31,0,0,0,0,0,0,0);
+			classInfo.add(s32);
+			SeatInfo s33= new SeatInfo(33,32,30,31,0,0,0,0,0,0,0);
+			classInfo.add(s33);
+
+			
+		}
 	}
+	
 	
 	
 	
@@ -242,6 +332,13 @@ public class Classroom {
 			
 			
 		}
+		
+		
+		
+		
+		
+			
+			
 		
 		
 		public int getSeatId() {
