@@ -36,7 +36,7 @@ public class CovidWallet extends JFrame{
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
     private JLabel Quarantine_Countdown;
-	private Calendar issuingDate;
+	//private Calendar issuingDate;
 	
 	
 	
@@ -58,9 +58,6 @@ public class CovidWallet extends JFrame{
 		panel.add(uploadFile);
 		
 		panel.add(expirDate);
-		
-		
-		
 		
 		submitDate.addActionListener(clickSubmit);
 		panel.add(submitDate);
