@@ -45,7 +45,7 @@ public class SignUp_Register extends JFrame {
 	 */
 	public SignUp_Register() {
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\sofia\\OneDrive\\Desktop\\\u039F\u03BC\u03B1\u03B4\u03B9\u03BA\u03AE\\Project Managers\\UOMLOGOGR22.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
 		setTitle("Cuac");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 560);
@@ -122,7 +122,6 @@ public class SignUp_Register extends JFrame {
 				
 				dispose ();
 				
-			// ------**BAGG TA BAZW OLA SE SXOLIA GIA NA KANW ELEGXOYS **************------------	
 			  
 			  
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
@@ -139,6 +138,7 @@ public class SignUp_Register extends JFrame {
 //				else {
 //					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
 //					mainScr.setVisible(true);
+//					u.getMainScreen(mainScr);
 //					dispose ();
 //				}
 			

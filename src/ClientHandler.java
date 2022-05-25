@@ -72,6 +72,7 @@ public class ClientHandler implements Runnable{
                 		registry.saveSeat(messageFromClient[1]);
                 		break;
                 	case "InfectionAlert":
+                		registry.addInfection(messageFromClient[1]);
                 		registry.saveInfection(messageFromClient[1]);
                 		break;
                 	default:

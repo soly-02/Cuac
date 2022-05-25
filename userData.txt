@@ -1,0 +1,4 @@
+dummy@uom.edu.gr, MySecr3tPassw00rd, null, 
+dummy2@gmail.com, 123456789, null, 22/5/2022, 
+dummy3@gmail.com, 987654321, C:\Users\Vaggelis\eclipse-workspace\Couak\src\userData.txt, 22/5/2022, Notification1. Notification2.
+dummy4@protonmail.com, Abc123, null, null, null

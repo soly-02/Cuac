@@ -103,7 +103,7 @@ public class User {
 	
 	
 	public void getMainScreen(MainScreen m) {
-		mainScr=m;
+		this.mainScr=m;
 		
 		
 	}
