@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -18,6 +19,7 @@ public class User {
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
 	private MainScreen mainScr;
+	private Registry registry;
 	
 	public User(String email, String password, Infection i) {  // isws xreiastei k alla attributes
 		this.email = email;
@@ -26,39 +28,25 @@ public class User {
 	
 	}
 	
-	public boolean connect() {  // kata th syndesh userID tha einai to email 
+	public boolean connect() {  
 		try {
-			socket = new Socket("localhost", 5000);  //attempt a connection
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.bufferedWriter= new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            System.out.println("Connection established");  
-            send(this.email);  // to socket einai etoimo, klhthike o constructor tou ClientHandler kai perimenei to userID giauto stelnoume to email. See ClientHandler constructor
-        } catch (IOException e) { // an kati paei lathos
-        	System.out.println("Error creating client socket");
-            closeEverything(socket, bufferedReader, bufferedWriter);
+			registry = new Registry();  //attempts a connection to the database
+        } catch (SQLException e) { 
+        	System.out.println("Error connecting to the database");
             return false;
         }
 		return true;
 	}
 	
 	public boolean sendCredentials() {
-		send("login;" + email + ", " + password);   //edw stelnontai ta credentials
-		System.out.println("credentials sent");
-		//apo edw kai katw einai h apanthsh tou server
-		String msgFromServer;
-		try {
-              msgFromServer = bufferedReader.readLine();  //blocking method
-               if(msgFromServer.equals("user not found")) {
-            	 System.out.println("user not found");  
-                return false;
-               }
-         } catch (IOException e) {
-        	 	System.out.println("Error reading server's message");
-                closeEverything(socket, bufferedReader, bufferedWriter);
-                return false;
-            }
-		return true; // an de symbei kanena exception kai o server de dosei "user not found" ola kala
-			
+		if(registry.login(email, password)) {
+			registry.register("dummy3@gmail.com", "Abc123");
+			return true;
+		}
+		else {
+			System.out.println("user not found");
+			return false;
+		}
 	}
 	
 	//TODO method pou perimenei gia notifications

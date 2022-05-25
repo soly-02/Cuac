@@ -116,31 +116,33 @@ public class SignUp_Register extends JFrame {
 				email = emailField.getText();
 				password = String.valueOf(passwordField.getPassword());
 				u = new User(email, password, i);
-				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
-				mainScr.setVisible(true);
-				u.getMainScreen(mainScr);
-				
-				dispose ();
+				//username: dummy@gmail.com
+				//password: 12346789
+//				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
+//				mainScr.setVisible(true);
+//				u.getMainScreen(mainScr);
+//				
+//				dispose ();
 				
 			  
 			  
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
 				// mas stelnei sthn arxikh othoni
 				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
-//				if(!u.connect()) {
-//					//pop-up oti den yparxei syndesh ston server
-//					return;
-//				}
-//				if(!(u.sendCredentials())) { //an ta sendCredentials epistrefoun sfalma
-//					//pop up ena parathyro pou na leei lathos credentials
-//					//delete User object
-//				}
-//				else {
-//					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
-//					mainScr.setVisible(true);
-//					u.getMainScreen(mainScr);
-//					dispose ();
-//				}
+				if(!u.connect()) {
+					//pop-up oti den yparxei syndesh ston server
+					return;
+				}
+				if(!(u.sendCredentials())) { //an ta sendCredentials epistrefoun sfalma
+					//pop up ena parathyro pou na leei lathos credentials
+					//delete User object
+				}
+				else {
+					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
+					mainScr.setVisible(true);
+					u.getMainScreen(mainScr);
+					dispose ();
+				}
 			
 				 
 		}
