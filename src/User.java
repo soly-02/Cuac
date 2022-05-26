@@ -26,6 +26,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.i=i;
+		connect();
 	
 	}
 	
@@ -35,19 +36,29 @@ public class User {
         } catch (SQLException e) { 
         	System.out.println("Error connecting to the database");
             return false;
+            // PETAW POP UP
         }
 		return true;
 	}
 	
-	public boolean sendCredentials() {
+	
+	
+	
+	public boolean sendRegCredentials() {
+		if(registry.register(email, password)) {
+			return true;
+		}
+			return false;
+		}
+	
+	
+	public boolean sendLogCredentials() {
 		if(registry.login(email, password)) {
 			return true;
 		}
-		else {
-			System.out.println("user not found");
 			return false;
 		}
-	}
+	
 	
 	public String getmyPdfPath() {
 		myPDFPath=registry.getFilePath(email);
@@ -117,7 +128,7 @@ public class User {
 	//-----------------------------------
 	
 	public void send(String MsgToSend) {
-		try {
+		/*  try {
 			bufferedWriter.write(MsgToSend);
 			bufferedWriter.newLine();
 			bufferedWriter.flush();
@@ -128,7 +139,7 @@ public class User {
 			closeEverything(socket, bufferedReader, bufferedWriter);
 			e.printStackTrace();
 		}
-		
+		*/ // NEEDS SQL UPDATE
 	}
 
 }

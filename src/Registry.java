@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -51,17 +52,37 @@ public class Registry {
 		try {
 			statement = connect.createStatement();
 			rs = statement.executeQuery("SELECT email, password FROM usertable WHERE email=" + "'"+ email + "'" +";");
+		
+			 
+			
+		
 			
 			while(rs.next()) {
+				
 				emailFromDB = rs.getString("email");
 				passwordFromDB = rs.getString("password");
+				
+				
+				if (emailFromDB.equals(email)) {
+					System.out.println("Email is in DB");                    //PERIPTOSH NA YPARXEI EMAIL
+					if(passwordFromDB.equals(password)) {
+						System.out.println("Password correct, log in complete");    //PERIPTOSH SWSTO PASSWORD
+						return true;
+					}
+					else { 
+						System.out.println("Password wrong, try again");         //PERIPTOSH LATHOS PASSWORD
+						//THELW POP UP SCREEN
+					    return false;
+					}
+					
+				
+				
 			}
+		}
+			
+			
 			statement.close();
-			if(emailFromDB!=null) { // if email is wrong there is no response
-				if(passwordFromDB.equals(password)) {					
-					return true;
-				}
-			}
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
