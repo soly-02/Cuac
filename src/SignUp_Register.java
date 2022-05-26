@@ -116,24 +116,30 @@ public class SignUp_Register extends JFrame {
 				email = emailField.getText();
 				password = String.valueOf(passwordField.getPassword());
 				u = new User(email, password, i);
-		
+				
 				
 				if (e.getActionCommand().equals("Register")) {
 					
 					
-					u.sendRegCredentials();
+					u.sendRegCredentials(); //TODO check if user exists and db connection
 					
 					
 				}
 				else  if (e.getActionCommand().equals("Sign In"))
 					if (u.sendLogCredentials()) {
-						MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
+						MainScreen mainScr= new MainScreen(u);
 						mainScr.setVisible(true);
 						u.getMainScreen(mainScr);
 						dispose ();
 						
 						
 					}
+					else {
+						System.out.println("user not found"); //pop-up
+						u.closeConnection();
+						//delete user object
+					}
+				
 						
 			  
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala

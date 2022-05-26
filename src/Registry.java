@@ -46,6 +46,16 @@ public class Registry {
 		connect = DriverManager.getConnection(url, usernamedb, passworddb);	
 	}
 	
+	public void closeConnection() {
+		try {
+			connect.close();
+			System.out.println("connection closed");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean login(String email, String password) {
 		String emailFromDB=null;
 		String passwordFromDB=null;
@@ -186,7 +196,28 @@ public class Registry {
 	}
 	
 	
-	
+	public void uploadSeat(String email, int classID, int seatId, String start, String end, String date) {
+		try {
+			String addSeatQuery = "INSERT INTO seatlog (email, classID, seatID, starttime, endtime, date)" + "VALUES (?,?,?,?,?,?)";
+			prep = connect.prepareStatement(addSeatQuery);
+			prep.setString(1, email);
+			prep.setInt(2, classID);
+			prep.setInt(3, seatId);
+			prep.setString(4, start);
+			prep.setString(5, end);
+			prep.setString(6, date);
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch(java.sql.SQLIntegrityConstraintViolationException s) {//seat, starttime, classID and date have already been inserted
+			System.out.println("seat, starttime, classID and date have already been inserted");
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error in uploadSeat");
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

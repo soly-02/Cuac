@@ -60,6 +60,8 @@ public class CovidWallet extends JFrame{
 		uploadFile.addActionListener(clickUpload);
 		panel.add(uploadFile);
 		
+		if(pdfDate!=null)
+			expirDateField.setText(pdfDate);
 		panel.add(expirDateField);
 		
 		submitDate.addActionListener(clickSubmit);
@@ -123,7 +125,6 @@ public class CovidWallet extends JFrame{
 				
 				countdown();
 			}
-			System.out.println(filePath);
 		}
 		
 	}

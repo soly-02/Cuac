@@ -84,6 +84,10 @@ public class User {
 		registry.setPdfDate(email, newDate);
 	}
 	
+	public void closeConnection() {
+		registry.closeConnection();
+	}
+	
 	//TODO method pou perimenei gia notifications
 	
 	
