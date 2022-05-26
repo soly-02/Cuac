@@ -14,6 +14,7 @@ public class User {
 	private String password;
 	private ArrayList <String> myNotifications= new ArrayList();
 	private String myPDFPath;
+	private String walletExpirDate;
 	private Infection i;
 	private Socket socket;
 	private BufferedReader bufferedReader;
@@ -40,7 +41,6 @@ public class User {
 	
 	public boolean sendCredentials() {
 		if(registry.login(email, password)) {
-			registry.register("dummy3@gmail.com", "Abc123");
 			return true;
 		}
 		else {
@@ -49,6 +49,16 @@ public class User {
 		}
 	}
 	
+	public String getmyPdfPath() {
+		myPDFPath=registry.getFilePath(email);
+		
+		return myPDFPath;
+	}
+	
+	public void updatePDFPath(String newPath) {
+		myPDFPath = newPath;
+		registry.setFilePath(email, myPDFPath);
+	}
 	//TODO method pou perimenei gia notifications
 	
 	

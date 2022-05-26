@@ -81,6 +81,7 @@ public class Registry {
 			prep.close();
 		}
 		catch(java.sql.SQLIntegrityConstraintViolationException s) {//attempt to insert an existing email
+			System.out.println("user already exists");
 			return false;
 		}
 		catch (SQLException e) {
@@ -90,82 +91,42 @@ public class Registry {
 		}
 		return true;
 	}
-	//----------------------------MEXRI EDW EINAI TO KAINOYRGIO REGISTRY--------------------------------------------------------
-	public String getFilePath(String clientMsg) throws IOException { // it returns null (as a String) if there is no path for the PDF file. ClientMsg = email;
-		FileInputStream inputStream = null;
-		Scanner sc = null;
-		MessageArray = clientMsg.split(", ");
-		email = MessageArray[0];
-		String pathToPDF = null;
-		
+	
+	public String getFilePath(String email){ // it returns null (as a String) if there is no path for the PDF file
+		String pathToPDF=null;
 		try {
-		    inputStream = new FileInputStream(userDataPath);
-		    while (sc.hasNextLine()) {
-		        String line = sc.nextLine();
-		        dataFromFile = line.split(", ");
-		        if((dataFromFile[0].equals(email))) { //found the user
-		        	pathToPDF = dataFromFile[2];
-		        }
-		        //System.out.println(line);
-		    }
-		    if (sc.ioException() != null) {
-		        throw sc.ioException();
-		    }
-		}catch(FileNotFoundException e) {
-			System.out.println("userData file not found");
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT pdfPath FROM usertable WHERE email=" + "'"+ email + "'" +";");
 			
-		}		
-		finally {
-		    if (inputStream != null) {
-		        inputStream.close();
-		    }
-		    if (sc != null) {
-		        sc.close();
-		    }
+			while(rs.next()) {
+				pathToPDF = rs.getString("pdfPath");
+			}
+			statement.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while getting path");
+			e.printStackTrace();
 		}
 		return pathToPDF;
 	}
 	
-	public void setFilePath(String clientMsg) { //changes the path to PDF. ClientMsg=email, pathToPDF
-		MessageArray = clientMsg.split(", ");
-		email = MessageArray[0];
-		String newLine = "";
-		String newPath = MessageArray[1];
-		
+	public void setFilePath(String email, String newPath) { //changes the path to PDF.
 		try {
-	        BufferedReader file = new BufferedReader(new FileReader(userDataPath));
-	        StringBuffer inputBuffer = new StringBuffer();
-	        String line;
-
-	        while ((line = file.readLine()) != null) {
-	        	dataFromFile = line.split(", ");
-	        	
-	        	if((dataFromFile[0].equals(email))) { //found the user
-	        		
-		        	dataFromFile[2] = newPath; //change the path
-		        	for(int i=0; i<dataFromFile.length; i++) { //convert array to string
-		        		newLine += dataFromFile[i];
-		        		if(i <= dataFromFile.length - 2)
-		        			newLine += ", ";
-		        	}
-		            inputBuffer.append(newLine);
-		            inputBuffer.append('\n');
-		            continue;
-	        	}
-	        	inputBuffer.append(line);
-	            inputBuffer.append('\n');
-	        	
-	        }
-	        file.close();
-
-	        FileOutputStream fileOut = new FileOutputStream(userDataPath);
-	        fileOut.write(inputBuffer.toString().getBytes());
-	        fileOut.close();
-	    } catch (Exception e) {
-	        System.out.println("userData file not found");
-	    }
+			String addPDFPathQuery = "UPDATE usertable SET pdfPath=? WHERE email=" + "'"+ email + "'" +";";
+			prep = connect.prepareStatement(addPDFPathQuery);
+			prep.setString(1, newPath);
+			
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while setting PDFPath");
+			e.printStackTrace();
+		}
 	}
-	
+	//----------------------------MEXRI EDW EINAI TO KAINOYRGIO REGISTRY--------------------------------------------------------
 	public String getNotifications(String clientMsg) throws IOException { // returns all notofication of a user. It can be null. ClientMsg=email
 		MessageArray = clientMsg.split(", ");
 		email = MessageArray[0];

@@ -25,7 +25,7 @@ public class CovidWallet extends JFrame{
 	//Constructors and variables
 	private JFrame frame = new JFrame();
 	private JPanel panel = new JPanel();
-	private JTextField expirDate = new JTextField("DD/MM/YY");
+	private JTextField expirDateField = new JTextField("DD/MM/YY");
 	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
 	private JButton submitDate = new JButton("Submit");
@@ -33,6 +33,7 @@ public class CovidWallet extends JFrame{
 	private ButtonListener clickSubmit = new ButtonListener();
 	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = new File(""); //PDF file is stored here.
+	private String expirDate;
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
     private JLabel Quarantine_Countdown;
@@ -46,6 +47,7 @@ public class CovidWallet extends JFrame{
 	public CovidWallet(User u) {
 		
 		this.u= u;
+		filePath = u.getmyPdfPath(); //IT CAN BE NULL
 		frame.setTitle("Covid Wallet"); //Sets the title.
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
@@ -94,6 +96,7 @@ public class CovidWallet extends JFrame{
 				if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
 				  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
 				  filePath = file.getAbsolutePath();
+				  u.updatePDFPath(filePath);
 				  
 				} else {
 				  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
@@ -115,6 +118,7 @@ public class CovidWallet extends JFrame{
 				
 				countdown();
 			}
+			System.out.println(filePath);
 		}
 		
 	}
