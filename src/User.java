@@ -145,19 +145,13 @@ public class User {
 	
 	//-----------------------------------
 	
-	public void send(String MsgToSend) {
-		/*  try {
-			bufferedWriter.write(MsgToSend);
-			bufferedWriter.newLine();
-			bufferedWriter.flush();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Failed to send message");
-			closeEverything(socket, bufferedReader, bufferedWriter);
-			e.printStackTrace();
-		}
-		*/ // NEEDS SQL UPDATE
+	public void sendSeatLog(String Email, String classId,String startTime, String endTime,  String date, 
+			String seatEnter ) {
+		
+		registry.uploadSeat(Email, Integer.parseInt(classId),Integer.parseInt( seatEnter), startTime,  endTime, date);
+		
+		
+		
 	}
 
 }
