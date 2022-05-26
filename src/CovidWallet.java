@@ -33,10 +33,10 @@ public class CovidWallet extends JFrame{
 	private ButtonListener clickSubmit = new ButtonListener();
 	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = new File(""); //PDF file is stored here.
-	private String expirDate;
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
     private JLabel Quarantine_Countdown;
+    private String pdfDate;
 	//private Calendar issuingDate;
 	
 	
@@ -48,6 +48,7 @@ public class CovidWallet extends JFrame{
 		
 		this.u= u;
 		filePath = u.getmyPdfPath(); //IT CAN BE NULL
+		pdfDate = u.getmyPdfDate();//IT CAN BE NULL too
 		frame.setTitle("Covid Wallet"); //Sets the title.
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
@@ -115,6 +116,10 @@ public class CovidWallet extends JFrame{
 				//int
 				
 				issuingDate.set(ERROR, ALLBITS, ABORT);*/
+				pdfDate=expirDateField.getText(); 
+				  u.updatePDFDate(pdfDate);
+				
+				
 				
 				countdown();
 			}

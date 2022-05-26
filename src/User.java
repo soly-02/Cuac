@@ -70,6 +70,20 @@ public class User {
 		myPDFPath = newPath;
 		registry.setFilePath(email, myPDFPath);
 	}
+	
+	
+	
+	public String getmyPdfDate() {
+		walletExpirDate=registry.getPdfDate(email);
+		
+		return walletExpirDate;
+	}
+	
+	public void updatePDFDate(String newDate) {
+		walletExpirDate = newDate;
+		registry.setPdfDate(email, newDate);
+	}
+	
 	//TODO method pou perimenei gia notifications
 	
 	

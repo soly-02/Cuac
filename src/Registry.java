@@ -147,6 +147,55 @@ public class Registry {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public String getPdfDate(String email){ // it returns null (as a String) if there is no date for the PDF file
+		String dateofPDF=null;
+		try {
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT walletDate FROM usertable WHERE email=" + "'"+ email + "'" +";");
+			
+			while(rs.next()) {
+				dateofPDF = rs.getString("walletDate");
+			}
+			statement.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while getting path");
+			e.printStackTrace();
+		}
+		return dateofPDF;
+	}
+	
+	
+	public void setPdfDate(String email, String newWalletDate) { 
+		try {
+			String addWalletDateQuery = "UPDATE usertable SET walletDate=? WHERE email=" + "'"+ email + "'" +";";
+			prep = connect.prepareStatement(addWalletDateQuery);
+			prep.setString(1, newWalletDate);
+			
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while setting PDFDate");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//----------------------------MEXRI EDW EINAI TO KAINOYRGIO REGISTRY--------------------------------------------------------
 	public String getNotifications(String clientMsg) throws IOException { // returns all notofication of a user. It can be null. ClientMsg=email
 		MessageArray = clientMsg.split(", ");
