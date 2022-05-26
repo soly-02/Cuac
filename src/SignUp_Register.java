@@ -45,7 +45,7 @@ public class SignUp_Register extends JFrame {
 	 */
 	public SignUp_Register() {
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\sofia\\OneDrive\\Desktop\\\u039F\u03BC\u03B1\u03B4\u03B9\u03BA\u03AE\\Project Managers\\UOMLOGOGR22.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
 		setTitle("Cuac");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 560);
@@ -116,31 +116,33 @@ public class SignUp_Register extends JFrame {
 				email = emailField.getText();
 				password = String.valueOf(passwordField.getPassword());
 				u = new User(email, password, i);
-				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
-				mainScr.setVisible(true);
-				u.getMainScreen(mainScr);
+				//username: dummy@gmail.com
+				//password: 12346789
+//				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
+//				mainScr.setVisible(true);
+//				u.getMainScreen(mainScr);
+//				
+//				dispose ();
 				
-				dispose ();
-				
-			// ------**BAGG TA BAZW OLA SE SXOLIA GIA NA KANW ELEGXOYS **************------------	
 			  
 			  
 				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
 				// mas stelnei sthn arxikh othoni
 				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
-//				if(!u.connect()) {
-//					//pop-up oti den yparxei syndesh ston server
-//					return;
-//				}
-//				if(!(u.sendCredentials())) { //an ta sendCredentials epistrefoun sfalma
-//					//pop up ena parathyro pou na leei lathos credentials
-//					//delete User object
-//				}
-//				else {
-//					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
-//					mainScr.setVisible(true);
-//					dispose ();
-//				}
+				if(!u.connect()) {
+					//pop-up oti den yparxei syndesh ston server
+					return;
+				}
+				if(!(u.sendCredentials())) { //an ta sendCredentials epistrefoun sfalma
+					//pop up ena parathyro pou na leei lathos credentials
+					//delete User object
+				}
+				else {
+					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
+					mainScr.setVisible(true);
+					u.getMainScreen(mainScr);
+					dispose ();
+				}
 			
 				 
 		}
