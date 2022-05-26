@@ -250,7 +250,7 @@ public class Classroom {
 		}
 			
 			
-			public ArrayList <Integer> getSeats(int seatId) {
+			public ArrayList <Integer> getSeats() {
 				
 				return nearbySeats;
 			

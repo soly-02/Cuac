@@ -281,7 +281,7 @@ public class Registry {
     				if(dataRead[7].equals(inEmail) && dataRead[3].equals(InfectionArray[1])
     						&& dataRead[4].equals(InfectionArray[2]) && dataRead[5].equals(InfectionArray[3])){
     							
-    					      UserCodes.add(line); //UserCodes einai oloi oi kwdikoi toy xrhsth sthn periodo poy eixe nosisei
+    					      UserCodes.add(line);
     							
     							
     						}
