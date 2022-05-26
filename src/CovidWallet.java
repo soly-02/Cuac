@@ -59,7 +59,7 @@ public class CovidWallet extends JFrame{
 		uploadFile.addActionListener(clickUpload);
 		panel.add(uploadFile);
 		
-		panel.add(expirDate);
+		panel.add(expirDateField);
 		
 		submitDate.addActionListener(clickSubmit);
 		panel.add(submitDate);
@@ -197,7 +197,7 @@ public class CovidWallet extends JFrame{
 				 try {
 					 for(;;) {
 						 
-						 String[] nums3= expirDate.getText().split("/");   // splitting the numbers and adding them in a table 
+						 String[] nums3= expirDateField.getText().split("/");   // splitting the numbers and adding them in a table 
 						 int	nums[] = {-1,-1,-1};
 							
 							for (int index = 0; index < nums3.length; index++) {
