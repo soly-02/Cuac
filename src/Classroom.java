@@ -419,6 +419,15 @@ public class Classroom {
 	
 	
 	
+	
+	
+	public ArrayList <SeatInfo> getclassInfo(int ClassId) {
+		
+		return classInfo;
+		
+	}
+	
+	
 	public class SeatInfo{
 		private int seatId;
 		private ArrayList <Integer> nearbySeats= new ArrayList<Integer>();
@@ -444,25 +453,53 @@ public class Classroom {
 		}
 		
 		
-		
-		
-		
-			
-			
-		
-		
 		public int getSeatId() {
 			
 			return seatId;
 		}
+		
+       public ArrayList <Integer> getNearSeatInfo (){
+			
+			return nearbySeats;
+		}
+		
+		
+		
 			
 			
-			public ArrayList <Integer> getSeats() {
-				
-				return nearbySeats;
+
+
+			
 			
 			
 		}
+	
+	public ArrayList <Integer> getSeatInfo(int SeatId,int ClassId,Classroom c ){
+		for (int i=0; i<c.getclassInfo(ClassId).size();i++) {
+			if (c.getclassInfo(ClassId).get(i).getSeatId()== SeatId) {
+				System.out.println(c.getclassInfo(ClassId).get(i).getNearSeatInfo().toString());
+				return c.getclassInfo(ClassId).get(i).getNearSeatInfo();
+				
+			}
+			
+			
+		}
+		return null;
+		
+		
+	}
+
+	
+	
+	
+	
+
+	public ArrayList <Integer> getSeats(int ClassId, int SeatId,Classroom c) {
+		
+		c.getclassInfo(ClassId);
+		return getSeatInfo(SeatId,ClassId,c );
+	
+	
 	}
 	
 	
