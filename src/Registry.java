@@ -221,6 +221,51 @@ public class Registry {
 	
 	
 	
+	public void setInfectionDate(String email, String date) { //changes the path to PDF.
+		try {
+			String addInfectionDateQuery = "UPDATE usertable SET infectionDate=? WHERE email=" + "'"+ email + "'" +";";
+			prep = connect.prepareStatement(addInfectionDateQuery);
+			prep.setString(1, date);
+			
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while setting PDFPath");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public String getInfectionDate(String email){ // it returns null (as a String) if there is no date for the PDF file
+		String dateofInfection=null;
+		try {
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT infectionDate FROM usertable WHERE email=" + "'"+ email + "'" +";");
+			
+			while(rs.next()) {
+				dateofInfection = rs.getString("infectionDate");
+			}
+			statement.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while getting path");
+			e.printStackTrace();
+		}
+		return dateofInfection;
+	}
+	
+	
+	
+	public void getPreviousSeats(String email,String date) {
+		
+		
+		
+		
+	}
+	
 	
 	
 	
