@@ -115,7 +115,7 @@ public class User {
 	
 	
 	
-	//---------GIA TRIAL MONO------------
+	
 	
 	
 	
@@ -142,18 +142,36 @@ public class User {
 	}
 	
 	
+	public void findPreviousSeats(String date) {
+		
+		
+		registry.getPreviousSeats(email, date);
+		
+	}
 	
-	//-----------------------------------
 	
-	public boolean sendSeatLog(String Email, String classId,String startTime, String endTime,  String date, 
+public void setInfectionDate(String date) {
+		registry.setInfectionDate(email, date);
+		
+		
+	}
+	
+	
+	public String getInfectionDate() {
+		
+		return registry.getInfectionDate(email);
+		
+		
+	}
+	
+	
+	
+	public void sendSeatLog(String Email, String classId,String startTime, String endTime,  String date, 
 			String seatEnter ) {
-		try {
-			registry.uploadSeat(Email, Integer.parseInt(classId),Integer.parseInt( seatEnter), startTime,  endTime, date);
-			return true;
-		}
-		catch(java.sql.SQLIntegrityConstraintViolationException s){
-			return false;
-		}
+		
+		registry.uploadSeat(Email, Integer.parseInt(classId),Integer.parseInt( seatEnter), startTime,  endTime, date);
+		
+		
 		
 	}
 
