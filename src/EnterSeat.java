@@ -213,9 +213,17 @@ public class EnterSeat extends JFrame {
 				System.out.println(code);
 				// EDW PREPEI NA EXW KLASH APO TON SERVER GIA NA STEILW TON CODE PX SERVER.SEND(String code)
 				// ston server gia na vrw tis ypoloipes theseis thelw thn class Classroom, to ClassId kai to seatEnter
-				u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime.getText(),endTime.getText(),  dayEnter.getText()+ "/"+
-						monthEnter.getText()+ "/"+ yearEnter.getText(), seatEnter.getText() );
-			    dispose();
+				if(u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime.getText(),endTime.getText(),  dayEnter.getText()+ "/"+
+						monthEnter.getText()+ "/"+ yearEnter.getText(), seatEnter.getText() )) {
+					System.out.println("Seat added successfully");
+					//pop-up
+					dispose();
+				}
+				else {
+					System.out.println("You have already registered this seat");
+					//pop-up
+				}
+			    
 			}
 			
 			

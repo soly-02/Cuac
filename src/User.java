@@ -145,12 +145,15 @@ public class User {
 	
 	//-----------------------------------
 	
-	public void sendSeatLog(String Email, String classId,String startTime, String endTime,  String date, 
+	public boolean sendSeatLog(String Email, String classId,String startTime, String endTime,  String date, 
 			String seatEnter ) {
-		
-		registry.uploadSeat(Email, Integer.parseInt(classId),Integer.parseInt( seatEnter), startTime,  endTime, date);
-		
-		
+		try {
+			registry.uploadSeat(Email, Integer.parseInt(classId),Integer.parseInt( seatEnter), startTime,  endTime, date);
+			return true;
+		}
+		catch(java.sql.SQLIntegrityConstraintViolationException s){
+			return false;
+		}
 		
 	}
 

@@ -17,6 +17,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 
 
@@ -196,7 +197,7 @@ public class Registry {
 	}
 	
 	
-	public void uploadSeat(String email, int classID, int seatId, String start, String end, String date) {
+	public void uploadSeat(String email, int classID, int seatId, String start, String end, String date) throws SQLIntegrityConstraintViolationException {
 		try {
 			String addSeatQuery = "INSERT INTO seatlog (email, classID, seatID, starttime, endtime, date)" + "VALUES (?,?,?,?,?,?)";
 			prep = connect.prepareStatement(addSeatQuery);
@@ -210,7 +211,7 @@ public class Registry {
 			prep.close();
 		}
 		catch(java.sql.SQLIntegrityConstraintViolationException s) {//seat, starttime, classID and date have already been inserted
-			System.out.println("seat, starttime, classID and date have already been inserted");
+			throw s;
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
