@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -211,18 +213,14 @@ public class EnterSeat extends JFrame {
 				String code = classId+"/"+ startTime.getText()+"/"+ endTime.getText()+"/"+ dayEnter.getText()+ "/"+
 				monthEnter.getText()+ "/"+ yearEnter.getText()+"/"+seatEnter.getText() + "/"+ u.getEmail();
 				System.out.println(code);
-				// EDW PREPEI NA EXW KLASH APO TON SERVER GIA NA STEILW TON CODE PX SERVER.SEND(String code)
-				// ston server gia na vrw tis ypoloipes theseis thelw thn class Classroom, to ClassId kai to seatEnter
-				if(u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime.getText(),endTime.getText(),  dayEnter.getText()+ "/"+
-						monthEnter.getText()+ "/"+ yearEnter.getText(), seatEnter.getText() )) {
-					System.out.println("Seat added successfully");
-					//pop-up
-					dispose();
+				
+				u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime.getText(),endTime.getText(),  dayEnter.getText()+ "/"+
+						monthEnter.getText()+ "/"+ yearEnter.getText(), seatEnter.getText() ); {
+					//System.out.println("Seat added successfully");
+				JOptionPane.showMessageDialog(null,"Επιτυχής δήλωση θέσης");
+				dispose();
 				}
-				else {
-					System.out.println("You have already registered this seat");
-					//pop-up
-				}
+				
 			    
 			}
 			

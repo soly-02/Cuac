@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -100,6 +101,7 @@ public class CovidWallet extends JFrame{
 				  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
 				  filePath = file.getAbsolutePath();
 				  u.updatePDFPath(filePath);
+				  JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση πιστοποιητικού");
 				  
 				} else {
 				  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
@@ -119,8 +121,8 @@ public class CovidWallet extends JFrame{
 				
 				issuingDate.set(ERROR, ALLBITS, ABORT);*/
 				pdfDate=expirDateField.getText(); 
-				  u.updatePDFDate(pdfDate);
-				
+				u.updatePDFDate(pdfDate);
+				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας");
 				
 				
 				countdown();

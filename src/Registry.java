@@ -197,7 +197,7 @@ public class Registry {
 	}
 	
 	
-	public void uploadSeat(String email, int classID, int seatId, String start, String end, String date) throws SQLIntegrityConstraintViolationException {
+	public void uploadSeat(String email, int classID, int seatId, String start, String end, String date) {
 		try {
 			String addSeatQuery = "INSERT INTO seatlog (email, classID, seatID, starttime, endtime, date)" + "VALUES (?,?,?,?,?,?)";
 			prep = connect.prepareStatement(addSeatQuery);
@@ -210,9 +210,7 @@ public class Registry {
 			prep.executeUpdate();
 			prep.close();
 		}
-		catch(java.sql.SQLIntegrityConstraintViolationException s) {//seat, starttime, classID and date have already been inserted
-			throw s;
-		}
+		
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("SQL Error in uploadSeat");

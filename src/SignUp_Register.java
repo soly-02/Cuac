@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JDesktopPane;
 import javax.swing.DefaultListModel;
@@ -23,6 +24,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -35,6 +37,8 @@ public class SignUp_Register extends JFrame {
 	private JPasswordField passwordField;
 	private String email;
 	private String password;
+	private String passRegex = "^(?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,12}$";
+	private Pattern pattern =Pattern.compile(passRegex);
 	
 	Infection i;
 	private User u;
@@ -117,50 +121,55 @@ public class SignUp_Register extends JFrame {
 				password = String.valueOf(passwordField.getPassword());
 				u = new User(email, password, i);
 				
-				
-				if (e.getActionCommand().equals("Register")) {
-					
-					
-					u.sendRegCredentials(); //TODO check if user exists and db connection
-					
-					
+				if(email.isBlank()) {
+					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
+					return;
 				}
-				else  if (e.getActionCommand().equals("Sign In"))
-					if (u.sendLogCredentials()) {
-						MainScreen mainScr= new MainScreen(u);
-						mainScr.setVisible(true);
-						u.getMainScreen(mainScr);
-						dispose ();
+//				else if(!pattern.matcher(password).matches()) {  disabled for testing
+//					JOptionPane.showMessageDialog(null, "Ο κωδικός πρέπει να περιλαμβάνει \r\n"
+//							+ "• Τουλάχιστον 6 χαρακτήρες.\r\n"
+//							+ "• Το πολύ 12 χαρακτήρες.\r\n"
+//							+ "• Τουλάχιστον ένα λατινικό γράμμα.\r\n"
+//							+ "• Τουλάχιστον έναν αριθμό.\r\n"
+//							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα\r\n"
+//							+ "και αριθμούς.\r\n"
+//							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);
+//					return;
+//				}
+				
+				if(u.connect()) {
+					if (e.getActionCommand().equals("Register")) {
+					
+						if(u.sendRegCredentials()) {
+							JOptionPane.showMessageDialog(null,"Επιτυχής εγγραφή");
+						}
+						else {
+							JOptionPane.showMessageDialog(null,"Αυτός ο λογαριασμός υπάρχει ήδη", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+						}
+					}		
+					else  if (e.getActionCommand().equals("Sign In")) {
+						if (u.sendLogCredentials()) {
+							MainScreen mainScr= new MainScreen(u);
+							mainScr.setVisible(true);
+							u.getMainScreen(mainScr);
+							dispose ();
 						
 						
-					}
+						}
 					else {
 						System.out.println("user not found"); //pop-up
+						JOptionPane.showMessageDialog(null,"Ο χρήστης δε βρέθηκε. Ελεγξε τα στοιχεία που έβαλες", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
 						u.closeConnection();
 						//delete user object
-					}
-				
+						}
+					}	
 						
-			  
-				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
-				// mas stelnei sthn arxikh othoni
-				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
-			
-				
-				/*
-				if(!(!u.sendRegCredentials())) { //an ta sendCredentials epistrefoun sfalma
-					//pop up ena parathyro pou na leei lathos credentials
-					//delete User object
 				}
-				if(!(!u.sendLogCredentials())) { //an ta sendCredentials epistrefoun sfalma
-					//pop up ena parathyro pou na leei lathos credentials
-					//delete User object
-					//ALLO PARATHIRO 
+				else {
+					System.out.println("Connection error");
+					JOptionPane.showMessageDialog(null,"Σφάλμα με τη σύνδεση", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+					//pop-up
 				}
-				
-				
-				
-			*/
 				 
 		}
 

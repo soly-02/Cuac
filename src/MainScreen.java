@@ -1,6 +1,8 @@
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,7 +11,11 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.JButton;
@@ -36,6 +42,7 @@ public class MainScreen extends JFrame {
 	public MainScreen(User u) {
 		setResizable(false);
 		this.u = u;
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 935, 577);
 		contentPane = new JPanel();
@@ -100,7 +107,15 @@ public class MainScreen extends JFrame {
 		 EnterInfection.addActionListener(bb);   
 		 EnterNotifications.addActionListener(bb);  
 		
-		
+//		frame.addWindowListener(new WindowAdapter() { a failed attempt for exit dialog
+//		      public void windowClosing(WindowEvent we) {
+//		          int result = JOptionPane.showConfirmDialog(frame, "Do you want to Exit ?", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
+//		          if (result == JOptionPane.YES_OPTION)
+//		            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		          else if (result == JOptionPane.NO_OPTION)
+//		            frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//		        }
+//		      });
 		
 	}
 	

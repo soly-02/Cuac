@@ -26,7 +26,6 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.i=i;
-		connect();
 	
 	}
 	
