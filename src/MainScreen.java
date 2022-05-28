@@ -43,7 +43,7 @@ public class MainScreen extends JFrame {
 		setResizable(false);
 		this.u = u;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 935, 577);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,15 +107,18 @@ public class MainScreen extends JFrame {
 		 EnterInfection.addActionListener(bb);   
 		 EnterNotifications.addActionListener(bb);  
 		
-//		frame.addWindowListener(new WindowAdapter() { a failed attempt for exit dialog
-//		      public void windowClosing(WindowEvent we) {
-//		          int result = JOptionPane.showConfirmDialog(frame, "Do you want to Exit ?", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
-//		          if (result == JOptionPane.YES_OPTION)
-//		            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		          else if (result == JOptionPane.NO_OPTION)
-//		            frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-//		        }
-//		      });
+		this.addWindowListener(new WindowAdapter() {
+		      public void windowClosing(WindowEvent we) {
+		          int result = JOptionPane.showConfirmDialog(null, "Do you want to Exit ?", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
+		          if (result == JOptionPane.YES_OPTION) {
+		            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		          	u.closeConnection();
+		          }	
+		          else if (result == JOptionPane.NO_OPTION) {
+		            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		          }  
+		        }
+		      });
 		
 	}
 	

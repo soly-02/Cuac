@@ -123,6 +123,7 @@ public class SignUp_Register extends JFrame {
 				
 				if(email.isBlank()) {
 					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
+					deleteUserObj(u);
 					return;
 				}
 //				else if(!pattern.matcher(password).matches()) {  disabled for testing
@@ -134,6 +135,7 @@ public class SignUp_Register extends JFrame {
 //							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα\r\n"
 //							+ "και αριθμούς.\r\n"
 //							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);
+//				    deleteUserObj(u);	
 //					return;
 //				}
 				
@@ -161,6 +163,7 @@ public class SignUp_Register extends JFrame {
 						JOptionPane.showMessageDialog(null,"Ο χρήστης δε βρέθηκε. Ελεγξε τα στοιχεία που έβαλες", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
 						u.closeConnection();
 						//delete user object
+						deleteUserObj(u);
 						}
 					}	
 						
@@ -168,11 +171,14 @@ public class SignUp_Register extends JFrame {
 				else {
 					System.out.println("Connection error");
 					JOptionPane.showMessageDialog(null,"Σφάλμα με τη σύνδεση", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-					//pop-up
+					deleteUserObj(u);
 				}
 				 
 		}
-
+		public void deleteUserObj(User u) {
+			u = null;
+			System.gc(); //call the garbage collector to delete the object
+		}
 	
 	
 }
