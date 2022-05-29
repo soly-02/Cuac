@@ -141,12 +141,22 @@ public class SignUp_Register extends JFrame {
 				
 				if(u.connect()) {
 					if (e.getActionCommand().equals("Register")) {
-					
-						if(u.sendRegCredentials()) {
-							JOptionPane.showMessageDialog(null,"Επιτυχής εγγραφή");
+						JPasswordField confirmPasswd = new JPasswordField(12);
+						int action = JOptionPane.showConfirmDialog(null, confirmPasswd,"Επιβεβαίωσε τον κωδικό",JOptionPane.OK_CANCEL_OPTION);
+						if(action > 0)
+							return;
+						if(String.valueOf(confirmPasswd.getPassword()).equals(password)) {
+							if(u.sendRegCredentials()) {
+								JOptionPane.showMessageDialog(null,"Επιτυχής εγγραφή");
+							}
+							else {
+								JOptionPane.showMessageDialog(null,"Αυτός ο λογαριασμός υπάρχει ήδη", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+								deleteUserObj(u);
+							}
 						}
 						else {
-							JOptionPane.showMessageDialog(null,"Αυτός ο λογαριασμός υπάρχει ήδη", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,"Οι κωδικοί δεν ταιριάζουν", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+							deleteUserObj(u);
 						}
 					}		
 					else  if (e.getActionCommand().equals("Sign In")) {
@@ -158,13 +168,13 @@ public class SignUp_Register extends JFrame {
 						
 						
 						}
-					else {
-						System.out.println("user not found"); //pop-up
-						JOptionPane.showMessageDialog(null,"Ο χρήστης δε βρέθηκε. Ελεγξε τα στοιχεία που έβαλες", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-						u.closeConnection();
-						//delete user object
-						deleteUserObj(u);
-						}
+						else {
+							System.out.println("user not found"); //pop-up
+							JOptionPane.showMessageDialog(null,"Ο χρήστης δε βρέθηκε. Ελεγξε τα στοιχεία που έβαλες", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+							u.closeConnection();
+							//delete user object
+							deleteUserObj(u);
+							}
 					}	
 						
 				}
@@ -176,6 +186,7 @@ public class SignUp_Register extends JFrame {
 				 
 		}
 		public void deleteUserObj(User u) {
+			u.closeConnection();
 			u = null;
 			System.gc(); //call the garbage collector to delete the object
 		}
