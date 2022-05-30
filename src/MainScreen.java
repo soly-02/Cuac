@@ -1,6 +1,8 @@
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,7 +11,11 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.JButton;
@@ -34,9 +40,11 @@ public class MainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public MainScreen(User u) {
+		setResizable(false);
 		this.u = u;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1026, 641);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 935, 577);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -44,7 +52,7 @@ public class MainScreen extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 51));
-		panel.setBounds(0, 0, 1018, 617);
+		panel.setBounds(0, 0, 921, 540);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -54,18 +62,11 @@ public class MainScreen extends JFrame {
 		user_email.setForeground(new Color(255, 255, 255));
 		panel.add(user_email);
 		
-		JLabel notification_reminder = new JLabel("Dummie Notification/Reminder");
-		notification_reminder.setBackground(new Color(255, 255, 255));
-		notification_reminder.setForeground(new Color(255, 0, 0));
-		notification_reminder.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		notification_reminder.setBounds(245, 11, 294, 55);
-		panel.add(notification_reminder);
-		
 		Quarantine_Countdown = new JLabel("");
 		Quarantine_Countdown.setFont(new Font("Tahoma", Font.BOLD, 22));
 		Quarantine_Countdown.setForeground(Color.RED);
 		Quarantine_Countdown.setHorizontalAlignment(SwingConstants.LEFT);
-		Quarantine_Countdown.setBounds(583, 13, 425, 45);
+		Quarantine_Countdown.setBounds(383, 13, 425, 45);
 		panel.add(Quarantine_Countdown);
 		
 		
@@ -76,27 +77,27 @@ public class MainScreen extends JFrame {
 		JButton EnterSeat = new JButton("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2");
 		EnterSeat.setBackground(new Color(255, 255, 255));
 		EnterSeat.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		EnterSeat.setBounds(385, 116, 268, 65);
+		EnterSeat.setBounds(330, 117, 268, 65);
 		panel.add(EnterSeat);
 		
 		JButton EnterCovidWallet = new JButton("Covid Wallet");
 		
 		EnterCovidWallet.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		EnterCovidWallet.setBackground(Color.WHITE);
-		EnterCovidWallet.setBounds(385, 217, 268, 65);
+		EnterCovidWallet.setBounds(330, 219, 268, 65);
 		panel.add(EnterCovidWallet);
 		
 		JButton EnterInfection = new JButton("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2");
 		
 		EnterInfection.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		EnterInfection.setBackground(Color.WHITE);
-		EnterInfection.setBounds(385, 317, 268, 65);
+		EnterInfection.setBounds(330, 318, 268, 65);
 		panel.add(EnterInfection);
 		
 		JButton EnterNotifications = new JButton("\u0395\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2");
 		EnterNotifications.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		EnterNotifications.setBackground(new Color(255, 0, 0));
-		EnterNotifications.setBounds(385, 469, 268, 65);
+		EnterNotifications.setBounds(330, 445, 268, 65);
 		panel.add(EnterNotifications);
 		
 		
@@ -106,7 +107,18 @@ public class MainScreen extends JFrame {
 		 EnterInfection.addActionListener(bb);   
 		 EnterNotifications.addActionListener(bb);  
 		
-		
+		this.addWindowListener(new WindowAdapter() {
+		      public void windowClosing(WindowEvent we) {
+		          int result = JOptionPane.showConfirmDialog(null, "Do you want to Exit ?", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
+		          if (result == JOptionPane.YES_OPTION) {
+		            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		          	u.closeConnection();
+		          }	
+		          else if (result == JOptionPane.NO_OPTION) {
+		            setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		          }  
+		        }
+		      });
 		
 	}
 	

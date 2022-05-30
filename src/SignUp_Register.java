@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JDesktopPane;
 import javax.swing.DefaultListModel;
@@ -23,6 +24,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -35,6 +37,8 @@ public class SignUp_Register extends JFrame {
 	private JPasswordField passwordField;
 	private String email;
 	private String password;
+	private String passRegex = "^(?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,12}$";
+	private Pattern pattern =Pattern.compile(passRegex);
 	
 	Infection i;
 	private User u;
@@ -116,35 +120,76 @@ public class SignUp_Register extends JFrame {
 				email = emailField.getText();
 				password = String.valueOf(passwordField.getPassword());
 				u = new User(email, password, i);
-				MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
-				mainScr.setVisible(true);
-				u.getMainScreen(mainScr);
 				
-				dispose ();
-				
-			  
-			  
-				// edw thelei mia if h opoia tsekarei ta credentials me ton server kai an ola pane kala
-				// mas stelnei sthn arxikh othoni
-				//ta email kai password tha ta paroume apo to input (mazi me elegxous gia to an to password exei katallhlo mhkos klp)
-//				if(!u.connect()) {
-//					//pop-up oti den yparxei syndesh ston server
+				if(email.isBlank()) {
+					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
+					deleteUserObj(u);
+					return;
+				}
+//				else if(!pattern.matcher(password).matches()) {  disabled for testing
+//					JOptionPane.showMessageDialog(null, "Ο κωδικός πρέπει να περιλαμβάνει \r\n"
+//							+ "• Τουλάχιστον 6 χαρακτήρες.\r\n"
+//							+ "• Το πολύ 12 χαρακτήρες.\r\n"
+//							+ "• Τουλάχιστον ένα λατινικό γράμμα.\r\n"
+//							+ "• Τουλάχιστον έναν αριθμό.\r\n"
+//							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα\r\n"
+//							+ "και αριθμούς.\r\n"
+//							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);
+//				    deleteUserObj(u);	
 //					return;
 //				}
-//				if(!(u.sendCredentials())) { //an ta sendCredentials epistrefoun sfalma
-//					//pop up ena parathyro pou na leei lathos credentials
-//					//delete User object
-//				}
-//				else {
-//					MainScreen mainScr= new MainScreen(u);  //TODO constructors in GUI screens to pass user's data
-//					mainScr.setVisible(true);
-//					u.getMainScreen(mainScr);
-//					dispose ();
-//				}
-			
+				
+				if(u.connect()) {
+					if (e.getActionCommand().equals("Register")) {
+						JPasswordField confirmPasswd = new JPasswordField(12);
+						int action = JOptionPane.showConfirmDialog(null, confirmPasswd,"Επιβεβαίωσε τον κωδικό",JOptionPane.OK_CANCEL_OPTION);
+						if(action > 0)
+							return;
+						if(String.valueOf(confirmPasswd.getPassword()).equals(password)) {
+							if(u.sendRegCredentials()) {
+								JOptionPane.showMessageDialog(null,"Επιτυχής εγγραφή");
+							}
+							else {
+								JOptionPane.showMessageDialog(null,"Αυτός ο λογαριασμός υπάρχει ήδη", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+								deleteUserObj(u);
+							}
+						}
+						else {
+							JOptionPane.showMessageDialog(null,"Οι κωδικοί δεν ταιριάζουν", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+							deleteUserObj(u);
+						}
+					}		
+					else  if (e.getActionCommand().equals("Sign In")) {
+						if (u.sendLogCredentials()) {
+							MainScreen mainScr= new MainScreen(u);
+							mainScr.setVisible(true);
+							u.getMainScreen(mainScr);
+							dispose ();
+						
+						
+						}
+						else {
+							System.out.println("user not found"); //pop-up
+							JOptionPane.showMessageDialog(null,"Ο χρήστης δε βρέθηκε. Ελεγξε τα στοιχεία που έβαλες", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+							u.closeConnection();
+							//delete user object
+							deleteUserObj(u);
+							}
+					}	
+						
+				}
+				else {
+					System.out.println("Connection error");
+					JOptionPane.showMessageDialog(null,"Σφάλμα με τη σύνδεση", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+					deleteUserObj(u);
+				}
 				 
 		}
-
+		public void deleteUserObj(User u) {
+			u.closeConnection();
+			u = null;
+			System.gc(); //call the garbage collector to delete the object
+		}
 	
 	
 }

@@ -35,6 +35,9 @@ public class InfectionScreen extends JFrame {
 	 */
 	public InfectionScreen(User u) {
 		this.u=u;
+		String dateofInfection = u.getInfectionDate();// can be null
+		
+		
 		setBounds(100, 100, 760, 513);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -147,8 +150,10 @@ public class InfectionScreen extends JFrame {
 			u.getInfection().setCovidStatus(true);
 			u.getInfection().setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
 			u.startCovidCountdown();
-			u.send("InfectionAlert;" + u.getEmail() + ", " + u.getInfection().getInfectionDate());
-			
+			u.setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
+			u.findPreviousSeats(u.getInfectionDate());
+			//u.send("InfectionAlert;" + u.getEmail() + ", " + u.getInfection().getInfectionDate());
+			//SQL ALLAGES
 			
 			dispose();
 			 }

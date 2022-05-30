@@ -12,6 +12,15 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Statement;
+
+
 public class Registry {
 	// Auth h klash tha diaxeirizetai ta logins, registers, logs kai ola ta arxeia tou server
 	// Kath grammh tou userData.txt einai: email, password, pathToPDF, InfectionDate, Notification1. Notification2 ......
@@ -20,163 +29,249 @@ public class Registry {
 	private String[] InfectionArray;
 	private String[] dataFromFile;
 	private String email;
-	private String userDataPath = "userData.txt"; //<----- absolute path name to work. Allakste to sto diko sas path
+	private String userDataPath = "userData.txt";
 	private String seatLogPath = "seatLog.txt";
+	private Connection connect = null;
+    private Statement statement = null;
+    private PreparedStatement prep = null;
+    private ResultSet rs = null;
 	 
 	// missing constructor
-	
-	public boolean login(String clientMsg) throws IOException { 
-		FileInputStream inputStream = null;
-		Scanner sc = null;
-		MessageArray = clientMsg.split(", ");
-		String password = MessageArray[1];
-		email = MessageArray[0];
+	public Registry() throws SQLException {
+		String url = "jdbc:mysql://snf-888491.vm.okeanos.grnet.gr:3306/cuac";
+		String usernamedb = "java";
+		String passworddb = "password";
 		
+		
+		System.out.println("Connecting database...");
+		connect = DriverManager.getConnection(url, usernamedb, passworddb);	
+	}
+	
+	public void closeConnection() {
 		try {
-		    inputStream = new FileInputStream(userDataPath); 
-		    sc = new Scanner(inputStream, "UTF-8");
-		    while (sc.hasNextLine()) {
-		        String line = sc.nextLine();
-		        dataFromFile = line.split(", ");
-		        if((dataFromFile[0].equals(email)) && (dataFromFile[1].equals(password))) {
-		        	return true;
-		        }
-		        //System.out.println(line);
-		    }
-		    if (sc.ioException() != null) {
-		        throw sc.ioException();
-		    }
-		}catch(FileNotFoundException e) {
-			System.out.println("userData file not found");
+			connect.close();
+			System.out.println("connection closed");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean login(String email, String password) {
+		String emailFromDB=null;
+		String passwordFromDB=null;
+		try {
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT email, password FROM usertable WHERE email=" + "'"+ email + "'" +";");
+		
+			 
 			
-		}		
-		finally {
-		    if (inputStream != null) {
-		        inputStream.close();
-		    }
-		    if (sc != null) {
-		        sc.close();
-		    }
+		
+			
+			while(rs.next()) {
+				
+				emailFromDB = rs.getString("email");
+				passwordFromDB = rs.getString("password");
+				
+				
+				if (emailFromDB.equals(email)) {
+					System.out.println("Email is in DB");                    //PERIPTOSH NA YPARXEI EMAIL
+					if(passwordFromDB.equals(password)) {
+						System.out.println("Password correct, log in complete");    //PERIPTOSH SWSTO PASSWORD
+						return true;
+					}
+					else { 
+						System.out.println("Password wrong, try again");         //PERIPTOSH LATHOS PASSWORD
+						//THELW POP UP SCREEN
+					    return false;
+					}
+					
+				
+				
+			}
+		}
+			
+			
+			statement.close();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error in login");
+			e.printStackTrace();
 		}
 		return false;
 	}
 	
-	public boolean register(String clientMsg) throws IOException {
-		FileInputStream inputStream = null;
-		Scanner sc = null;
-		MessageArray = clientMsg.split(", ");
-		String password = MessageArray[1];
-		email = MessageArray[0];
-		
+	public boolean register(String email, String password) {
 		try {
-		    inputStream = new FileInputStream(userDataPath); 
-		    sc = new Scanner(inputStream, "UTF-8");
-		    while (sc.hasNextLine()) {  // search the file to check if user exists
-		        String line = sc.nextLine();
-		        dataFromFile = line.split(", ");
-		        if((dataFromFile[0].equals(email))) { // user already exists
-		        	return false;
-		        }
-		        //System.out.println(line);
-		    }
-		    if (sc.ioException() != null) {
-		        throw sc.ioException();
-		    }
-		}catch(FileNotFoundException e) {
-			System.out.println("userData file not found");
-			
-		}		
-		finally {
-		    if (inputStream != null) {
-		        inputStream.close();
-		    }
-		    if (sc != null) {
-		        sc.close();
-		    }
+			String addUserQuery = "INSERT INTO usertable (email, password)" + "VALUES (?,?)";
+			prep = connect.prepareStatement(addUserQuery);
+			prep.setString(1, email);
+			prep.setString(2, password);
+			prep.executeUpdate();
+			prep.close();
 		}
-		
-		BufferedWriter out = new BufferedWriter(new FileWriter(userDataPath, true));
-		out.write(email + ", " + password + ", null, null, null");
-        out.newLine();
-        out.close();
+		catch(java.sql.SQLIntegrityConstraintViolationException s) {//attempt to insert an existing email
+			System.out.println("user already exists");
+			return false;
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error in register");
+			e.printStackTrace();
+		}
 		return true;
 	}
 	
-	public String getFilePath(String clientMsg) throws IOException { // it returns null (as a String) if there is no path for the PDF file. ClientMsg = email;
-		FileInputStream inputStream = null;
-		Scanner sc = null;
-		MessageArray = clientMsg.split(", ");
-		email = MessageArray[0];
-		String pathToPDF = null;
-		
+	public String getFilePath(String email){ // it returns null (as a String) if there is no path for the PDF file
+		String pathToPDF=null;
 		try {
-		    inputStream = new FileInputStream(userDataPath);
-		    while (sc.hasNextLine()) {
-		        String line = sc.nextLine();
-		        dataFromFile = line.split(", ");
-		        if((dataFromFile[0].equals(email))) { //found the user
-		        	pathToPDF = dataFromFile[2];
-		        }
-		        //System.out.println(line);
-		    }
-		    if (sc.ioException() != null) {
-		        throw sc.ioException();
-		    }
-		}catch(FileNotFoundException e) {
-			System.out.println("userData file not found");
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT pdfPath FROM usertable WHERE email=" + "'"+ email + "'" +";");
 			
-		}		
-		finally {
-		    if (inputStream != null) {
-		        inputStream.close();
-		    }
-		    if (sc != null) {
-		        sc.close();
-		    }
+			while(rs.next()) {
+				pathToPDF = rs.getString("pdfPath");
+			}
+			statement.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while getting path");
+			e.printStackTrace();
 		}
 		return pathToPDF;
 	}
 	
-	public void setFilePath(String clientMsg) { //changes the path to PDF. ClientMsg=email, pathToPDF
-		MessageArray = clientMsg.split(", ");
-		email = MessageArray[0];
-		String newLine = "";
-		String newPath = MessageArray[1];
-		
+	public void setFilePath(String email, String newPath) { //changes the path to PDF.
 		try {
-	        BufferedReader file = new BufferedReader(new FileReader(userDataPath));
-	        StringBuffer inputBuffer = new StringBuffer();
-	        String line;
-
-	        while ((line = file.readLine()) != null) {
-	        	dataFromFile = line.split(", ");
-	        	
-	        	if((dataFromFile[0].equals(email))) { //found the user
-	        		
-		        	dataFromFile[2] = newPath; //change the path
-		        	for(int i=0; i<dataFromFile.length; i++) { //convert array to string
-		        		newLine += dataFromFile[i];
-		        		if(i <= dataFromFile.length - 2)
-		        			newLine += ", ";
-		        	}
-		            inputBuffer.append(newLine);
-		            inputBuffer.append('\n');
-		            continue;
-	        	}
-	        	inputBuffer.append(line);
-	            inputBuffer.append('\n');
-	        	
-	        }
-	        file.close();
-
-	        FileOutputStream fileOut = new FileOutputStream(userDataPath);
-	        fileOut.write(inputBuffer.toString().getBytes());
-	        fileOut.close();
-	    } catch (Exception e) {
-	        System.out.println("userData file not found");
-	    }
+			String addPDFPathQuery = "UPDATE usertable SET pdfPath=? WHERE email=" + "'"+ email + "'" +";";
+			prep = connect.prepareStatement(addPDFPathQuery);
+			prep.setString(1, newPath);
+			
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while setting PDFPath");
+			e.printStackTrace();
+		}
 	}
 	
+	
+	public String getPdfDate(String email){ // it returns null (as a String) if there is no date for the PDF file
+		String dateofPDF=null;
+		try {
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT walletDate FROM usertable WHERE email=" + "'"+ email + "'" +";");
+			
+			while(rs.next()) {
+				dateofPDF = rs.getString("walletDate");
+			}
+			statement.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while getting path");
+			e.printStackTrace();
+		}
+		return dateofPDF;
+	}
+	
+	
+	public void setPdfDate(String email, String newWalletDate) { 
+		try {
+			String addWalletDateQuery = "UPDATE usertable SET walletDate=? WHERE email=" + "'"+ email + "'" +";";
+			prep = connect.prepareStatement(addWalletDateQuery);
+			prep.setString(1, newWalletDate);
+			
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while setting PDFDate");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void uploadSeat(String email, int classID, int seatId, String start, String end, String date) {
+		try {
+			String addSeatQuery = "INSERT INTO seatlog (email, classID, seatID, starttime, endtime, date)" + "VALUES (?,?,?,?,?,?)";
+			prep = connect.prepareStatement(addSeatQuery);
+			prep.setString(1, email);
+			prep.setInt(2, classID);
+			prep.setInt(3, seatId);
+			prep.setString(4, start);
+			prep.setString(5, end);
+			prep.setString(6, date);
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error in uploadSeat");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	public void setInfectionDate(String email, String date) { //changes the path to PDF.
+		try {
+			String addInfectionDateQuery = "UPDATE usertable SET infectionDate=? WHERE email=" + "'"+ email + "'" +";";
+			prep = connect.prepareStatement(addInfectionDateQuery);
+			prep.setString(1, date);
+			
+			prep.executeUpdate();
+			prep.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while setting PDFPath");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public String getInfectionDate(String email){ // it returns null (as a String) if there is no date for the PDF file
+		String dateofInfection=null;
+		try {
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT infectionDate FROM usertable WHERE email=" + "'"+ email + "'" +";");
+			
+			while(rs.next()) {
+				dateofInfection = rs.getString("infectionDate");
+			}
+			statement.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while getting path");
+			e.printStackTrace();
+		}
+		return dateofInfection;
+	}
+	
+	
+	
+	public void getPreviousSeats(String email,String date) {
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	//----------------------------MEXRI EDW EINAI TO KAINOYRGIO REGISTRY--------------------------------------------------------
 	public String getNotifications(String clientMsg) throws IOException { // returns all notofication of a user. It can be null. ClientMsg=email
 		MessageArray = clientMsg.split(", ");
 		email = MessageArray[0];

@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -28,7 +29,7 @@ public class CovidWallet extends JFrame{
 	//Constructors and variables
 	private JFrame frame = new JFrame();
 	private JPanel panel = new JPanel();
-	private JTextField expirDate = new JTextField("DD/MM/YY");
+	private JTextField expirDateField = new JTextField("DD/MM/YY");
 	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
 	private JButton submitDate = new JButton("Submit");
@@ -39,6 +40,7 @@ public class CovidWallet extends JFrame{
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
     private JLabel Quarantine_Countdown;
+    private String pdfDate;
 	//private Calendar issuingDate;
 	
 	
@@ -49,6 +51,8 @@ public class CovidWallet extends JFrame{
 	public CovidWallet(User u) {
 		
 		this.u= u;
+		filePath = u.getmyPdfPath(); //IT CAN BE NULL
+		pdfDate = u.getmyPdfDate();//IT CAN BE NULL too
 		frame.setTitle("Covid Wallet"); //Sets the title.
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
@@ -60,7 +64,9 @@ public class CovidWallet extends JFrame{
 		uploadFile.addActionListener(clickUpload);
 		panel.add(uploadFile);
 		
-		panel.add(expirDate);
+		if(pdfDate!=null)
+			expirDateField.setText(pdfDate);
+		panel.add(expirDateField);
 		
 		submitDate.addActionListener(clickSubmit);
 		panel.add(submitDate);
@@ -97,6 +103,8 @@ public class CovidWallet extends JFrame{
 				if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
 				  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
 				  filePath = file.getAbsolutePath();
+				  u.updatePDFPath(filePath);
+				  JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση πιστοποιητικού");
 				  
 				  Viewer viewer = new Viewer();
 				  viewer.setupViewer();
@@ -119,6 +127,10 @@ public class CovidWallet extends JFrame{
 				//int
 				
 				issuingDate.set(ERROR, ALLBITS, ABORT);*/
+				pdfDate=expirDateField.getText(); 
+				u.updatePDFDate(pdfDate);
+				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας");
+				
 				
 				countdown();
 			}
@@ -200,7 +212,7 @@ public class CovidWallet extends JFrame{
 				 try {
 					 for(;;) {
 						 
-						 String[] nums3= expirDate.getText().split("/");   // splitting the numbers and adding them in a table 
+						 String[] nums3= expirDateField.getText().split("/");   // splitting the numbers and adding them in a table 
 						 int	nums[] = {-1,-1,-1};
 							
 							for (int index = 0; index < nums3.length; index++) {
