@@ -14,6 +14,9 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.*;
 import javax.swing.text.BadLocationException;
 
+import org.jpedal.examples.viewer.Commands;
+import org.jpedal.examples.viewer.Viewer;
+
 import java.io.File;
 import java.time.temporal.ChronoUnit;
 import java.awt.event.ActionEvent;
@@ -102,6 +105,10 @@ public class CovidWallet extends JFrame{
 				  filePath = file.getAbsolutePath();
 				  u.updatePDFPath(filePath);
 				  JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση πιστοποιητικού");
+				  
+				  Viewer viewer = new Viewer();
+				  viewer.setupViewer();
+				  viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath});
 				  
 				} else {
 				  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
