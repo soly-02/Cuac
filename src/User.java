@@ -144,7 +144,7 @@ public class User {
 	public void findPreviousSeats(String date) {
 		
 		
-		registry.getPreviousSeats(email, date);
+		registry.getPreviousSeats(email);
 		
 	}
 	

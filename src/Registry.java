@@ -258,13 +258,78 @@ public class Registry {
 	
 	
 	
-	public void getPreviousSeats(String email,String date) {
+	public  ArrayList<String> getPreviousSeats(String email) {
+		
+		
+		//Classroom c1= new Classroom(1);
+		 ArrayList<String> UserCodes = new ArrayList<String>() ;
+		String code= null;
+		String[] date = getInfectionDate(email).split("/");
+		
+		
+	   	 Calendar cal_of= new GregorianCalendar(); //MERA POY NOSISE
+		 
+	   	     ArrayList<Calendar> cals= new ArrayList<Calendar>();
+			 cal_of.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[0]));						 
+			 cal_of.set(Calendar.MONTH, Integer.parseInt(date[1]) -1);
+			 cal_of.set(Calendar.YEAR, Integer.parseInt(date[2]));
+			 cals.add(cal_of);
+				 
+				 
+			 Calendar cal_1= new GregorianCalendar();
+			 cal_1= (Calendar) cal_of.clone();            //MIA MERA PRIN
+			 cal_1.add(Calendar.DAY_OF_MONTH,-1);
+			 cals.add(cal_1);
+				 
+	         Calendar cal_2= new GregorianCalendar();
+	         cal_2= (Calendar) cal_of.clone();              //DYO MERES PRIN
+	         cal_2.add(Calendar.DAY_OF_MONTH,-2);
+	         cals.add(cal_2);
+				 
+	         Calendar cal_3= new GregorianCalendar();
+	         cal_3= (Calendar) cal_of.clone();             //TREIS MERES PRIN
+	         cal_3.add(Calendar.DAY_OF_MONTH,-3);
+	         cals.add(cal_3);
+	        System.out.println((cals.get(0)).get(Calendar.DATE)+ "/" +(cals.get(0).get((Calendar.MONTH))+1)+ "/" + cals.get(0).get(Calendar.YEAR));
+		
+		      String dateTry; 
+	         for (int i=0; i<cals.size(); i++) {
+	        	 dateTry=  cals.get(i).get(Calendar.DATE)+ "/" +(cals.get(0).get((Calendar.MONTH))+1)+ "/" + cals.get(i).get(Calendar.YEAR);
+	        	 
+	        	 try {
+	     			statement = connect.createStatement();
+	     			rs = statement.executeQuery("SELECT classID,seatId,starttime,endtime,date  FROM seatlog WHERE email="+ "'"+ email+ "'" + "AND date="+ "'"+ dateTry+"'" );
+	     		
+	     			while(rs.next()) {
+	     			UserCodes.add(( rs.getString("classID")+ "/" + rs.getString("seatId") + "/" + rs.getString("starttime")+ "/" + rs.getString("endtime")+ "/" + rs.getString("date")));
+	     			
+	     			}
+	     			statement.close();
+	     			//UserCodes.add(code);
+	     		}
+
+	        	 catch (SQLException e) {
+	     			// TODO Auto-generated catch block
+	     			System.out.println("SQL Error while user info");
+	     			e.printStackTrace();
+	     		}
+	        	 
+	        	 
+	        	 
+	        	 
+	         }
+	         
+	         return UserCodes; 
+	         }
+		
+		
+	
+	public void notifyPotentiallyInfected(ArrayList <String> UserCodes) {
 		
 		
 		
 		
 	}
-	
 	
 	
 	
