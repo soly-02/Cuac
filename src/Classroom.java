@@ -479,7 +479,7 @@ public class Classroom {
 		}
 		
 		else {
-			System.out.println("No such Classroom ID!!" + '\n' + "The Classroom ID's are:" + '\n' + "1- AMFITHEATRO 12" + '\n' + "2- ERGASTHRIO 234" + '\n' + "ERGASTHRIO KYD");
+			System.out.println("No such Classroom ID!!" + '\n' + "The Classroom ID's are:" + '\n' + "1- AMFITHEATRO 12" + '\n' + "2- ERGASTHRIO 234" + '\n' + "3-ERGASTHRIO KYD");
 		}
 	}
 	
@@ -541,7 +541,8 @@ public class Classroom {
 			
 		}
 	
-	public ArrayList <Integer> getSeatInfo(int SeatId,int ClassId,Classroom c ){
+	public ArrayList <Integer> getSeatInfo(int SeatId,int ClassId ){
+		Classroom c= new Classroom(ClassId);
 		for (int i=0; i<c.getclassInfo(ClassId).size();i++) {
 			if (c.getclassInfo(ClassId).get(i).getSeatId()== SeatId) {
 				System.out.println(c.getclassInfo(ClassId).get(i).getNearSeatInfo().toString());
@@ -556,21 +557,15 @@ public class Classroom {
 		
 	}
 
-	
-	
-	
+	public ArrayList <Integer> getSeats(int SeatId,int ClassId ){
+		Classroom c= new Classroom(ClassId);
+        return getSeatInfo(SeatId,ClassId );
 	
 
-	public ArrayList <Integer> getSeats(int ClassId, int SeatId,Classroom c) {
-		
-		c.getclassInfo(ClassId);
-		return getSeatInfo(SeatId,ClassId,c );
-	
-	
-	}
+
 	
 	
 	
 	
 }
-
+}

@@ -298,10 +298,10 @@ public class Registry {
 	        	 
 	        	 try {
 	     			statement = connect.createStatement();
-	     			rs = statement.executeQuery("SELECT classID,seatId,starttime,endtime,date  FROM seatlog WHERE email="+ "'"+ email+ "'" + "AND date="+ "'"+ dateTry+"'" );
+	     			rs = statement.executeQuery("SELECT *  FROM seatlog WHERE email="+ "'"+ email+ "'" + "AND date="+ "'"+ dateTry+"'" );
 	     		
 	     			while(rs.next()) {
-	     			UserCodes.add(( rs.getString("classID")+ "/" + rs.getString("seatId") + "/" + rs.getString("starttime")+ "/" + rs.getString("endtime")+ "/" + rs.getString("date")));
+	     			UserCodes.add((rs.getString("email")+ "/" + rs.getString("classID")+ "/" + rs.getString("seatId") + "/" + rs.getString("starttime")+ "/" + rs.getString("endtime")+ "/" + rs.getString("date")));
 	     			
 	     			}
 	     			statement.close();
@@ -324,10 +324,75 @@ public class Registry {
 		
 		
 	
-	public void notifyPotentiallyInfected(ArrayList <String> UserCodes) {
+	public void notifyPotentiallyInfected(ArrayList <String> UserCodes, String email) {
+		Classroom c1= new Classroom(1);
+		String[] data;
+		String[] nearSeats;
+		String person[];
+		String person2;
+		String seat;
+		int classID;
+		int seatID;
+		ArrayList <String> mustNotify= new ArrayList <String>();
+		for (int i=0; i< UserCodes.size(); i++) {
 		
-		
-		
+			data = UserCodes.get(i).toString().split("/");
+			classID= Integer.parseInt( data [1]);
+			seatID=Integer.parseInt(data[2]);
+			
+			System.out.println(""+classID+seatID );
+			
+			seat=c1.getSeatInfo(seatID,classID).toString();
+			
+			nearSeats= seat.replace("[", "").replace("]", "").replace(" ", "").replace(" ", "").split(",");
+			//KANE PRINT NA DEIS
+			for (int i1=0; i1< nearSeats.length; i1++) {
+				
+				if (Integer.parseInt(nearSeats[i1])!=0) {
+	        	 
+	        	 try {
+	     			statement = connect.createStatement();
+	     			rs = statement.executeQuery("SELECT *  FROM seatlog WHERE email!="+"'"+ email+ "'"+ " AND date="+ "'"+data[5]+"/"+data[6]+"/"+data[7] +"'" 
+	     					+"AND classId="+"'" + data[1]+"'" + "AND SeatId="+"'" +Integer.parseInt(nearSeats[i1])+"'");
+	     					
+	     			
+	     		
+	     			while(rs.next()) {
+	     			person2 = ((rs.getString("email")+ "/" + rs.getString("classID")+ "/" + rs.getString("seatId") + "/" + rs.getString("starttime")+ "/" + rs.getString("endtime")+ "/" + rs.getString("date")));
+	     			person= person2.split("/");
+	     			if (person[3].indexOf(':')!=-1) {
+	     				person[3]= person[3].length() < 2 ? person[3] : person[3].substring(0, 2);
+	     				
+	     			}
+	     			if (person[4].indexOf(':')!=-1) {
+	     				person[4]= person[4].length() < 2 ? person[4] : person[4].substring(0, 2);
+	     				
+	     			}
+	     			
+	     			if (!(Integer.parseInt(data[3])>Integer.parseInt(person[4]))& !(Integer.parseInt(data[4])<Integer.parseInt(person[3])))
+	     				mustNotify.add(person2);
+	     			
+	     			}
+	     			statement.close();
+	     			//UserCodes.add(code);
+	     		}
+
+	        	 catch (SQLException e) {
+	     			// TODO Auto-generated catch block
+	     			System.out.println("SQL Error while near info");
+	     			e.printStackTrace();
+	     		}
+	        	 
+	        	 
+	        		 
+	        	 }
+				
+			}
+			
+		}
+		for (int i2=0; i2<mustNotify.size();i2++) {
+   		 System.out.println( mustNotify.get(i2));
+		}
 		
 	}
 	
