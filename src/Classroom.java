@@ -557,15 +557,5 @@ public class Classroom {
 		
 	}
 
-	public ArrayList <Integer> getSeats(int SeatId,int ClassId ){
-		Classroom c= new Classroom(ClassId);
-        return getSeatInfo(SeatId,ClassId );
 	
-
-
-	
-	
-	
-	
-}
 }
