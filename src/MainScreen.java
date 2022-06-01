@@ -109,7 +109,7 @@ public class MainScreen extends JFrame {
 		
 		this.addWindowListener(new WindowAdapter() {
 		      public void windowClosing(WindowEvent we) {
-		          int result = JOptionPane.showConfirmDialog(null, "Do you want to Exit ?", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
+		          int result = JOptionPane.showConfirmDialog(null, "Εξοδος;", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
 		          if (result == JOptionPane.YES_OPTION) {
 		            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		          	u.closeConnection();

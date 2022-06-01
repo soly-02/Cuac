@@ -399,8 +399,6 @@ public class Registry {
 	
 	
 	
-	
-	
 	//----------------------------MEXRI EDW EINAI TO KAINOYRGIO REGISTRY--------------------------------------------------------
 	public String getNotifications(String clientMsg) throws IOException { // returns all notofication of a user. It can be null. ClientMsg=email
 		MessageArray = clientMsg.split(", ");

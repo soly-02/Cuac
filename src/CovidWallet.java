@@ -38,7 +38,7 @@ public class CovidWallet extends JFrame{
 	private ButtonListener clickShow = new ButtonListener(); //ButtonListener assigned to the showFIle button.
 	private ButtonListener clickSubmit = new ButtonListener();
 	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
-	private File file = new File(""); //PDF file is stored here.
+	private File file = null; //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
     private JLabel Quarantine_Countdown;
@@ -54,6 +54,9 @@ public class CovidWallet extends JFrame{
 		
 		this.u= u;
 		filePath = u.getmyPdfPath(); //IT CAN BE NULL
+		if(filePath!=null) {
+			this.file = new File(filePath);
+		}
 		pdfDate = u.getmyPdfDate();//IT CAN BE NULL too
 		frame.setTitle("Covid Wallet"); //Sets the title.
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
@@ -139,12 +142,17 @@ public class CovidWallet extends JFrame{
 				
 				countdown();
 			}else if(action.equals("Show PDF")) {
-				if(file.isFile()) {
+				if (file==null){
+					JOptionPane.showMessageDialog(null,"Το αρχείο δε βρέθηκε. Ξαναψάξε");
+				}
+				else if(file.isFile()) {
 					Viewer viewer = new Viewer();
 					viewer.setupViewer();
 					viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath});
 				
-				}else {
+				}
+				
+				else {
 					JOptionPane.showMessageDialog(null, "Δεν έχει επιλεχθεί αρχείο.");
 				}
 				
