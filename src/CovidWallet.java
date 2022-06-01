@@ -33,7 +33,9 @@ public class CovidWallet extends JFrame{
 	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
 	private JButton submitDate = new JButton("Submit");
+	private JButton showFile = new JButton("Show PDF"); // Button that fires up PDF Viewer.
 	private ButtonListener clickUpload = new ButtonListener(); //ButtonListener assigned to the uploadFile button.
+	private ButtonListener clickShow = new ButtonListener(); //ButtonListener assigned to the showFIle button.
 	private ButtonListener clickSubmit = new ButtonListener();
 	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = new File(""); //PDF file is stored here.
@@ -63,6 +65,9 @@ public class CovidWallet extends JFrame{
 		
 		uploadFile.addActionListener(clickUpload);
 		panel.add(uploadFile);
+		
+		showFile.addActionListener(clickShow);
+		panel.add(showFile);
 		
 		if(pdfDate!=null)
 			expirDateField.setText(pdfDate);
@@ -129,10 +134,20 @@ public class CovidWallet extends JFrame{
 				issuingDate.set(ERROR, ALLBITS, ABORT);*/
 				pdfDate=expirDateField.getText(); 
 				u.updatePDFDate(pdfDate);
-				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας");
+				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας.");
 				
 				
 				countdown();
+			}else if(action.equals("Show PDF")) {
+				if(file.isFile()) {
+					Viewer viewer = new Viewer();
+					viewer.setupViewer();
+					viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath});
+				
+				}else {
+					JOptionPane.showMessageDialog(null, "Δεν έχει επιλεχθεί αρχείο.");
+				}
+				
 			}
 		}
 		
