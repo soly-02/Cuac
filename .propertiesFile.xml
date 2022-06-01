@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
   <recentfiles>
+<<<<<<< HEAD
     <file name="C:\Users\mitsos\Documents\A study of the Assyro-Babylonian Words Relating to Sacrifice.pdf"/>
+=======
+    <file name="C:\Users\sofia\OneDrive\Desktop\Ομαδική\afafeaf.pdf"/>
+>>>>>>> 4d8756c0ab2b4ac4f2956e715766ce2fe274069d
   </recentfiles>
   <!--Flag to show popup information first time viewer is used-->
   <showfirsttimepopup value="false"/>
@@ -276,7 +280,11 @@ com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel-->
   <!--Flag to open last document upon openning the viewer-->
   <openLastDocument value="false"/>
   <!--Page to open last document to-->
+<<<<<<< HEAD
   <lastDocumentPage value="3"/>
+=======
+  <lastDocumentPage value="1"/>
+>>>>>>> 4d8756c0ab2b4ac4f2956e715766ce2fe274069d
   <!--The inset of the page in the play area-->
   <pageInsets value="25"/>
   <!--The length of the tabbed pane when it has been collapsed-->

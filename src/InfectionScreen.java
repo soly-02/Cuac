@@ -151,7 +151,7 @@ public class InfectionScreen extends JFrame {
 			u.getInfection().setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
 			u.startCovidCountdown();
 			u.setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
-			u.findPreviousSeats(u.getInfectionDate());
+			u.findPeopleToNotify(u.getInfectionDate());
 			//u.send("InfectionAlert;" + u.getEmail() + ", " + u.getInfection().getInfectionDate());
 			//SQL ALLAGES
 			

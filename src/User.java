@@ -141,12 +141,16 @@ public class User {
 	}
 	
 	
-	public void findPreviousSeats(String date) {
+	public void findPeopleToNotify(String date) {
 		
+		registry.notifyPotentiallyInfected(registry.getPreviousSeats(email),email);
 		
-		registry.getPreviousSeats(email, date);
 		
 	}
+	
+
+	
+	
 	
 	
 public void setInfectionDate(String date) {

@@ -308,8 +308,8 @@ public class Classroom {
 		
 		//Making of class 1 (aithousa 3)
 		
-		else if (classId==1) {
-			this.classSize=0;
+		else if (classId==3) {
+			this.classSize=64;
 			
 		// ****************1ST LAB****************
 			// *****************1ST ROW*****************
@@ -413,6 +413,73 @@ public class Classroom {
 			// *****************7TH ROW*****************
 			
 		// ****************2ND LAB****************
+			
+			// ****************1ST ROW****************
+			SeatInfo s41= new SeatInfo(41,42,43,48,49,0,0,0,0,0,0);
+			classInfo.add(s41);
+			SeatInfo s42= new SeatInfo(42,41,43,44,48,49,50,0,0,0,0);
+			classInfo.add(s42);
+			SeatInfo s43= new SeatInfo(43,41,42,44,45,42,49,50,0,0,0);
+			classInfo.add(s43);
+			SeatInfo s44= new SeatInfo(44,42,43,45,46,50,51,52,0,0,0);
+			classInfo.add(s44);
+			SeatInfo s45= new SeatInfo(45,43,44,46,51,52,53,0,0,0,0);
+			classInfo.add(s45);
+			SeatInfo s46= new SeatInfo(46,44,45,52,53,0,0,0,0,0,0);
+			classInfo.add(s46);
+			
+			// *****************2ND ROW*****************
+			
+			SeatInfo s48= new SeatInfo(48,41,42,49,56,57,0,0,0,0,0);
+			classInfo.add(s48);
+			SeatInfo s49= new SeatInfo(49,41,42,43,48,50,51,56,57,0,0);
+			classInfo.add(s49);
+			SeatInfo s50= new SeatInfo(50,42,43,44,48,49,51,52,57,0,0);
+			classInfo.add(s50);
+			SeatInfo s51= new SeatInfo(51,43,44,45,49,50,52,53,0,0,0);
+			classInfo.add(s51);
+			SeatInfo s52= new SeatInfo(52,44,45,46,50,51,53,0,0,0,0);
+			classInfo.add(s52);
+			SeatInfo s53= new SeatInfo(53,45,46,51,52,0,0,0,0,0,0);
+			classInfo.add(s53);
+			
+			// *****************3RD ROW*****************
+			
+			SeatInfo s56= new SeatInfo(56,48,49,57,58,59,60,0,0,0,0);
+			classInfo.add(s56);
+			SeatInfo s57= new SeatInfo(57,48,49,50,56,58,59,60,0,0,0);
+			classInfo.add(s57);
+			SeatInfo s58= new SeatInfo(58,56,57,59,60,0,0,0,0,0,0);
+			classInfo.add(s58);
+			// *****************3RD (and a half) ROW*****************
+			SeatInfo s59= new SeatInfo(59,56,57,58,60,0,0,0,0,0,0);
+			classInfo.add(s59);
+			SeatInfo s60= new SeatInfo(60,56,57,58,59,0,0,0,0,0,0);
+			classInfo.add(s60);
+			
+			// ****************4TH ROW****************
+			
+			SeatInfo s61= new SeatInfo(61,59,60,62,63,0,0,0,0,0,0);
+			classInfo.add(s61);
+			SeatInfo s62= new SeatInfo(62,59,60,61,63,64,0,0,0,0,0);
+			classInfo.add(s62);
+			SeatInfo s63= new SeatInfo(63,60,61,62,64,0,0,0,0,0,0);
+			classInfo.add(s63);
+			SeatInfo s64= new SeatInfo(64,62,63,0,0,0,0,0,0,0,0);
+			classInfo.add(s64);
+			
+			//sthn gwnia
+			
+			SeatInfo s47= new SeatInfo(47,54,55,0,0,0,0,0,0,0,0);
+			classInfo.add(s47);
+			SeatInfo s54= new SeatInfo(54,47,55,0,0,0,0,0,0,0,0);
+			classInfo.add(s54);
+			SeatInfo s55= new SeatInfo(55,47,54,0,0,0,0,0,0,0,0);
+			classInfo.add(s55);
+		}
+		
+		else {
+			System.out.println("No such Classroom ID!!" + '\n' + "The Classroom ID's are:" + '\n' + "1- AMFITHEATRO 12" + '\n' + "2- ERGASTHRIO 234" + '\n' + "3-ERGASTHRIO KYD");
 		}
 	}
 	
@@ -474,7 +541,8 @@ public class Classroom {
 			
 		}
 	
-	public ArrayList <Integer> getSeatInfo(int SeatId,int ClassId,Classroom c ){
+	public ArrayList <Integer> getSeatInfo(int SeatId,int ClassId ){
+		Classroom c= new Classroom(ClassId);
 		for (int i=0; i<c.getclassInfo(ClassId).size();i++) {
 			if (c.getclassInfo(ClassId).get(i).getSeatId()== SeatId) {
 				System.out.println(c.getclassInfo(ClassId).get(i).getNearSeatInfo().toString());
@@ -490,20 +558,4 @@ public class Classroom {
 	}
 
 	
-	
-	
-	
-
-	public ArrayList <Integer> getSeats(int ClassId, int SeatId,Classroom c) {
-		
-		c.getclassInfo(ClassId);
-		return getSeatInfo(SeatId,ClassId,c );
-	
-	
-	}
-	
-	
-	
-	
 }
-
