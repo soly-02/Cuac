@@ -81,7 +81,7 @@ public class CovidWallet extends JFrame{
 		//--------SOFIA COMING THROUGH------- 
 		Quarantine_Countdown = new JLabel("");
 		Quarantine_Countdown.setFont(new Font("Tahoma", Font.BOLD, 22));
-		Quarantine_Countdown.setForeground(Color.RED);
+		Quarantine_Countdown.setForeground(new Color(196,215,233,255));
 		panel.add(Quarantine_Countdown);
 				
 		frame.setVisible(true);
