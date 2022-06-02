@@ -152,7 +152,6 @@ public class CovidWallet extends JFrame{
 					Viewer viewer = new Viewer();
 					viewer.setupViewer();
 					viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath});
-				
 				}
 				
 				else {
