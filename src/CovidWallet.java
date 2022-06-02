@@ -113,10 +113,6 @@ public class CovidWallet extends JFrame{
 				  u.updatePDFPath(filePath);
 				  JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση πιστοποιητικού");
 				  
-				  Viewer viewer = new Viewer();
-				  viewer.setupViewer();
-				  viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath});
-				  
 				} else {
 				  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
 				}
