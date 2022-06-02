@@ -30,13 +30,15 @@ public class CovidWallet extends JFrame{
 	private JFrame frame = new JFrame();
 	private JPanel panel = new JPanel();
 	private JTextField expirDateField = new JTextField("DD/MM/YY");
-	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
+	//private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
 	private JButton submitDate = new JButton("Submit");
+	private JButton showFile = new JButton("Show PDF"); // Button that fires up PDF Viewer.
 	private ButtonListener clickUpload = new ButtonListener(); //ButtonListener assigned to the uploadFile button.
+	private ButtonListener clickShow = new ButtonListener(); //ButtonListener assigned to the showFIle button.
 	private ButtonListener clickSubmit = new ButtonListener();
-	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
-	private File file = new File(""); //PDF file is stored here.
+	//private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
+	private File file = null; //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
     private JLabel Quarantine_Countdown;
@@ -52,17 +54,23 @@ public class CovidWallet extends JFrame{
 		
 		this.u= u;
 		filePath = u.getmyPdfPath(); //IT CAN BE NULL
+		if(filePath!=null) {
+			this.file = new File(filePath);
+		}
 		pdfDate = u.getmyPdfDate();//IT CAN BE NULL too
 		frame.setTitle("Covid Wallet"); //Sets the title.
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
 		
-		certificateSelection = new JComboBox<String>(kind);
-		panel.add(certificateSelection);
-		certificateSelection.addActionListener(select);
+		//certificateSelection = new JComboBox<String>(kind);
+		//panel.add(certificateSelection);
+		//certificateSelection.addActionListener(select);
 		
 		uploadFile.addActionListener(clickUpload);
 		panel.add(uploadFile);
+		
+		showFile.addActionListener(clickShow);
+		panel.add(showFile);
 		
 		if(pdfDate!=null)
 			expirDateField.setText(pdfDate);
@@ -129,10 +137,27 @@ public class CovidWallet extends JFrame{
 				issuingDate.set(ERROR, ALLBITS, ABORT);*/
 				pdfDate=expirDateField.getText(); 
 				u.updatePDFDate(pdfDate);
-				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας");
+				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας.");
 				
 				
 				countdown();
+			}else if(action.equals("Show PDF")) {
+				if (file==null){
+					JOptionPane.showMessageDialog(null,"Δεν εχει φορτωθεί καποιο αρχείο. Πάτα 'Open File' για να φορτώσεις");
+				}
+				else if(!file.exists()) {
+					JOptionPane.showMessageDialog(null,"Το αρχείο ίσως έχει αλλάξει θέση. Βρές το μέσω του 'Open File'");
+				}
+				else if(file.isFile()) {
+					Viewer viewer = new Viewer();
+					viewer.setupViewer();
+					viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath});
+				}
+				
+				else {
+					JOptionPane.showMessageDialog(null, "Δεν έχει επιλεχθεί αρχείο.");
+				}
+				
 			}
 		}
 		
@@ -179,7 +204,7 @@ public class CovidWallet extends JFrame{
 	}
 }
 	
-	class ComboBoxListener implements ActionListener{
+	/*class ComboBoxListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -189,7 +214,7 @@ public class CovidWallet extends JFrame{
 			
 		}
 		
-	}
+	}*/
 
 	public String getFilePath() {
 		return filePath;

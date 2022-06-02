@@ -397,7 +397,30 @@ public class Registry {
 	}
 	
 	
-	
+	public void updateNotification(String email, Notifications n) {
+		String updateQuery;// = "UPDATE usertable SET ?=" +"'" + n.getMessage()[n.getType() - 1]+ "'" + "WHERE email=" +"'" + email + "'" + ";";
+		try {
+			
+			if(n.getType()==1) {
+				updateQuery = "UPDATE usertable SET notiftype1=" +"'" + n.getMessage()[n.getType() - 1]+ "'" + "WHERE email=" +"'" + email + "'" + ";";				
+				
+			}
+			else if(n.getType()==2) {
+				updateQuery = "UPDATE usertable SET notiftype2=" +"'" + n.getMessage()[n.getType() - 1]+ "'" + "WHERE email=" +"'" + email + "'" + ";";					
+				
+			}
+			else {
+				updateQuery = "UPDATE usertable SET notiftype3=" +"'" + n.getMessage()[n.getType() - 1]+ "'" + "WHERE email=" +"'" + email + "'" + ";";					
+			}
+			prep = connect.prepareStatement(updateQuery);
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	
