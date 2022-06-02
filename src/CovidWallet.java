@@ -30,14 +30,14 @@ public class CovidWallet extends JFrame{
 	private JFrame frame = new JFrame();
 	private JPanel panel = new JPanel();
 	private JTextField expirDateField = new JTextField("DD/MM/YY");
-	private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
+	//private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
 	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
 	private JButton submitDate = new JButton("Submit");
 	private JButton showFile = new JButton("Show PDF"); // Button that fires up PDF Viewer.
 	private ButtonListener clickUpload = new ButtonListener(); //ButtonListener assigned to the uploadFile button.
 	private ButtonListener clickShow = new ButtonListener(); //ButtonListener assigned to the showFIle button.
 	private ButtonListener clickSubmit = new ButtonListener();
-	private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
+	//private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = null; //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
 	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
@@ -62,9 +62,9 @@ public class CovidWallet extends JFrame{
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
 		
-		certificateSelection = new JComboBox<String>(kind);
-		panel.add(certificateSelection);
-		certificateSelection.addActionListener(select);
+		//certificateSelection = new JComboBox<String>(kind);
+		//panel.add(certificateSelection);
+		//certificateSelection.addActionListener(select);
 		
 		uploadFile.addActionListener(clickUpload);
 		panel.add(uploadFile);
@@ -205,7 +205,7 @@ public class CovidWallet extends JFrame{
 	}
 }
 	
-	class ComboBoxListener implements ActionListener{
+	/*class ComboBoxListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -215,7 +215,7 @@ public class CovidWallet extends JFrame{
 			
 		}
 		
-	}
+	}*/
 
 	public String getFilePath() {
 		return filePath;
