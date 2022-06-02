@@ -2,6 +2,7 @@
 <properties>
   <recentfiles>
     <file name="C:\Users\sofia\OneDrive\Desktop\Ομαδική\afafeaf.pdf"/>
+    <file name="C:\Users\sofia\OneDrive\Desktop\Ομαδική\CUAC EPSL OMADA16.docx.pdf"/>
   </recentfiles>
   <!--Flag to show popup information first time viewer is used-->
   <showfirsttimepopup value="false"/>
@@ -276,7 +277,7 @@ com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel-->
   <!--Flag to open last document upon openning the viewer-->
   <openLastDocument value="false"/>
   <!--Page to open last document to-->
-  <lastDocumentPage value="1"/>
+  <lastDocumentPage value="2"/>
   <!--The inset of the page in the play area-->
   <pageInsets value="25"/>
   <!--The length of the tabbed pane when it has been collapsed-->
