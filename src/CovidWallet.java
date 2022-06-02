@@ -3,16 +3,13 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.filechooser.*;
-import javax.swing.text.BadLocationException;
 
 import org.jpedal.examples.viewer.Commands;
 import org.jpedal.examples.viewer.Viewer;
@@ -25,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+@SuppressWarnings("serial")
 public class CovidWallet extends JFrame{
 	//Constructors and variables
 	private JFrame frame = new JFrame();
@@ -40,7 +38,7 @@ public class CovidWallet extends JFrame{
 	//private ComboBoxListener select = new ComboBoxListener(); //ActionListener assigned to Combobox.
 	private File file = null; //PDF file is stored here.
 	private String filePath; //Path to the PDF file is stored here.
-	private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
+	//private String[] kind = {"Πιστοποιητικό Εμβολιασμού", "Πιστοποιητικό Νόσησης", "Rapid Test"};//Array containing the different kinds of certificates.
     private JLabel Quarantine_Countdown;
     private String pdfDate;
 	//private Calendar issuingDate;
@@ -149,9 +147,19 @@ public class CovidWallet extends JFrame{
 					JOptionPane.showMessageDialog(null,"Το αρχείο ίσως έχει αλλάξει θέση. Βρές το μέσω του 'Open File'");
 				}
 				else if(file.isFile()) {
-					Viewer viewer = new Viewer();
-					viewer.setupViewer();
-					viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath});
+					JFrame pdfContainer = new JFrame(); //JFrame for the pdf viewer.
+					JPanel pdfViewer = new JPanel(); //JPanel for the pdf viewer.
+					
+					pdfContainer.add(pdfViewer); //JPanel is added to JFrame.
+					
+					Viewer viewer = new Viewer(pdfViewer, null); //PDF Viewer is created. It will appear in the JFrame created above.
+					viewer.setupViewer(); //PDF Viewer is initialised.
+					viewer.executeCommand(Commands.OPENFILE, new Object[] {filePath}); //Viewer displays PDF file specified by the 'filePath' variable.
+					
+					pdfContainer.setDefaultCloseOperation(HIDE_ON_CLOSE); //Default operation is set to hiding the JFrame.
+					pdfContainer.setSize(700, 500); //Default width and height for the JFrame.
+					pdfContainer.setResizable(true); //JFrame is set to be resizable.
+					pdfContainer.setVisible(true); //JFrame is set to be visible.
 				}
 				
 				else {
@@ -284,7 +292,6 @@ public class CovidWallet extends JFrame{
 				 
 			 }
 				catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				 
