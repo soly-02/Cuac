@@ -274,9 +274,11 @@ public class CovidWallet extends JFrame{
 					 
 					 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
 				//	 System.out.println("AAA "+noOfDaysBetween);
-					 if (noOfDaysBetween>0)
-					    Quarantine_Countdown.setText("Το πιστοποιητικό λήγει σε : "+noOfDaysBetween+ " μέρες");
-					
+					 if (noOfDaysBetween>0) {
+						 Quarantine_Countdown.setText("Το πιστοποιητικό λήγει σε : "+noOfDaysBetween+ " μέρες");
+					 }else {
+						 Quarantine_Countdown.setText("Το πιστοποιητικό έχει λήξει");
+					 }
 					 Quarantine_Countdown.revalidate();
 					 
 					 
