@@ -102,19 +102,16 @@ public class CovidWallet extends JFrame{
 				selectFile.setDialogTitle("Select Certificate"); //Sets the title of the file chooser's window.
 				selectFile.setFileSelectionMode(JFileChooser.FILES_ONLY); // Only files will be displayed.
 				selectFile.setFileFilter(new myFileFilter()); // Filters out all files except for PDFs.
-				
-				
-				
-				
 	
 				if (selectFile.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) { //If User chooses a file:
-				  file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
-				  filePath = file.getAbsolutePath();
-				  u.updatePDFPath(filePath);
-				  JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση πιστοποιητικού");
+					file = selectFile.getSelectedFile(); // file is stored in the 'file' variable.
+					filePath = file.getAbsolutePath();
+					u.updatePDFPath(filePath);
+					JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση πιστοποιητικού");
 				  
 				} else {
-				  System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
+					System.out.println("No Selection "); // 'No Selection' is printed in the console when User does not choose a file.
+				
 				}
 			
 			}else if (action.equals("Submit")) {
@@ -130,20 +127,20 @@ public class CovidWallet extends JFrame{
 				//int
 				
 				issuingDate.set(ERROR, ALLBITS, ABORT);*/
-				pdfDate=expirDateField.getText(); 
+				pdfDate = expirDateField.getText(); 
 				u.updatePDFDate(pdfDate);
 				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας.");
 				
-				
 				countdown();
+			
 			}else if(action.equals("Show PDF")) {
 				if (file==null){
 					JOptionPane.showMessageDialog(null,"Δεν εχει φορτωθεί καποιο αρχείο. Πάτα 'Open File' για να φορτώσεις");
-				}
-				else if(!file.exists()) {
+				
+				}else if(!file.exists()) {
 					JOptionPane.showMessageDialog(null,"Το αρχείο ίσως έχει αλλάξει θέση. Βρές το μέσω του 'Open File'");
-				}
-				else if(file.isFile()) {
+				
+				}else if(file.isFile()) {
 					JFrame pdfContainer = new JFrame(); //JFrame for the pdf viewer.
 					JPanel pdfViewer = new JPanel(); //JPanel for the pdf viewer.
 					

@@ -143,7 +143,6 @@ public class MainScreen extends JFrame {
                  {
 					
 					CovidWallet CovWal= new CovidWallet(u);
-					CovWal.setVisible(true);
 				}
 					
 					
