@@ -324,7 +324,7 @@ public class Registry {
 		
 		
 	
-	public void notifyPotentiallyInfected(ArrayList <String> UserCodes, String email) {
+	public ArrayList <String> notifyPotentiallyInfected(ArrayList <String> UserCodes, String email) {
 		Classroom c1= new Classroom(1);
 		String[] data;
 		String[] nearSeats;
@@ -393,6 +393,7 @@ public class Registry {
 		for (int i2=0; i2<mustNotify.size();i2++) {
    		 System.out.println( mustNotify.get(i2));
 		}
+		return mustNotify;
 		
 	}
 	
