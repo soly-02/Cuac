@@ -36,6 +36,7 @@ public class MainScreen extends JFrame {
 	private MainScreen m;
     private JLabel user_email;
     JLabel Quarantine_Countdown;
+    long previousData=-1;
 	/**
 	 * Create the frame.
 	 */
@@ -234,6 +235,17 @@ public class MainScreen extends JFrame {
 						 if (noOfDaysBetween>0)
 						    Quarantine_Countdown.setText("Μέρες Καραντίνας Που Απομένουν: "+noOfDaysBetween);
 						
+						 
+						 if (previousData!= noOfDaysBetween ) {
+							 System.out.println("GAMWTOOOOOOOOOOOOO "+noOfDaysBetween);
+							 u.getNotifications().updateMessage(2,"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
+							 u.updateNotification( 2);
+						 }
+						
+						 
+						 previousData= noOfDaysBetween;
+						 
+						 
 						 Quarantine_Countdown.revalidate();
 						 
 						 

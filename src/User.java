@@ -12,20 +12,21 @@ public class User {
 	
 	private String email;
 	private String password;
-	private ArrayList <String> myNotifications= new ArrayList();
 	private String myPDFPath;
 	private String walletExpirDate;
 	private Infection i;
+	private Notifications n;
 	private Socket socket;
 	private BufferedReader bufferedReader;
 	private BufferedWriter bufferedWriter;
 	private MainScreen mainScr;
 	private Registry registry;
 	
-	public User(String email, String password, Infection i) {  // isws xreiastei k alla attributes
+	public User(String email, String password, Infection i, Notifications n) {  // isws xreiastei k alla attributes
 		this.email = email;
 		this.password = password;
 		this.i=i;
+		this.n= n;
 	
 	}
 	
@@ -59,6 +60,9 @@ public class User {
 		}
 	
 	
+	
+	
+	
 	public String getmyPdfPath() {
 		myPDFPath=registry.getFilePath(email);
 		
@@ -69,6 +73,13 @@ public class User {
 		myPDFPath = newPath;
 		registry.setFilePath(email, myPDFPath);
 	}
+	
+	
+	public Notifications getNotifications() {
+		return n;
+		
+	}
+	
 	
 	
 	
@@ -167,7 +178,9 @@ public void setInfectionDate(String date) {
 		
 	}
 	
-	
+	public void updateNotification( int type) {
+	registry.updateNotification(email, n, type);
+	}
 	
 	public void sendSeatLog(String Email, String classId,String startTime, String endTime,  String date, 
 			String seatEnter ) {

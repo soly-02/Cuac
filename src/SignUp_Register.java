@@ -41,6 +41,7 @@ public class SignUp_Register extends JFrame {
 	private Pattern pattern =Pattern.compile(passRegex);
 	
 	Infection i;
+	Notifications n;
 	private User u;
 
 
@@ -117,9 +118,10 @@ public class SignUp_Register extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				i = new Infection();
+				n = new Notifications();
 				email = emailField.getText();
 				password = String.valueOf(passwordField.getPassword());
-				u = new User(email, password, i);
+				u = new User(email, password, i, n);
 				
 				if(email.isBlank()) {
 					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");

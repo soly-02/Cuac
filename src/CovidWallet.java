@@ -43,7 +43,7 @@ public class CovidWallet extends JFrame{
     private JLabel Quarantine_Countdown;
     private String pdfDate;
 	//private Calendar issuingDate;
-	
+    long previousData=-1;
 	
 	
 	private User u;
@@ -279,6 +279,13 @@ public class CovidWallet extends JFrame{
 					 }else {
 						 Quarantine_Countdown.setText("Το πιστοποιητικό έχει λήξει");
 					 }
+					 
+					 if (previousData!= noOfDaysBetween && noOfDaysBetween <30 ) {
+						 u.getNotifications().updateMessage(1,"Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
+						 u.updateNotification( 1);
+					 }
+					 
+					 previousData= noOfDaysBetween;
 					 Quarantine_Countdown.revalidate();
 					 
 					 
