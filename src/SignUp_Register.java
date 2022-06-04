@@ -31,7 +31,7 @@ import java.awt.GridBagConstraints;
 public class SignUp_Register extends JFrame {
 
 	private JPanel contentPane;
-	//To email kai to password molis patietai kapoio koympi(sign in/ register) stelnontai san string ston server.
+	//To email kai to password molis patietai kapoio koympi(sign in/ register) stelnontai ston server.
 	// an ola einai komple vazei mesa ton xristi alliws error kai 3anadokimazei
 	private JTextField emailField;
 	private JPasswordField passwordField;
@@ -40,8 +40,8 @@ public class SignUp_Register extends JFrame {
 	private String passRegex = "^(?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,12}$";
 	private Pattern pattern =Pattern.compile(passRegex);
 	
-	Infection i;
-	Notifications n;
+	private Infection i;
+	private Notifications n;
 	private User u;
 
 
@@ -125,7 +125,7 @@ public class SignUp_Register extends JFrame {
 				
 				if(email.isBlank()) {
 					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
-					deleteUserObj(u);
+					deleteObjects();
 					return;
 				}
 //				else if(!pattern.matcher(password).matches()) {  disabled for testing
@@ -137,7 +137,7 @@ public class SignUp_Register extends JFrame {
 //							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα\r\n"
 //							+ "και αριθμούς.\r\n"
 //							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);
-//				    deleteUserObj(u);	
+//				    deleteObjects();	
 //					return;
 //				}
 				
@@ -153,12 +153,12 @@ public class SignUp_Register extends JFrame {
 							}
 							else {
 								JOptionPane.showMessageDialog(null,"Αυτός ο λογαριασμός υπάρχει ήδη", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-								deleteUserObj(u);
+								deleteObjects();
 							}
 						}
 						else {
 							JOptionPane.showMessageDialog(null,"Οι κωδικοί δεν ταιριάζουν", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
-							deleteUserObj(u);
+							deleteObjects();
 						}
 					}		
 					else  if (e.getActionCommand().equals("Sign In")) {
@@ -173,9 +173,8 @@ public class SignUp_Register extends JFrame {
 						else {
 							System.out.println("user not found"); //pop-up
 							JOptionPane.showMessageDialog(null,"Ο χρήστης δε βρέθηκε. Ελεγξε τα στοιχεία που έβαλες", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-							u.closeConnection();
 							//delete user object
-							deleteUserObj(u);
+							deleteObjects();
 							}
 					}	
 						
@@ -183,14 +182,16 @@ public class SignUp_Register extends JFrame {
 				else {
 					System.out.println("Connection error");
 					JOptionPane.showMessageDialog(null,"Σφάλμα με τη σύνδεση", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
-					deleteUserObj(u);
+					deleteObjects();
 				}
 				 
 		}
-		public void deleteUserObj(User u) {
+		public void deleteObjects() {
 			u.closeConnection();
 			u = null;
-			System.gc(); //call the garbage collector to delete the object
+			i = null;
+			n = null;
+			System.gc(); //call the garbage collector to delete the objects
 		}
 	
 	

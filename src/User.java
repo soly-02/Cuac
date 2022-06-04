@@ -16,9 +16,6 @@ public class User {
 	private String walletExpirDate;
 	private Infection i;
 	private Notifications n;
-	private Socket socket;
-	private BufferedReader bufferedReader;
-	private BufferedWriter bufferedWriter;
 	private MainScreen mainScr;
 	private Registry registry;
 	
@@ -98,35 +95,11 @@ public class User {
 		registry.closeConnection();
 	}
 	
-	//TODO method pou perimenei gia notifications
 	
-	
-	public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
-        
-        try {
-            if (bufferedReader != null) {
-                bufferedReader.close();
-            }
-            if (bufferedWriter != null) {
-                bufferedWriter.close();
-            }
-            if (socket != null) {
-                socket.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 	
 	public String getEmail() {
 		return this.email;
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	
