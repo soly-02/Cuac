@@ -239,7 +239,7 @@ public class MainScreen extends JFrame {
 						 if (previousData!= noOfDaysBetween ) {
 							 System.out.println("GAMWTOOOOOOOOOOOOO "+noOfDaysBetween);
 							 u.getNotifications().updateMessage(2,"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
-							 u.updateNotification( 2);
+							 u.updateNotification(2,u.getEmail(),"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες");
 						 }
 						
 						 

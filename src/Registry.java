@@ -389,13 +389,13 @@ public class Registry {
 	}
 	
 	
-	public void updateNotification(String email, Notifications n, int type) {
+	public void updateNotification(String email, String message, int type) {
 		String updateQuery;// = "UPDATE usertable SET ?=" +"'" + n.getMessage()[n.getType() - 1]+ "'" + "WHERE email=" +"'" + email + "'" + ";";
 		try {
 	
-			
-				updateQuery = "UPDATE usertable SET notiftype"+type+ "=" +"'" + n.getMessage(type)+ "'" + "WHERE email=" +"'" + email + "'" + ";";				
-				
+			    
+				updateQuery = "UPDATE usertable SET notiftype"+type+ "=" +"'" + message+ "'" + "WHERE email=" +"'" + email + "'" + ";";				
+			  
 			
 			prep = connect.prepareStatement(updateQuery);
 			prep.executeUpdate();
@@ -406,5 +406,29 @@ public class Registry {
 		}
 		
 	}
+	
+	public String getNotification(int type, String email){ // it returns null (as a String) if there is no date for the PDF file
+		String message=null;
+		try {
+			statement = connect.createStatement();
+			rs = statement.executeQuery("SELECT notiftype"+type+" "+ "FROM usertable WHERE email=" + "'"+ email + "'" +";");
+			
+			while(rs.next()) {
+				message = rs.getString("notiftype"+type);
+			}
+			statement.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("SQL Error while getting message");
+			e.printStackTrace();
+		}
+		return message;
+	}
+	
+	
+	
+	
+	
 	
 }

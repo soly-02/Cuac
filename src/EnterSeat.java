@@ -42,6 +42,7 @@ public class EnterSeat extends JFrame {
 	 * Create the frame.
 	 */
 	public EnterSeat(User u) {
+		setResizable(false);
 		 this.u = u;
 		 ButtonGroup G1;
 		

@@ -20,10 +20,11 @@ public class NotificationsScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public NotificationsScreen(User u) {
+		setResizable(false);
 		
 		this.u=u;
 		
-		setBounds(100, 100, 740, 493);
+		setBounds(100, 100, 957, 625);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -31,7 +32,7 @@ public class NotificationsScreen extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 51));
-		panel.setBounds(0, 0, 726, 456);
+		panel.setBounds(0, 0, 943, 588);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -46,6 +47,47 @@ public class NotificationsScreen extends JFrame {
 		user_email.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		user_email.setBounds(10, 11, 167, 21);
 		panel.add(user_email);
-	}
+		
+		
+		
+		JLabel CovidWalletLabel = new JLabel(" ");
+		if (!(u.getNotif(1).equals(null))) 
+			CovidWalletLabel.setText(u.getNotif(1));
+		
+		CovidWalletLabel.setForeground(Color.WHITE);
+		CovidWalletLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
+		CovidWalletLabel.setBounds(95, 113, 775, 86);
+		panel.add(CovidWalletLabel);
+			
+		
+		
+		
+		JLabel QuarantineLabel = new JLabel(" ");
+		if (!(u.getNotif(2).equals("null"))) 
+			QuarantineLabel.setText(u.getNotif(2));
+		
+		QuarantineLabel.setForeground(Color.WHITE);
+		QuarantineLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
+		QuarantineLabel.setBounds(95, 222, 775, 78);
+		panel.add(QuarantineLabel);
+		
+		JLabel CovidAlert = new JLabel(" ");
+		if (!(u.getNotif(3).equals("null"))) {
+			
 
+			u.getNotif(3);
+			CovidAlert.setText("<html>""<br/>" "</html>");
+		}
+		
+		
+		
+		CovidAlert.setForeground(Color.WHITE);
+		CovidAlert.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
+		CovidAlert.setBounds(10, 404, 923, 78);
+		panel.add(CovidAlert);
+		
+		
+		
+		
+}
 }

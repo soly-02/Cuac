@@ -282,7 +282,7 @@ public class CovidWallet extends JFrame{
 					 
 					 if (previousData!= noOfDaysBetween && noOfDaysBetween <30 ) {
 						 u.getNotifications().updateMessage(1,"Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
-						 u.updateNotification( 1);
+						 u.updateNotification(1, u.getEmail(), "Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες");
 					 }
 					 
 					 previousData= noOfDaysBetween;
