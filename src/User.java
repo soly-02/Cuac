@@ -128,13 +128,20 @@ public class User {
 	public void findPeopleToNotify(String date) {
 		String[] info;
 		String[] personalInfo;
+		String className=null;
 		ArrayList <String> people= registry.notifyPotentiallyInfected(registry.getPreviousSeats(email),email);
 		for (int i=0;i<people.size();i++) {
 			info= people.toString().replace("[", "").replace("]", "").replace(" ", "").replace(" ", "").split(",");
 			for (int j=0; j<info.length;j++) {
 				personalInfo= info[j].split("/");
-				String message= "ΠΡΟΣΟΧΗ! Στις: "+personalInfo[5]+"/"+personalInfo[6]+"/"+ personalInfo[7]+ " βρεθήκατε κοντά σε κρούσμα στην αίθουσα: "
-						+ personalInfo[1]+ " ώρα: "+ personalInfo[3]+":00 ~"+ personalInfo[4]+":00 και θέση:"+personalInfo[2]+". Παρακαλούμε κάντε τεστ";  //no commas
+				if (personalInfo[1].equals("1"))
+					className= "Αμφιθέατρο 12";
+				else if (personalInfo[1].equals("2"))
+					className= "Εργαστήριο 234";
+				else if (personalInfo[1].equals("3"))
+					className= "ΚΥΔ";
+				String message= "ΠΡΟΣΟΧΗ! Στις : "+personalInfo[5]+"/"+personalInfo[6]+"/"+ personalInfo[7]+ " βρεθήκατε κοντά σε κρούσμα, στην αίθουσα: "
+						+ className+ ", ώρα: "+ personalInfo[3]+":00 ~"+ personalInfo[4]+":00, και θέση: "+personalInfo[2]+". Παρακαλούμε κάντε τεστ ";  //no commas
 				updateNotification(3,personalInfo[0],message);
 				
 				

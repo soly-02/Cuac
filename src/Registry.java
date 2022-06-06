@@ -396,7 +396,7 @@ public class Registry {
 			if (type==3) {
 				String existedNotification = getNotification(type, email);
 				if(existedNotification!= null) {
-					message = existedNotification + ", " + message;
+					message = existedNotification + " $$" + message;
 				}
 			}
 			updateQuery = "UPDATE usertable SET notiftype"+type+ "=" +"'" + message+ "'" + "WHERE email=" +"'" + email + "'" + ";";				

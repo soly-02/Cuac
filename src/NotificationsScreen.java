@@ -9,6 +9,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.regex.Pattern;
+import javax.swing.JTextPane;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class NotificationsScreen extends JFrame {
 
@@ -23,6 +27,11 @@ public class NotificationsScreen extends JFrame {
 		setResizable(false);
 		
 		this.u=u;
+		String oldText=" ";
+		
+		
+		
+		
 		
 		setBounds(100, 100, 957, 625);
 		contentPane = new JPanel();
@@ -36,11 +45,16 @@ public class NotificationsScreen extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblE = new JLabel("E\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2");
-		lblE.setForeground(Color.WHITE);
-		lblE.setFont(new Font("Tahoma", Font.BOLD, 22));
-		lblE.setBounds(10, 43, 221, 41);
-		panel.add(lblE);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 95, 923, 482);
+		panel.add(scrollPane);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
+		textPane.setForeground(Color.WHITE);
+		textPane.setBackground(new Color(0, 0, 51));
+		scrollPane.setViewportView(textPane);
+		textPane.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
 		
 		JLabel user_email = new JLabel(u.getEmail());
 		user_email.setForeground(Color.WHITE);
@@ -48,43 +62,45 @@ public class NotificationsScreen extends JFrame {
 		user_email.setBounds(10, 11, 167, 21);
 		panel.add(user_email);
 		
+		JLabel Notiflabel = new JLabel("\u0395\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2");
+		Notiflabel.setForeground(Color.WHITE);
+		Notiflabel.setFont(new Font("Tahoma", Font.BOLD, 22));
+		Notiflabel.setBounds(10, 43, 221, 41);
+		panel.add(Notiflabel);
+		
+		String gap="-------------------------------------------------------------------------------------------------------";
 		
 		
-		JLabel CovidWalletLabel = new JLabel(" ");
-		if (u.getNotifFromDB(1)!=null) 
-			CovidWalletLabel.setText(u.getNotifFromDB(1));
+
+		if (u.getNotifFromDB(1)!=null) {
+			textPane.setText(oldText+u.getNotifFromDB(1)+"\n"+gap);
+		    oldText=textPane.getText();
+		}
 		
-		CovidWalletLabel.setForeground(Color.WHITE);
-		CovidWalletLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
-		CovidWalletLabel.setBounds(95, 113, 775, 86);
-		panel.add(CovidWalletLabel);
-			
+		if (u.getNotifFromDB(2)!=null) {
+			textPane.setText(oldText+u.getNotifFromDB(2)+"\n"+gap);
+		    oldText=textPane.getText();
+		}
+		
+	
+		
+		String[] mess;
 		
 		
 		
-		JLabel QuarantineLabel = new JLabel(" ");
-		if (u.getNotifFromDB(2)!=null) 
-			QuarantineLabel.setText(u.getNotifFromDB(2));
-		
-		QuarantineLabel.setForeground(Color.WHITE);
-		QuarantineLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
-		QuarantineLabel.setBounds(95, 222, 775, 78);
-		panel.add(QuarantineLabel);
-		
-		JLabel CovidAlert = new JLabel(" ");
 		if (u.getNotifFromDB(3)!=null) {
 			
 
-			u.getNotifFromDB(3);
-			//CovidAlert.setText("<html>""<br/>" "</html>"); 
+			
+			mess= u.getNotifFromDB(3).split(Pattern.quote("$$"));
+			for (int i=mess.length-1;i>=0;i--) {
+				System.out.println(mess[i]);
+				textPane.setText(oldText+mess[i]+"\n"+gap);
+				oldText=textPane.getText();
+			}
+			
 		}
 		
-		
-		
-		CovidAlert.setForeground(Color.WHITE);
-		CovidAlert.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
-		CovidAlert.setBounds(10, 404, 923, 78);
-		panel.add(CovidAlert);
 		
 		
 		

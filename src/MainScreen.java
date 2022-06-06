@@ -101,6 +101,12 @@ public class MainScreen extends JFrame {
 		EnterNotifications.setBounds(330, 445, 268, 65);
 		panel.add(EnterNotifications);
 		
+		if(!(u.getInfectionDate()==(null))) {
+			System.out.println("aaaaaa");
+			countdown() ;
+		}
+		
+		
 		
 		 ButtonListener bb= new ButtonListener();
 		 EnterSeat.addActionListener(bb);   
@@ -186,9 +192,11 @@ public class MainScreen extends JFrame {
 					 try {
 						 for(;;) {
 							 
-
-							 dateInfection = u.getInfection().getInfectionDate();
-							
+							 if(!(u.getInfectionDate()==null)) {
+							 dateInfection = u.getInfectionDate();
+							 }
+							 else
+								 dateInfection = u.getInfection().getInfectionDate();
 							 
 							 String[] nums3= dateInfection.split("/");   // splitting the numbers and adding them in a table 
 							 int	nums[] = {-1,-1,-1};
@@ -235,9 +243,10 @@ public class MainScreen extends JFrame {
 						 if (noOfDaysBetween>0)
 						    Quarantine_Countdown.setText("Μέρες Καραντίνας Που Απομένουν: "+noOfDaysBetween);
 						
+						 if (noOfDaysBetween==0)
+							    Quarantine_Countdown.setText("");
 						 
 						 if (previousData!= noOfDaysBetween ) {
-							 System.out.println("GAMWTOOOOOOOOOOOOO "+noOfDaysBetween);
 							 u.getUserNotifications().updateMessage(2,"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
 							 u.updateNotification(2,u.getEmail(),"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες");
 						 }
