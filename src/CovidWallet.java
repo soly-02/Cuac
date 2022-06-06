@@ -44,7 +44,7 @@ public class CovidWallet extends JFrame{
     private String pdfDate;
 	//private Calendar issuingDate;
     long previousData=-1;
-	
+    JFrame pdfContainer = new JFrame(); //JFrame for the pdf viewer.
 	
 	private User u;
 		
@@ -144,7 +144,7 @@ public class CovidWallet extends JFrame{
 					JOptionPane.showMessageDialog(null,"Το αρχείο ίσως έχει αλλάξει θέση. Βρές το μέσω του 'Open File'");
 				
 				}else if(file.isFile()) {
-					JFrame pdfContainer = new JFrame(); //JFrame for the pdf viewer.
+					
 					JPanel pdfViewer = new JPanel(); //JPanel for the pdf viewer.
 					
 					pdfContainer.add(pdfViewer); //JPanel is added to JFrame.
