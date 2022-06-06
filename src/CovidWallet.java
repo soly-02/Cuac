@@ -57,6 +57,11 @@ public class CovidWallet extends JFrame{
 			this.file = new File(filePath);
 		}
 		pdfDate = u.getmyPdfDate();//IT CAN BE NULL too
+		if(pdfDate !=null) {
+			expirDateField.setText(pdfDate);
+			countdown();
+		}
+		
 		frame.setTitle("Covid Wallet"); //Sets the title.
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
@@ -70,9 +75,7 @@ public class CovidWallet extends JFrame{
 		
 		showFile.addActionListener(clickShow);
 		panel.add(showFile);
-		
-		if(pdfDate!=null)
-			expirDateField.setText(pdfDate);
+			
 		panel.add(expirDateField);
 		
 		submitDate.addActionListener(clickSubmit);
@@ -239,7 +242,7 @@ public class CovidWallet extends JFrame{
 				 try {
 					 for(;;) {
 						 
-						 String[] nums3= expirDateField.getText().split("/");   // splitting the numbers and adding them in a table 
+						 String[] nums3= pdfDate.split("/");   // splitting the numbers and adding them in a table 
 						 int	nums[] = {-1,-1,-1};
 							
 							for (int index = 0; index < nums3.length; index++) {
@@ -276,16 +279,22 @@ public class CovidWallet extends JFrame{
 				//	 System.out.println("AAA "+noOfDaysBetween);
 					 if (noOfDaysBetween>0) {
 						 Quarantine_Countdown.setText("Το πιστοποιητικό λήγει σε : "+noOfDaysBetween+ " μέρες");
-					 }else {
-						 Quarantine_Countdown.setText("Το πιστοποιητικό έχει λήξει");
-					 }
-					 
-					 if (previousData!= noOfDaysBetween && noOfDaysBetween <30 ) {
-						 u.getNotifications().updateMessage(1,"Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
+						 u.getUserNotifications().updateMessage(1,"Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
 						 u.updateNotification(1, u.getEmail(), "Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες");
 					 }
+					 else {
+							Quarantine_Countdown.setText("Το πιστοποιητικό έχει λήξει");
+						 	u.getUserNotifications().updateMessage(1,"Το πιστοποιητικό έχει λήξει" );
+						 	u.updateNotification(1, u.getEmail(), "Το πιστοποιητικό έχει λήξει");
+						 	return;
+					 }
 					 
-					 previousData= noOfDaysBetween;
+//					 if (previousData!= noOfDaysBetween && noOfDaysBetween <30 ) {
+//						 u.getUserNotifications().updateMessage(1,"Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
+//						 u.updateNotification(1, u.getEmail(), "Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες");
+//					 }
+					 
+					 //previousData= noOfDaysBetween;
 					 Quarantine_Countdown.revalidate();
 					 
 					 

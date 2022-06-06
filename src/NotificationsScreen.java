@@ -51,8 +51,8 @@ public class NotificationsScreen extends JFrame {
 		
 		
 		JLabel CovidWalletLabel = new JLabel(" ");
-		if (!(u.getNotif(1).equals(null))) 
-			CovidWalletLabel.setText(u.getNotif(1));
+		if (u.getNotifFromDB(1)!=null) 
+			CovidWalletLabel.setText(u.getNotifFromDB(1));
 		
 		CovidWalletLabel.setForeground(Color.WHITE);
 		CovidWalletLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
@@ -63,8 +63,8 @@ public class NotificationsScreen extends JFrame {
 		
 		
 		JLabel QuarantineLabel = new JLabel(" ");
-		if (!(u.getNotif(2).equals("null"))) 
-			QuarantineLabel.setText(u.getNotif(2));
+		if (u.getNotifFromDB(2)!=null) 
+			QuarantineLabel.setText(u.getNotifFromDB(2));
 		
 		QuarantineLabel.setForeground(Color.WHITE);
 		QuarantineLabel.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 20));
@@ -72,11 +72,11 @@ public class NotificationsScreen extends JFrame {
 		panel.add(QuarantineLabel);
 		
 		JLabel CovidAlert = new JLabel(" ");
-		if (!(u.getNotif(3).equals("null"))) {
+		if (u.getNotifFromDB(3)!=null) {
 			
 
-			u.getNotif(3);
-			CovidAlert.setText("<html>""<br/>" "</html>");
+			u.getNotifFromDB(3);
+			//CovidAlert.setText("<html>""<br/>" "</html>"); 
 		}
 		
 		

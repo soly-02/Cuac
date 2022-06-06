@@ -72,7 +72,7 @@ public class User {
 	}
 	
 	
-	public Notifications getNotifications() {
+	public Notifications getUserNotifications() {
 		return n;
 		
 	}
@@ -133,8 +133,8 @@ public class User {
 			info= people.toString().replace("[", "").replace("]", "").replace(" ", "").replace(" ", "").split(",");
 			for (int j=0; j<info.length;j++) {
 				personalInfo= info[j].split("/");
-				String message= "ΠΡΟΣΟΧΗ! Στις: "+personalInfo[5]+"/"+personalInfo[6]+"/"+ personalInfo[7]+ " βρεθήκατε κοντά σε κρούσμα, στην αίθουσα: "
-						+ personalInfo[1]+ ", ώρα: "+ personalInfo[3]+":00 ~"+ personalInfo[4]+":00, και θέση:"+personalInfo[2]+", παρακαλούμε κάντε τεστ";
+				String message= "ΠΡΟΣΟΧΗ! Στις: "+personalInfo[5]+"/"+personalInfo[6]+"/"+ personalInfo[7]+ " βρεθήκατε κοντά σε κρούσμα στην αίθουσα: "
+						+ personalInfo[1]+ " ώρα: "+ personalInfo[3]+":00 ~"+ personalInfo[4]+":00 και θέση:"+personalInfo[2]+". Παρακαλούμε κάντε τεστ";  //no commas
 				updateNotification(3,personalInfo[0],message);
 				
 				
@@ -170,7 +170,7 @@ public void setInfectionDate(String date) {
 	}
 	
 	
-	public String getNotif(int type) {
+	public String getNotifFromDB(int type) {
 		return registry.getNotification(type, email);
 		
 		
