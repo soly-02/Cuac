@@ -1,6 +1,5 @@
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -17,12 +16,10 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
@@ -177,10 +174,7 @@ public class MainScreen extends JFrame {
 	
 	
 }
-	 
-	
-	 
-	 
+	 	 
 		 
 		 public void countdown() {
 			 
@@ -279,11 +273,5 @@ public class MainScreen extends JFrame {
 		 	 
 		 }	 
 		 
-	 
-		 
-		
-	
-	
-	
 	
 }

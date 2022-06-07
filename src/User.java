@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,7 +13,7 @@ public class User {
 	private MainScreen mainScr;
 	private Registry registry;
 	
-	public User(String email, String password, Infection i, Notifications n) {  // isws xreiastei k alla attributes
+	public User(String email, String password, Infection i, Notifications n) {
 		this.email = email;
 		this.password = password;
 		this.i=i;
@@ -33,7 +27,6 @@ public class User {
         } catch (SQLException e) { 
         	System.out.println("Error connecting to the database");
             return false;
-            // PETAW POP UP
         }
 		return true;
 	}
@@ -179,9 +172,7 @@ public void setInfectionDate(String date) {
 	
 	public String getNotifFromDB(int type) {
 		return registry.getNotification(type, email);
-		
-		
-		
+			
 	}
 	
 	
@@ -189,9 +180,7 @@ public void setInfectionDate(String date) {
 			String seatEnter ) {
 		
 		registry.uploadSeat(Email, Integer.parseInt(classId),Integer.parseInt( seatEnter), startTime,  endTime, date);
-		
-		
-		
+			
 	}
 
 }

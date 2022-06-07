@@ -29,8 +29,8 @@ public class EnterSeat extends JFrame {
 	private JRadioButton rb1;
 	private JRadioButton rb2;
 	private JRadioButton rb3;
-	private JTextField startTime;
-	private JTextField endTime;
+	private JTextField startTimeField;
+	private JTextField endTimeField;
 	private JTextField dayEnter;
 	private JTextField monthEnter;
 	private JTextField yearEnter;
@@ -103,11 +103,11 @@ public class EnterSeat extends JFrame {
 		 lblNewLabel_1.setBounds(196, 187, 147, 57);
 		 panel.add(lblNewLabel_1);
 		 
-		 startTime = new JTextField();
-		 startTime.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
-		 startTime.setBounds(372, 202, 136, 35);
-		 panel.add(startTime);
-		 startTime.setColumns(10);
+		 startTimeField = new JTextField();
+		 startTimeField.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
+		 startTimeField.setBounds(372, 202, 136, 35);
+		 panel.add(startTimeField);
+		 startTimeField.setColumns(10);
 		 
 		 JLabel lblNewLabel_1_1 = new JLabel("\u038F\u03C1\u03B1 \u03BB\u03AE\u03BE\u03B7\u03C2 :");
 		 lblNewLabel_1_1.setForeground(Color.WHITE);
@@ -115,11 +115,11 @@ public class EnterSeat extends JFrame {
 		 lblNewLabel_1_1.setBounds(220, 255, 123, 57);
 		 panel.add(lblNewLabel_1_1);
 		 
-		 endTime = new JTextField();
-		 endTime.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
-		 endTime.setColumns(10);
-		 endTime.setBounds(372, 259, 136, 35);
-		 panel.add(endTime);
+		 endTimeField = new JTextField();
+		 endTimeField.setFont(new Font("Microsoft YaHei", Font.PLAIN, 20));
+		 endTimeField.setColumns(10);
+		 endTimeField.setBounds(372, 259, 136, 35);
+		 panel.add(endTimeField);
 		 
 		 JLabel lblNewLabel_1_1_1 = new JLabel("\u0397\u03BC\u03B5\u03C1\u03BF\u03BC\u03B7\u03BD\u03AF\u03B1 :");
 		 lblNewLabel_1_1_1.setForeground(Color.WHITE);
@@ -210,12 +210,14 @@ public class EnterSeat extends JFrame {
 				classId=0;
 			
 			if (classId!= 0) {
+				String startTime = mapHour(sanitizeHour(startTimeField.getText()));
+				String endTime = mapHour(sanitizeHour(endTimeField.getText()));
 				
-				String code = classId+"/"+ startTime.getText()+"/"+ endTime.getText()+"/"+ dayEnter.getText()+ "/"+
+				String code = classId+"/"+ startTime+"/"+ endTime +"/"+ dayEnter.getText()+ "/"+
 				monthEnter.getText()+ "/"+ yearEnter.getText()+"/"+seatEnter.getText() + "/"+ u.getEmail();
 				System.out.println(code);
 				
-				u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime.getText(),endTime.getText(),  dayEnter.getText()+ "/"+
+				u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime,endTime,  dayEnter.getText()+ "/"+
 						monthEnter.getText()+ "/"+ yearEnter.getText(), seatEnter.getText() ); {
 					//System.out.println("Seat added successfully");
 				JOptionPane.showMessageDialog(null,"Επιτυχής δήλωση θέσης");
@@ -225,11 +227,26 @@ public class EnterSeat extends JFrame {
 			    
 			}
 			
-			
+		}
+
+		public String sanitizeHour(String text) {
+			if(text.contains(":")) {
+				String hour[] = text.split(":");
+				return hour[0];
+			}
+			else {
+				return text;
+			}
+		}
+		
+		public String mapHour(String text) {
+			int hour = Integer.parseInt(text);
+			if(hour < 9) {
+				hour += 12;
+			}
+			return Integer.toString(hour);
 			
 		}
 
-
-
-}
+	}
 }

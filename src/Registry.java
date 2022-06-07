@@ -1,23 +1,12 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 
 
@@ -33,7 +22,6 @@ public class Registry {
 		String url = "jdbc:mysql://snf-888491.vm.okeanos.grnet.gr:3306/cuac";
 		String usernamedb = "java";
 		String passworddb = "password";
-		
 		
 		System.out.println("Connecting database...");
 		connect = DriverManager.getConnection(url, usernamedb, passworddb);	
@@ -55,16 +43,11 @@ public class Registry {
 		try {
 			statement = connect.createStatement();
 			rs = statement.executeQuery("SELECT email, password FROM usertable WHERE email=" + "'"+ email + "'" +";");
-		
-			 
-			
-		
 			
 			while(rs.next()) {
 				
 				emailFromDB = rs.getString("email");
 				passwordFromDB = rs.getString("password");
-				
 				
 				if (emailFromDB.equals(email)) {
 					System.out.println("Email is in DB");                    //PERIPTOSH NA YPARXEI EMAIL
@@ -75,14 +58,10 @@ public class Registry {
 					else { 
 						System.out.println("Password wrong, try again");         //PERIPTOSH LATHOS PASSWORD
 					    return false;
-					}
-					
-				
-				
+					}	
 			}
 		}
-			
-			
+					
 			statement.close();
 			
 			
@@ -109,7 +88,6 @@ public class Registry {
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error in register");
 			e.printStackTrace();
 		}
 		return true;
@@ -128,7 +106,6 @@ public class Registry {
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error while getting path");
 			e.printStackTrace();
 		}
 		return pathToPDF;
@@ -145,7 +122,6 @@ public class Registry {
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error while setting PDFPath");
 			e.printStackTrace();
 		}
 	}
@@ -164,7 +140,6 @@ public class Registry {
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error while getting path");
 			e.printStackTrace();
 		}
 		return dateofPDF;
@@ -182,7 +157,6 @@ public class Registry {
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error while setting PDFDate");
 			e.printStackTrace();
 		}
 	}
@@ -204,14 +178,13 @@ public class Registry {
 		
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error in uploadSeat");
 			e.printStackTrace();
 		}
 	}
 	
 	
 	
-	public void setInfectionDate(String email, String date) { //changes the path to PDF.
+	public void setInfectionDate(String email, String date) {
 		try {
 			String addInfectionDateQuery = "UPDATE usertable SET infectionDate=? WHERE email=" + "'"+ email + "'" +";";
 			prep = connect.prepareStatement(addInfectionDateQuery);
@@ -222,13 +195,12 @@ public class Registry {
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error while setting PDFPath");
 			e.printStackTrace();
 		}
 	}
 	
 	
-	public String getInfectionDate(String email){ // it returns null (as a String) if there is no date for the PDF file
+	public String getInfectionDate(String email){
 		String dateofInfection=null;
 		try {
 			statement = connect.createStatement();
@@ -241,7 +213,6 @@ public class Registry {
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQL Error while getting path");
 			e.printStackTrace();
 		}
 		return dateofInfection;
@@ -301,7 +272,6 @@ public class Registry {
 
 	        	 catch (SQLException e) {
 	     			// TODO Auto-generated catch block
-	     			System.out.println("SQL Error while user info");
 	     			e.printStackTrace();
 	     		}
 	        	 
