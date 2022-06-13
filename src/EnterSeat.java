@@ -197,18 +197,22 @@ public class EnterSeat extends JFrame {
 			 
 			
 			// Check which class was selected
-			if (rb1.isSelected()) {
+			if (rb1.isSelected() && Integer.parseInt(seatEnter.getText()) >0 && Integer.parseInt(seatEnter.getText()) <=88) {
 				classId=1;
 			}
-			else if (rb2.isSelected()) {
+			else if (rb2.isSelected()&& Integer.parseInt(seatEnter.getText()) >0 && Integer.parseInt(seatEnter.getText()) <=35) {
 				classId=2;
 			}
-			else if (rb3.isSelected()) {
+			else if (rb3.isSelected()&& Integer.parseInt(seatEnter.getText()) >0 && Integer.parseInt(seatEnter.getText()) <=64) {
 				classId=3;
 			}
-			else 
+			else {
 				classId=0;
 			
+	     System.out.println("Exoyme thema");
+			
+			
+			}			
 			if (classId!= 0) {
 				String startTime = mapHour(sanitizeHour(startTimeField.getText()));
 				String endTime = mapHour(sanitizeHour(endTimeField.getText()));
