@@ -125,7 +125,7 @@ public class SignUp_Register extends JFrame {
 				
 				if(email.isBlank()) {
 					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
-					deleteObjects();
+					//deleteObjects();
 					return;
 				}
 //				else if(!pattern.matcher(password).matches()) {  disabled for testing

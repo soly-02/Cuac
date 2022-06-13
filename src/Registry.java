@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,10 +21,22 @@ public class Registry {
 	 
 	// missing constructor
 	public Registry() throws SQLException {
-		String url = "jdbc:mysql://snf-888491.vm.okeanos.grnet.gr:3306/cuac";
-		String usernamedb = "java";
-		String passworddb = "password";
+		String url;
+		String usernamedb;
+		String passworddb;
 		
+		Properties prop = new Properties();
+		String fileName = "db-credentials.config";
+		try (FileInputStream fis = new FileInputStream(fileName)) {
+		    prop.load(fis);
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		usernamedb = prop.getProperty("username");
+		passworddb = prop.getProperty("password");
+		url = prop.getProperty("url");
+	
 		System.out.println("Connecting database...");
 		connect = DriverManager.getConnection(url, usernamedb, passworddb);	
 	}
