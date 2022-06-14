@@ -12,26 +12,26 @@ def days_past(dateOfInfection):
 	return delta.days
 
 
+if __name__ == "main":
+	db = mysql.connector.connect(
+	host="localhost",
+	user="root",
+	password="password", 
+	database = "cuac"
+	)
 
-db = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="password", 
-  database = "cuac"
-)
 
+	cursorSelect = db.cursor()
+	cursorSelect.execute("SELECT date FROM seatlog")
+	result = cursorSelect.fetchall()
 
-cursorSelect = db.cursor()
-cursorSelect.execute("SELECT date FROM seatlog")
-result = cursorSelect.fetchall()
-
-for i in result:
-	if(days_past(i[0]) > 10):
-		cursorDel = db.cursor()
-		delquery = "DELETE FROM seatlog WHERE date = %s"
-		dateToDelete = i
-		cursorDel.execute(delquery, dateToDelete)
-		db.commit()
-		#print("row deleted")
-        
-db.close()
+	for i in result:
+		if(days_past(i[0]) > 10):
+			cursorDel = db.cursor()
+			delquery = "DELETE FROM seatlog WHERE date = %s"
+			dateToDelete = i
+			cursorDel.execute(delquery, dateToDelete)
+			db.commit()
+			#print("row deleted")
+			
+	db.close()
