@@ -12,8 +12,9 @@ public class Notifications {
 	public Notifications() {
 		
 	}
-	
-	
+	//notifType1: Το πιστοποιητικό σας λήγει σε : Χ μέρες
+	//notiftype2: Η καραντίνα σας λήγει σε : X μέρες
+	//notifType3: ΠΡΟΣΟΧΗ! Στις: dd/mm/YY βρεθήκατε κοντά σε κρούσμα στην αίθουσα: X ώρα: HH:MM ~HH:MM και θέση:Y. Παρακαλούμε κάντε τεστ
 	//-------------------------------------------------------
 	
 	public void updateMessage(int type, String info) {

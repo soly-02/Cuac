@@ -178,7 +178,7 @@ public class MainScreen extends JFrame {
 		 
 		 public void countdown() {
 			 
-			 //GIA NA ARXISEI TO COUNTDOWN DOKIMH ME REFRESH TO EMAIL
+			 //GIA NA ARXISEI TO COUNTDOWN
 			 Thread clock= new Thread() {
 				 String dateInfection;
 				 public void run() {

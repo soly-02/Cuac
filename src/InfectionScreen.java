@@ -148,8 +148,6 @@ public class InfectionScreen extends JFrame {
 			u.startCovidCountdown();
 			u.setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
 			u.findPeopleToNotify(u.getInfectionDate());
-			//u.send("InfectionAlert;" + u.getEmail() + ", " + u.getInfection().getInfectionDate());
-			//SQL ALLAGES
 			
 			dispose();
 			 }

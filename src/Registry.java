@@ -35,8 +35,8 @@ public class Registry {
 		}
 		usernamedb = prop.getProperty("username");
 		passworddb = prop.getProperty("password");
-		url = prop.getProperty("url");
-	
+		url = prop.getProperty("url") + prop.getProperty("database");
+
 		System.out.println("Connecting database...");
 		connect = DriverManager.getConnection(url, usernamedb, passworddb);	
 	}
@@ -373,7 +373,7 @@ public class Registry {
 	}
 	
 	
-	public void updateNotification(String email, String message, int type) {
+	public void updateNotification(String email, String message, int type) {  
 		String updateQuery;
 		try {
 	

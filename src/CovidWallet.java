@@ -119,17 +119,6 @@ public class CovidWallet extends JFrame{
 			
 			}else if (action.equals("Submit")) {
 			
-				/*issuingDate = new GregorianCalendar(); //den xreiazetai issuing date
-				
-				try {
-					int day = Integer.parseInt(expirDate.getText(0, 2));
-				} catch (NumberFormatException | BadLocationException e1) {
-					e1.printStackTrace();
-				}
-				//int
-				//int
-				
-				issuingDate.set(ERROR, ALLBITS, ABORT);*/
 				pdfDate = expirDateField.getText(); 
 				u.updatePDFDate(pdfDate);
 				JOptionPane.showMessageDialog(null,"Επιτυχής ανανέωση ημερομηνίας.");
@@ -233,7 +222,7 @@ public class CovidWallet extends JFrame{
 		 
 		 
 		 
-		 //GIA NA ARXISEI TO COUNTDOWN DOKIMH ME REFRESH TO EMAIL
+		 //GIA NA ARXISEI TO COUNTDOWN
 		 Thread clock= new Thread() {
 			
 			 

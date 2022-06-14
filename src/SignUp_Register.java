@@ -136,8 +136,7 @@ public class SignUp_Register extends JFrame {
 //							+ "• Τουλάχιστον έναν αριθμό.\r\n"
 //							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα\r\n"
 //							+ "και αριθμούς.\r\n"
-//							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);
-//				    deleteObjects();	
+//							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);	
 //					return;
 //				}
 				
