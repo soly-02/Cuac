@@ -41,6 +41,7 @@ public class MainScreen extends JFrame {
 		setResizable(false);
 		this.u = u;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
+		setTitle("Cuac");
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 935, 577);
 		contentPane = new JPanel();

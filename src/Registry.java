@@ -21,12 +21,12 @@ public class Registry {
 	 
 	// missing constructor
 	public Registry() throws SQLException {
-		String url;
+		String url = "jdbc:mysql://";
 		String usernamedb;
 		String passworddb;
 		
 		Properties prop = new Properties();
-		String fileName = "db-credentials.config";
+		String fileName = "database\\db-credentials.config";
 		try (FileInputStream fis = new FileInputStream(fileName)) {
 		    prop.load(fis);
 		
@@ -35,7 +35,7 @@ public class Registry {
 		}
 		usernamedb = prop.getProperty("username");
 		passworddb = prop.getProperty("password");
-		url = prop.getProperty("url") + prop.getProperty("database");
+		url += prop.getProperty("url") + ":" + prop.getProperty("port") + "/" + prop.getProperty("database");
 
 		System.out.println("Connecting database...");
 		connect = DriverManager.getConnection(url, usernamedb, passworddb);	

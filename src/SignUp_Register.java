@@ -1,8 +1,4 @@
 
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,20 +9,13 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import javax.swing.JDesktopPane;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.regex.Pattern;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 
 public class SignUp_Register extends JFrame {
 
@@ -125,20 +114,18 @@ public class SignUp_Register extends JFrame {
 				
 				if(email.isBlank()) {
 					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
-					//deleteObjects();
 					return;
 				}
-//				else if(!pattern.matcher(password).matches()) {  disabled for testing
-//					JOptionPane.showMessageDialog(null, "Ο κωδικός πρέπει να περιλαμβάνει \r\n"
-//							+ "• Τουλάχιστον 6 χαρακτήρες.\r\n"
-//							+ "• Το πολύ 12 χαρακτήρες.\r\n"
-//							+ "• Τουλάχιστον ένα λατινικό γράμμα.\r\n"
-//							+ "• Τουλάχιστον έναν αριθμό.\r\n"
-//							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα\r\n"
-//							+ "και αριθμούς.\r\n"
-//							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);	
-//					return;
-//				}
+				else if(!pattern.matcher(password).matches()) { 
+					JOptionPane.showMessageDialog(null, "Ο κωδικός πρέπει να περιλαμβάνει \r\n"
+							+ "• Τουλάχιστον 6 χαρακτήρες.\r\n"
+							+ "• Το πολύ 12 χαρακτήρες.\r\n"
+							+ "• Τουλάχιστον ένα λατινικό γράμμα.\r\n"
+							+ "• Τουλάχιστον έναν αριθμό.\r\n"
+							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα και αριθμούς.\r\n"
+							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);	
+					return;
+				}
 				
 				if(u.connect()) {
 					if (e.getActionCommand().equals("Register")) {

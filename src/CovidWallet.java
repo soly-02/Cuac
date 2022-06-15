@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 //import javax.swing.JComboBox;
@@ -30,7 +31,7 @@ public class CovidWallet extends JFrame{
 	private JPanel panel = new JPanel();
 	private JTextField expirDateField = new JTextField("DD/MM/YY");
 	//private JComboBox<String> certificateSelection;// Dropdown box for the user to choose the type of certificate.
-	private JButton uploadFile = new JButton("Open File"); //Button that fires up JFileChooser, for file selection.
+	private JButton uploadFile = new JButton("Select File"); //Button that fires up JFileChooser, for file selection.
 	private JButton submitDate = new JButton("Submit");
 	private JButton showFile = new JButton("Show PDF"); // Button that fires up PDF Viewer.
 	private ButtonListener clickUpload = new ButtonListener(); //ButtonListener assigned to the uploadFile button.
@@ -61,7 +62,8 @@ public class CovidWallet extends JFrame{
 			expirDateField.setText(pdfDate);
 			countdown();
 		}
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
+		setTitle("Cuac");
 		frame.setTitle("Covid Wallet"); //Sets the title.
 		panel.setBackground(new Color(0, 0, 51)); //Sets background colour.
 		frame.add(panel);
@@ -98,7 +100,7 @@ public class CovidWallet extends JFrame{
 			
 			String action = e.getActionCommand();
 			
-			if(action.equals("Open File")  ) { //If the source of the event is the clickUpload button, the following lines are executed.
+			if(action.equals("Select File")  ) { //If the source of the event is the clickUpload button, the following lines are executed.
 				JFileChooser selectFile = new JFileChooser(); //Creates JFileChooser object.
 				
 				selectFile.setCurrentDirectory(null); //Sets the directory that the file chooser will display by default. (Set to 'Documents')
@@ -127,7 +129,7 @@ public class CovidWallet extends JFrame{
 			
 			}else if(action.equals("Show PDF")) {
 				if (file==null){
-					JOptionPane.showMessageDialog(null,"Δεν εχει φορτωθεί καποιο αρχείο. Πάτα 'Open File' για να φορτώσεις");
+					JOptionPane.showMessageDialog(null,"Δεν εχει φορτωθεί καποιο αρχείο. Πάτα 'Open File' για να φορτώσεις ένα");
 				
 				}else if(!file.exists()) {
 					JOptionPane.showMessageDialog(null,"Το αρχείο ίσως έχει αλλάξει θέση. Βρές το μέσω του 'Open File'");

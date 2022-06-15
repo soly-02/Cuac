@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.temporal.ChronoUnit;
@@ -38,7 +39,8 @@ public class InfectionScreen extends JFrame {
 		this.u=u;
 		String dateofInfection = u.getInfectionDate();// can be null
 		
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
+		setTitle("Cuac");
 		setBounds(100, 100, 760, 513);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

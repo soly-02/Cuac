@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.regex.Pattern;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
@@ -27,7 +28,7 @@ public class NotificationsScreen extends JFrame {
 		
 		
 		
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
 		setBounds(100, 100, 957, 625);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
