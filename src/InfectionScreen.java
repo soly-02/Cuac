@@ -1,11 +1,16 @@
 
 import javax.swing.JFrame;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -118,6 +123,9 @@ public class InfectionScreen extends JFrame {
 		
 		public void actionPerformed(ActionEvent e) {
 			 
+			
+			if( !validateJavaDate(month.getText()+"/"+day.getText()+"/"+year.getText())) {
+			
 			 Calendar cal_now= new GregorianCalendar();
 			 Calendar cal_of= new GregorianCalendar();
 			 Calendar cal_end= new GregorianCalendar();
@@ -158,11 +166,44 @@ public class InfectionScreen extends JFrame {
 			
 		}
 
-
-
+			else
+				JOptionPane.showMessageDialog(null,"Λανθασμένη είσοδος ημερομηνίας, παρακαλώ προσπαθήστε ξανά.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
 }
+	}
+	
+	 public static boolean validateJavaDate(String strDate)
+	   {
+		/* Check if date is 'null' */
+		if (strDate.trim().equals(""))
+		{
+		    return true;
+		}
+		/* Date is not 'null' */
+		else
+		{
+		    /*
+		     * Set preferred date format,
+		     * For example MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
+		    SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+		    sdfrmt.setLenient(false);
+		    /* Create Date object
+		     * parse the string into date 
+	             */
+		    try
+		    {
+		        Date javaDate = sdfrmt.parse(strDate); 
+		       // System.out.println(strDate+" is valid date format");
+		    }
+		    /* Date format is invalid */
+		    catch (ParseException e)
+		    {
+		       // System.out.println(strDate+" is Invalid Date format");
+		        return false;
+		    }
+		    /* Return true if date format is valid */
+		    return true;
+		}
 	
 	
-	
-	
+}
 }
