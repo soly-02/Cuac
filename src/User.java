@@ -123,13 +123,13 @@ public class User {
 			for (int j=0; j<info.length;j++) {
 				personalInfo= info[j].split("/");
 				if (personalInfo[1].equals("1"))
-					className= "ÁìöéèÝáôñï 12";
+					className= "Î‘Î¼Ï†Î¹Î¸Î­Î±Ï„ÏÎ¿ 12";
 				else if (personalInfo[1].equals("2"))
-					className= "ÅñãáóôÞñéï 234";
+					className= "Î•ÏÎ³Î±ÏƒÏ„Î®ÏÎ¹Î¿ 234";
 				else if (personalInfo[1].equals("3"))
-					className= "ÊÕÄ";
-				String message= "ÐÑÏÓÏ×Ç! Óôéò : "+personalInfo[5]+"/"+personalInfo[6]+"/"+ personalInfo[7]+ " âñåèÞêáôå êïíôÜ óå êñïýóìá, óôçí áßèïõóá: "
-						+ className+ ", þñá: "+ personalInfo[3]+":00 ~"+ personalInfo[4]+":00, êáé èÝóç: "+personalInfo[2]+". Ðáñáêáëïýìå êÜíôå ôåóô ";  //no commas
+					className= "ÎšÎ¥Î”";
+				String message= "Î Î¡ÎŸÎ£ÎŸÎ§Î—! Î£Ï„Î¹Ï‚ : "+personalInfo[5]+"/"+personalInfo[6]+"/"+ personalInfo[7]+ " Î²ÏÎµÎ¸Î®ÎºÎ±Ï„Îµ ÎºÎ¿Î½Ï„Î¬ ÏƒÎµ ÎºÏÎ¿ÏÏƒÎ¼Î±, ÏƒÏ„Î·Î½ Î±Î¯Î¸Î¿Ï…ÏƒÎ±: "
+						+ className+ ", ÏŽÏÎ±: "+ personalInfo[3]+":00 ~"+ personalInfo[4]+":00, ÎºÎ±Î¹ Î¸Î­ÏƒÎ·: "+personalInfo[2]+". Î Î±ÏÎ±ÎºÎ±Î»Î¿ÏÎ¼Îµ ÎºÎ¬Î½Ï„Îµ Ï„ÎµÏƒÏ„ ";  //no commas
 				updateNotification(3,personalInfo[0],message);
 				
 				

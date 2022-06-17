@@ -126,7 +126,7 @@ public class InfectionScreen extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			 
 			
-			if( !validateJavaDate(month.getText()+"/"+day.getText()+"/"+year.getText())) {
+			if( validateJavaDate(month.getText()+"/"+day.getText()+"/"+year.getText())) {
 			
 			 Calendar cal_now= new GregorianCalendar();
 			 Calendar cal_of= new GregorianCalendar();
@@ -162,14 +162,14 @@ public class InfectionScreen extends JFrame {
 			dispose();
 			 }
 			 else {
-				 lblNewLabel.setText("Η περίοδος αυτής της καραντίνας έχει λήξει. Ξαναπροσπαθήστε.");
+				 lblNewLabel.setText("Ξ— Ο€ΞµΟΞ―ΞΏΞ΄ΞΏΟ‚ Ξ±Ο…Ο„Ξ®Ο‚ Ο„Ξ·Ο‚ ΞΊΞ±ΟΞ±Ξ½Ο„Ξ―Ξ½Ξ±Ο‚ Ξ­Ο‡ΞµΞΉ Ξ»Ξ®ΞΎΞµΞΉ. ΞΞ±Ξ½Ξ±Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΟ„Ξµ.");
 				 lblNewLabel.revalidate();
 			 }
 			
 		}
 
 			else
-				JOptionPane.showMessageDialog(null,"Λανθασμένη είσοδος ημερομηνίας, παρακαλώ προσπαθήστε ξανά.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Ξ›Ξ±Ξ½ΞΈΞ±ΟƒΞΌΞ­Ξ½Ξ· ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚ Ξ·ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ±Ο‚, Ο€Ξ±ΟΞ±ΞΊΞ±Ξ»Ο Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬.", "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±", JOptionPane.WARNING_MESSAGE);
 }
 	}
 	

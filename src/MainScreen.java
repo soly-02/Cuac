@@ -100,7 +100,7 @@ public class MainScreen extends JFrame {
 		panel.add(EnterNotifications);
 		
 		if(!(u.getInfectionDate()==(null))) {
-			System.out.println("aaaaaa");
+			System.out.println("countdown start");
 			countdown() ;
 		}
 		
@@ -114,7 +114,7 @@ public class MainScreen extends JFrame {
 		
 		this.addWindowListener(new WindowAdapter() { //exit dialog
 		      public void windowClosing(WindowEvent we) {
-		          int result = JOptionPane.showConfirmDialog(null, "Εξοδος;", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
+		          int result = JOptionPane.showConfirmDialog(null, "Ξ•ΞΎΞΏΞ΄ΞΏΟ‚;", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
 		          if (result == JOptionPane.YES_OPTION) {
 		            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		          	u.closeConnection();
@@ -236,14 +236,14 @@ public class MainScreen extends JFrame {
 						 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
 					//	 System.out.println("AAA "+noOfDaysBetween);
 						 if (noOfDaysBetween>0)
-						    Quarantine_Countdown.setText("Μέρες Καραντίνας Που Απομένουν: "+noOfDaysBetween);
+							  Quarantine_Countdown.setText("ΞΞ­ΟΞµΟ‚ ΞΞ±ΟΞ±Ξ½Ο„Ξ―Ξ½Ξ±Ο‚ Ξ ΞΏΟ… Ξ‘Ο€ΞΏΞΌΞ­Ξ½ΞΏΟ…Ξ½: "+noOfDaysBetween);
 						
 						 if (noOfDaysBetween==0)
 							    Quarantine_Countdown.setText("");
 						 
 						 if (previousData!= noOfDaysBetween ) {
-							 u.getUserNotifications().updateMessage(2,"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
-							 u.updateNotification(2,u.getEmail(),"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες");
+							 u.getUserNotifications().updateMessage(2,"Ξ— ΞΊΞ±ΟΞ±Ξ½Ο„Ξ―Ξ½Ξ± ΟƒΞ±Ο‚ Ξ»Ξ®Ξ³ΞµΞΉ ΟƒΞµ : "+noOfDaysBetween+ " ΞΌΞ­ΟΞµΟ‚" );
+							 u.updateNotification(2,u.getEmail(),"Ξ— ΞΊΞ±ΟΞ±Ξ½Ο„Ξ―Ξ½Ξ± ΟƒΞ±Ο‚ Ξ»Ξ®Ξ³ΞµΞΉ ΟƒΞµ : "+noOfDaysBetween+ " ΞΌΞ­ΟΞµΟ‚");
 						 }
 						
 						 

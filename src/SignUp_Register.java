@@ -113,37 +113,37 @@ public class SignUp_Register extends JFrame {
 				u = new User(email, password, i, n);
 				
 				if(email.isBlank()) {
-					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
+					JOptionPane.showMessageDialog(null,"Ξ£Ο…ΞΌΟ€Ξ»Ξ®ΟΟ‰ΟƒΞµ Ο„ΞΏ email");
 					return;
 				}
 				else if(!pattern.matcher(password).matches()) { 
-					JOptionPane.showMessageDialog(null, "Ο κωδικός πρέπει να περιλαμβάνει \r\n"
-							+ "• Τουλάχιστον 6 χαρακτήρες.\r\n"
-							+ "• Το πολύ 12 χαρακτήρες.\r\n"
-							+ "• Τουλάχιστον ένα λατινικό γράμμα.\r\n"
-							+ "• Τουλάχιστον έναν αριθμό.\r\n"
-							+ "• Απαγορεύεται η χρήση άλλων συμβόλων πέρα απο λατινικά γράμματα και αριθμούς.\r\n"
-							+ "","Σφάλμα κωδικού",JOptionPane.ERROR_MESSAGE);	
+					JOptionPane.showMessageDialog(null, "Ξ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± Ο€ΞµΟΞΉΞ»Ξ±ΞΌΞ²Ξ¬Ξ½ΞµΞΉ \r\n"
+							+ "β€Ά Ξ¤ΞΏΟ…Ξ»Ξ¬Ο‡ΞΉΟƒΟ„ΞΏΞ½ 6 Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚.\r\n"
+							+ "β€Ά Ξ¤ΞΏ Ο€ΞΏΞ»Ο 12 Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚.\r\n"
+							+ "β€Ά Ξ¤ΞΏΟ…Ξ»Ξ¬Ο‡ΞΉΟƒΟ„ΞΏΞ½ Ξ­Ξ½Ξ± Ξ»Ξ±Ο„ΞΉΞ½ΞΉΞΊΟ Ξ³ΟΞ¬ΞΌΞΌΞ±.\r\n"
+							+ "β€Ά Ξ¤ΞΏΟ…Ξ»Ξ¬Ο‡ΞΉΟƒΟ„ΞΏΞ½ Ξ­Ξ½Ξ±Ξ½ Ξ±ΟΞΉΞΈΞΌΟ.\r\n"
+							+ "β€Ά Ξ‘Ο€Ξ±Ξ³ΞΏΟΞµΟΞµΟ„Ξ±ΞΉ Ξ· Ο‡ΟΞ®ΟƒΞ· Ξ¬Ξ»Ξ»Ο‰Ξ½ ΟƒΟ…ΞΌΞ²ΟΞ»Ο‰Ξ½ Ο€Ξ­ΟΞ± Ξ±Ο€ΞΏ Ξ»Ξ±Ο„ΞΉΞ½ΞΉΞΊΞ¬ Ξ³ΟΞ¬ΞΌΞΌΞ±Ο„Ξ± ΞΊΞ±ΞΉ Ξ±ΟΞΉΞΈΞΌΞΏΟΟ‚.\r\n"
+							+ "","Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ",JOptionPane.ERROR_MESSAGE);	
 					return;
 				}
 				
 				if(u.connect()) { //connection attempted when any button is clicked
 					if (e.getActionCommand().equals("Register")) {
 						JPasswordField confirmPasswd = new JPasswordField(12);
-						int action = JOptionPane.showConfirmDialog(null, confirmPasswd,"Επιβεβαίωσε τον κωδικό",JOptionPane.OK_CANCEL_OPTION);
+						int action = JOptionPane.showConfirmDialog(null, confirmPasswd,"Ξ•Ο€ΞΉΞ²ΞµΞ²Ξ±Ξ―Ο‰ΟƒΞµ Ο„ΞΏΞ½ ΞΊΟ‰Ξ΄ΞΉΞΊΟ",JOptionPane.OK_CANCEL_OPTION);
 						if(action > 0) 
 							return; //no password confirmation
 						if(String.valueOf(confirmPasswd.getPassword()).equals(password)) {
 							if(u.sendRegCredentials()) {
-								JOptionPane.showMessageDialog(null,"Επιτυχής εγγραφή");
+								JOptionPane.showMessageDialog(null,"Ξ•Ο€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ ΞµΞ³Ξ³ΟΞ±Ο†Ξ®");
 							}
 							else {
-								JOptionPane.showMessageDialog(null,"Αυτός ο λογαριασμός υπάρχει ήδη", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(null,"Ξ‘Ο…Ο„ΟΟ‚ ΞΏ Ξ»ΞΏΞ³Ξ±ΟΞΉΞ±ΟƒΞΌΟΟ‚ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ®Ξ΄Ξ·", "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±", JOptionPane.ERROR_MESSAGE);
 								deleteObjects();
 							}
 						}
 						else {
-							JOptionPane.showMessageDialog(null,"Οι κωδικοί δεν ταιριάζουν", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null,"ΞΞΉ ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΞ― Ξ΄ΞµΞ½ Ο„Ξ±ΞΉΟΞΉΞ¬Ξ¶ΞΏΟ…Ξ½", "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±", JOptionPane.WARNING_MESSAGE);
 							deleteObjects();
 						}
 					}		
@@ -158,7 +158,7 @@ public class SignUp_Register extends JFrame {
 						}
 						else {
 							System.out.println("user not found"); //pop-up
-							JOptionPane.showMessageDialog(null,"Ο χρήστης δε βρέθηκε. Ελεγξε τα στοιχεία που έβαλες", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,"Ξ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ Ξ΄Ξµ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ. Ξ•Ξ»ΞµΞ³ΞΎΞµ Ο„Ξ± ΟƒΟ„ΞΏΞΉΟ‡ΞµΞ―Ξ± Ο€ΞΏΟ… Ξ­Ξ²Ξ±Ξ»ΞµΟ‚", "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±", JOptionPane.ERROR_MESSAGE);
 							//delete user object
 							deleteObjects();
 							}
@@ -167,7 +167,7 @@ public class SignUp_Register extends JFrame {
 				}
 				else {
 					System.out.println("Connection error");
-					JOptionPane.showMessageDialog(null,"Σφάλμα με τη σύνδεση", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΌΞµ Ο„Ξ· ΟƒΟΞ½Ξ΄ΞµΟƒΞ·", "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±", JOptionPane.ERROR_MESSAGE);
 					deleteObjects();
 				}
 				 

@@ -211,14 +211,14 @@ public class EnterSeat extends JFrame {
 			}
 			else {
 				classId=0;
-				JOptionPane.showMessageDialog(null,"Λανθασμένη είσοδος τάξης, παρακαλώ προσπαθήστε ξανά.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Ξ›Ξ±Ξ½ΞΈΞ±ΟƒΞΌΞ­Ξ½Ξ· ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚ Ο„Ξ¬ΞΎΞ·Ο‚, Ο€Ξ±ΟΞ±ΞΊΞ±Ξ»Ο Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬.", "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±", JOptionPane.WARNING_MESSAGE);
 			}
 				
 				
 				
 				boolean answer=validateJavaDate(monthEnter.getText()+"/"+dayEnter.getText() +"/"+yearEnter.getText());
 				if (!answer) {
-					JOptionPane.showMessageDialog(null,"Λανθασμένη είσοδος ημερομηνίας, παρακαλώ προσπαθήστε ξανά.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Ξ›Ξ±Ξ½ΞΈΞ±ΟƒΞΌΞ­Ξ½Ξ· ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚ Ξ·ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ±Ο‚, Ο€Ξ±ΟΞ±ΞΊΞ±Ξ»Ο Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬.", "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±", JOptionPane.WARNING_MESSAGE);
 					classId=0;
 					
 					
@@ -236,7 +236,7 @@ public class EnterSeat extends JFrame {
 				u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime,endTime,  dayEnter.getText()+ "/"+
 						monthEnter.getText()+ "/"+ yearEnter.getText(), seatEnter.getText() ); {
 					//System.out.println("Seat added successfully");
-				JOptionPane.showMessageDialog(null,"Επιτυχής δήλωση θέσης");
+				JOptionPane.showMessageDialog(null,"Ξ•Ο€ΞΉΟ„Ο…Ο‡Ξ®Ο‚ Ξ΄Ξ®Ξ»Ο‰ΟƒΞ· ΞΈΞ­ΟƒΞ·Ο‚");
 				dispose();
 				}
 				
