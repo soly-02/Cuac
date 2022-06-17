@@ -112,7 +112,7 @@ public class SignUp_Register extends JFrame {
 				password = String.valueOf(passwordField.getPassword());
 				u = new User(email, password, i, n);
 				
-				if(email.isBlank()) {
+				if(email.equals("")) {
 					JOptionPane.showMessageDialog(null,"Συμπλήρωσε το email");
 					return;
 				}
@@ -136,6 +136,10 @@ public class SignUp_Register extends JFrame {
 						if(String.valueOf(confirmPasswd.getPassword()).equals(password)) {
 							if(u.sendRegCredentials()) {
 								JOptionPane.showMessageDialog(null,"Επιτυχής εγγραφή");
+								MainScreen mainScr= new MainScreen(u);
+								mainScr.setVisible(true);
+								u.getMainScreen(mainScr);
+								dispose ();
 							}
 							else {
 								JOptionPane.showMessageDialog(null,"Αυτός ο λογαριασμός υπάρχει ήδη", "Σφάλμα", JOptionPane.ERROR_MESSAGE);
