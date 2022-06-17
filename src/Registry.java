@@ -19,7 +19,7 @@ public class Registry {
     private PreparedStatement prep = null;
     private ResultSet rs = null;
 	 
-	// missing constructor
+	
 	public Registry() throws SQLException {
 		String url = "jdbc:mysql://";
 		String usernamedb;
@@ -377,7 +377,7 @@ public class Registry {
 		String updateQuery;
 		try {
 	
-			if (type==3) {
+			if (type==3) {  //for types check Notification class
 				String existedNotification = getNotification(type, email);
 				if(existedNotification!= null) {
 					message = existedNotification + " $$" + message;

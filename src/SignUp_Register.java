@@ -127,12 +127,12 @@ public class SignUp_Register extends JFrame {
 					return;
 				}
 				
-				if(u.connect()) {
+				if(u.connect()) { //connection attempted when any button is clicked
 					if (e.getActionCommand().equals("Register")) {
 						JPasswordField confirmPasswd = new JPasswordField(12);
 						int action = JOptionPane.showConfirmDialog(null, confirmPasswd,"Επιβεβαίωσε τον κωδικό",JOptionPane.OK_CANCEL_OPTION);
-						if(action > 0)
-							return;
+						if(action > 0) 
+							return; //no password confirmation
 						if(String.valueOf(confirmPasswd.getPassword()).equals(password)) {
 							if(u.sendRegCredentials()) {
 								JOptionPane.showMessageDialog(null,"Επιτυχής εγγραφή");
@@ -148,7 +148,7 @@ public class SignUp_Register extends JFrame {
 						}
 					}		
 					else  if (e.getActionCommand().equals("Sign In")) {
-						if (u.sendLogCredentials()) {
+						if (u.sendLogCredentials()) { //successful sign in
 							MainScreen mainScr= new MainScreen(u);
 							mainScr.setVisible(true);
 							u.getMainScreen(mainScr);

@@ -65,7 +65,7 @@ public class User {
 	}
 	
 	
-	public Notifications getUserNotifications() {
+	public Notifications getUserNotifications() { //returns notifications from the object and not from the database
 		return n;
 		
 	}

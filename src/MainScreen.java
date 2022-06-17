@@ -112,7 +112,7 @@ public class MainScreen extends JFrame {
 		 EnterInfection.addActionListener(bb);   
 		 EnterNotifications.addActionListener(bb);  
 		
-		this.addWindowListener(new WindowAdapter() {
+		this.addWindowListener(new WindowAdapter() { //exit dialog
 		      public void windowClosing(WindowEvent we) {
 		          int result = JOptionPane.showConfirmDialog(null, "Εξοδος;", "Exit Confirmation : ", JOptionPane.YES_NO_OPTION);
 		          if (result == JOptionPane.YES_OPTION) {

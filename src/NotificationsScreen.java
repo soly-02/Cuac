@@ -64,6 +64,8 @@ public class NotificationsScreen extends JFrame {
 		Notiflabel.setBounds(10, 43, 221, 41);
 		panel.add(Notiflabel);
 		
+		
+		/// rendering saved notifications
 		String gap="--------------------------------------------------------------------------------------------------------";
 		
 		
