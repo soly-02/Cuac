@@ -129,10 +129,10 @@ public class CovidWallet extends JFrame{
 			
 			}else if(action.equals("Show PDF")) {
 				if (file==null){
-					JOptionPane.showMessageDialog(null,"Δεν εχει φορτωθεί καποιο αρχείο. Πάτα 'Open File' για να φορτώσεις ένα");
+					JOptionPane.showMessageDialog(null,"Δεν εχει φορτωθεί καποιο αρχείο. Πάτα 'Select File' για να φορτώσεις ένα");
 				
 				}else if(!file.exists()) {
-					JOptionPane.showMessageDialog(null,"Το αρχείο ίσως έχει αλλάξει θέση. Βρές το μέσω του 'Open File'");
+					JOptionPane.showMessageDialog(null,"Το αρχείο ίσως έχει αλλάξει θέση. Βρές το μέσω του 'Select File'");
 				
 				}else if(file.isFile()) {
 					
