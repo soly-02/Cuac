@@ -58,7 +58,7 @@ public class CovidWallet extends JFrame{
 			this.file = new File(filePath);
 		}
 		pdfDate = u.getmyPdfDate();//IT CAN BE NULL too
-		if(pdfDate !=null) {
+		if(!pdfDate.equals("null")) {
 			expirDateField.setText(pdfDate);
 			countdown();
 		}
