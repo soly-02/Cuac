@@ -83,7 +83,7 @@ public class CovidWallet extends JFrame{
 		submitDate.addActionListener(clickSubmit);
 		panel.add(submitDate);
 		
-		//--------SOFIA COMING THROUGH------- 
+		
 		Quarantine_Countdown = new JLabel("");
 		Quarantine_Countdown.setFont(new Font("Tahoma", Font.BOLD, 22));
 		Quarantine_Countdown.setForeground(new Color(196,215,233,255));
@@ -218,13 +218,13 @@ public class CovidWallet extends JFrame{
 	
 	
 	
-	// TO COUNTDOWN
+	// This countdown calculates the time that each covid certificate is valid.
 	
 	 public void countdown() {
 		 
 		 
 		 
-		 //GIA NA ARXISEI TO COUNTDOWN
+		 
 		 Thread clock= new Thread() {
 			
 			 
@@ -237,13 +237,13 @@ public class CovidWallet extends JFrame{
 						 int	nums[] = {-1,-1,-1};
 							
 							for (int index = 0; index < nums3.length; index++) {
-								nums[index]=Integer.parseInt(nums3[index]);
+								nums[index]=Integer.parseInt(nums3[index]); // from String to int
 							                     
 							}
 						
 						 
-					 Calendar cal_now= new GregorianCalendar();
-					 Calendar cal_end= new GregorianCalendar();
+					 Calendar cal_now= new GregorianCalendar();  // creation of calendar of current day
+					 Calendar cal_end= new GregorianCalendar();  // creation of calendar of expiration day
 					 
 					 int now_day = cal_now.get(Calendar.DAY_OF_MONTH);
 					 int now_month = cal_now.get(Calendar.MONTH ) ;
@@ -254,7 +254,7 @@ public class CovidWallet extends JFrame{
 					 cal_now.set(Calendar.YEAR, now_year);
 					 
 					 int day_end =nums[0];
-					 int month_end=nums[1]-1;
+					 int month_end=nums[1]-1;    //modifications so that the date will be viewed in standard greek format
 					 int year_end= nums[2];
 					 
 					 cal_end.set(Calendar.DAY_OF_MONTH, day_end);
@@ -262,12 +262,9 @@ public class CovidWallet extends JFrame{
 					 cal_end.set(Calendar.YEAR, year_end);
 					 
 					
-				//	 System.out.println("Date now: "+ cal_now.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_now.get(Calendar.MONTH )+1)+"/"+ cal_now.get(Calendar.YEAR)+
-				//			                      "Date of: "+ cal_of.get(Calendar.DAY_OF_MONTH)+"/"+(cal_of.get(Calendar.MONTH )+1)+"/"+ cal_of.get(Calendar.YEAR) +
-				//	                              "Date end: "+ cal_end.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_end.get(Calendar.MONTH )+1)+"/"+ cal_end.get(Calendar.YEAR)); 
-					 
-					 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
-				//	 System.out.println("AAA "+noOfDaysBetween);
+				
+					 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant()); // calculate the days between two dates
+				
 					 if (noOfDaysBetween>0) {
 						 Quarantine_Countdown.setText("Το πιστοποιητικό λήγει σε : "+noOfDaysBetween+ " μέρες");
 						 u.getUserNotifications().updateMessage(1,"Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
@@ -280,13 +277,8 @@ public class CovidWallet extends JFrame{
 						 	return;
 					 }
 					 
-//					 if (previousData!= noOfDaysBetween && noOfDaysBetween <30 ) {
-//						 u.getUserNotifications().updateMessage(1,"Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
-//						 u.updateNotification(1, u.getEmail(), "Το πιστοποιητικό σας λήγει σε : "+noOfDaysBetween+ " μέρες");
-//					 }
-					 
-					 //previousData= noOfDaysBetween;
-					 Quarantine_Countdown.revalidate();
+
+					 Quarantine_Countdown.revalidate(); //updates label
 					 
 					 
 					 

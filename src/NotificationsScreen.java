@@ -67,15 +67,13 @@ public class NotificationsScreen extends JFrame {
 		
 		/// rendering saved notifications
 		String gap="--------------------------------------------------------------------------------------------------------";
-		
-		
 
-		if (u.getNotifFromDB(1)!=null) {
+		if (u.getNotifFromDB(1)!=null) { //checks notification type 1 in database
 			textPane.setText(oldText+u.getNotifFromDB(1)+"\n"+gap);
 		    oldText=textPane.getText();
 		}
 		
-		if (u.getNotifFromDB(2)!=null) {
+		if (u.getNotifFromDB(2)!=null) {//checks notification type 2 in database
 			textPane.setText(oldText+u.getNotifFromDB(2)+"\n"+gap);
 		    oldText=textPane.getText();
 		}
@@ -86,15 +84,15 @@ public class NotificationsScreen extends JFrame {
 		
 		
 		
-		if (u.getNotifFromDB(3)!=null) {
+		if (u.getNotifFromDB(3)!=null) {//checks notification type 3 in database
 			
 
 			
 			mess= u.getNotifFromDB(3).split(Pattern.quote("$$"));
-			for (int i=mess.length-1;i>=0;i--) {
+			for (int i=mess.length-1;i>=0;i--) {   
 				System.out.println(mess[i]);
-				textPane.setText(oldText+mess[i]+"\n"+gap);
-				oldText=textPane.getText();
+				textPane.setText(oldText+mess[i]+"\n"+gap);    // if a person has been exposed to many infected students, the notifications
+				oldText=textPane.getText();                    // don't update(like the other 2 types of messages), but they keep adding up.
 			}
 			
 		}

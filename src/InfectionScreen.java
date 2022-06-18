@@ -100,23 +100,23 @@ public class InfectionScreen extends JFrame {
 		 ButtonListener bb= new ButtonListener();
 		 okButton.addActionListener(bb);
 		
-		JLabel lblNewLabel_1 = new JLabel("\u039C\u03AD\u03C1\u03B1");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(154, 204, 57, 41);
-		panel.add(lblNewLabel_1);
+		JLabel lblDay = new JLabel("\u039C\u03AD\u03C1\u03B1");
+		lblDay.setForeground(Color.WHITE);
+		lblDay.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
+		lblDay.setBounds(154, 204, 57, 41);
+		panel.add(lblDay);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("\u039C\u03AE\u03BD\u03B1\u03C2");
-		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
-		lblNewLabel_1_1.setBounds(352, 204, 57, 41);
-		panel.add(lblNewLabel_1_1);
+		JLabel lblMonth = new JLabel("\u039C\u03AE\u03BD\u03B1\u03C2");
+		lblMonth.setForeground(Color.WHITE);
+		lblMonth.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
+		lblMonth.setBounds(352, 204, 57, 41);
+		panel.add(lblMonth);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("\u0388\u03C4\u03BF\u03C2");
-		lblNewLabel_1_2.setForeground(Color.WHITE);
-		lblNewLabel_1_2.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
-		lblNewLabel_1_2.setBounds(547, 204, 57, 41);
-		panel.add(lblNewLabel_1_2);
+		JLabel lblYear = new JLabel("\u0388\u03C4\u03BF\u03C2");
+		lblYear.setForeground(Color.WHITE);
+		lblYear.setFont(new Font("Microsoft YaHei", Font.BOLD, 16));
+		lblYear.setBounds(547, 204, 57, 41);
+		panel.add(lblYear);
 	}
 
 	class ButtonListener implements ActionListener {
@@ -128,9 +128,9 @@ public class InfectionScreen extends JFrame {
 			
 			if( validateJavaDate(month.getText()+"/"+day.getText()+"/"+year.getText())) {
 			
-			 Calendar cal_now= new GregorianCalendar();
-			 Calendar cal_of= new GregorianCalendar();
-			 Calendar cal_end= new GregorianCalendar();
+			 Calendar cal_now= new GregorianCalendar();  //calendar of current date
+			 Calendar cal_of= new GregorianCalendar();   // calendar of date of infection
+			 Calendar cal_end= new GregorianCalendar();  // calendar of date when quarantine can end
 			 
 			 int now_day = cal_now.get(Calendar.DAY_OF_MONTH);
 			 int now_month = cal_now.get(Calendar.MONTH ) ;
@@ -152,12 +152,12 @@ public class InfectionScreen extends JFrame {
 			 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
 			
 			 
-			 if (noOfDaysBetween>0 && noOfDaysBetween<=5) {
+			 if (noOfDaysBetween>0 && noOfDaysBetween<=5) { // if user still in quarantine upadates infection info
 			u.getInfection().setCovidStatus(true);
 			u.getInfection().setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
 			u.startCovidCountdown();
 			u.setInfectionDate(day.getText()+"/"+month.getText()+"/"+year.getText());
-			u.findPeopleToNotify(u.getInfectionDate());
+			u.findPeopleToNotify(u.getInfectionDate()); // finds people that sat next to the user 3 days before diagnosis
 			
 			dispose();
 			 }

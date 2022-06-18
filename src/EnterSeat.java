@@ -42,7 +42,7 @@ public class EnterSeat extends JFrame {
 	
 
 	/**
-	 * Create the frame.
+	 * Create the frame. GUI construction
 	 */
 	public EnterSeat(User u) {
 		setResizable(false);
@@ -79,7 +79,7 @@ public class EnterSeat extends JFrame {
 		lblNewLabel.setBounds(136, 110, 207, 57);
 		panel.add(lblNewLabel);
 		
-		rb1 = new JRadioButton("\u0391\u03BC\u03C6\u03B9\u03B8\u03AD\u03B1\u03C4\u03C1\u03BF 12");
+		rb1 = new JRadioButton("\u0391\u03BC\u03C6\u03B9\u03B8\u03AD\u03B1\u03C4\u03C1\u03BF 12"); 
 		rb1.setFont(new Font("Microsoft YaHei", Font.BOLD, 18));
 		rb1.setBounds(372, 110, 199, 21);
 		panel.add(rb1);
@@ -216,7 +216,7 @@ public class EnterSeat extends JFrame {
 				
 				
 				
-				boolean answer=validateJavaDate(monthEnter.getText()+"/"+dayEnter.getText() +"/"+yearEnter.getText());
+				boolean answer=validateJavaDate(monthEnter.getText()+"/"+dayEnter.getText() +"/"+yearEnter.getText()); // checks if date is valid
 				if (!answer) {
 					JOptionPane.showMessageDialog(null,"Λανθασμένη είσοδος ημερομηνίας, παρακαλώ προσπαθήστε ξανά.", "Σφάλμα", JOptionPane.WARNING_MESSAGE);
 					classId=0;
@@ -225,17 +225,19 @@ public class EnterSeat extends JFrame {
 				}
 			
 					
-			if (classId!= 0) {
-				String startTime = mapHour(sanitizeHour(startTimeField.getText()));
+			if (classId!= 0) { //if a classroom was correctly chosen
+				String startTime = mapHour(sanitizeHour(startTimeField.getText())); // Offers desired format of times
 				String endTime = mapHour(sanitizeHour(endTimeField.getText()));
 				
+				
+				// creation of the code with the seat info that will be sent to the daatabase
 				String code = classId+"/"+ startTime+"/"+ endTime +"/"+ dayEnter.getText()+ "/"+
 				monthEnter.getText()+ "/"+ yearEnter.getText()+"/"+seatEnter.getText() + "/"+ u.getEmail();
 				System.out.println(code);
-				
+				// sending the code to the database
 				u.sendSeatLog( u.getEmail(), Integer.toString(classId)  ,startTime,endTime,  dayEnter.getText()+ "/"+
 						monthEnter.getText()+ "/"+ yearEnter.getText(), seatEnter.getText() ); {
-					//System.out.println("Seat added successfully");
+					
 				JOptionPane.showMessageDialog(null,"Επιτυχής δήλωση θέσης");
 				dispose();
 				}

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class Registry {
+public class Registry {  // CONTROLLER CLASS connected with the database
 	
 	private Connection connect = null;
     private Statement statement = null;
@@ -51,12 +51,12 @@ public class Registry {
 		}
 	}
 	
-	public boolean login(String email, String password) {
+	public boolean login(String email, String password) { // If the user chose to sign in / login (already has an account)
 		String emailFromDB=null;
 		String passwordFromDB=null;
 		try {
 			statement = connect.createStatement();
-			rs = statement.executeQuery("SELECT email, password FROM usertable WHERE email=" + "'"+ email + "'" +";");
+			rs = statement.executeQuery("SELECT email, password FROM usertable WHERE email=" + "'"+ email + "'" +";"); //gets email and password from database
 			
 			while(rs.next()) {
 				
@@ -64,13 +64,13 @@ public class Registry {
 				passwordFromDB = rs.getString("password");
 				
 				if (emailFromDB.equals(email)) {
-					System.out.println("Email is in DB");                    //PERIPTOSH NA YPARXEI EMAIL
+					System.out.println("Email is in DB");                    //if email exists in databes
 					if(passwordFromDB.equals(password)) {
-						System.out.println("Password correct, log in complete");    //PERIPTOSH SWSTO PASSWORD
+						System.out.println("Password correct, log in complete");    //if the entered password was correct
 						return true;
 					}
 					else { 
-						System.out.println("Password wrong, try again");         //PERIPTOSH LATHOS PASSWORD
+						System.out.println("Password wrong, try again");         //if the entered password was wrong
 					    return false;
 					}	
 			}
@@ -87,7 +87,9 @@ public class Registry {
 		return false;
 	}
 	
-	public boolean register(String email, String password) {
+	
+	
+	public boolean register(String email, String password) { // If the user chose to register a new account (doesn't have an account)
 		try {
 			String addUserQuery = "INSERT INTO usertable (email, password)" + "VALUES (?,?)";
 			prep = connect.prepareStatement(addUserQuery);
@@ -107,6 +109,8 @@ public class Registry {
 		return true;
 	}
 	
+	
+	// Method that returns the saved path to a user's pdf file, containing their covid-certificate from the database
 	public String getFilePath(String email){ // it returns null (as a String) if there is no path for the PDF file
 		String pathToPDF=null;
 		try {
@@ -125,6 +129,9 @@ public class Registry {
 		return pathToPDF;
 	}
 	
+	
+	
+	// Method that saves the selected path to a user's pdf file, containing their covid-certificate in the database
 	public void setFilePath(String email, String newPath) { //changes the path to PDF.
 		try {
 			String addPDFPathQuery = "UPDATE usertable SET pdfPath=? WHERE email=" + "'"+ email + "'" +";";
@@ -140,7 +147,7 @@ public class Registry {
 		}
 	}
 	
-	
+	// Method that returns the saved expiration date of to a user's pdf file, containing their covid-certificate from the database
 	public String getPdfDate(String email){ // it returns null (as a String) if there is no date for the PDF file
 		String dateofPDF=null;
 		try {
@@ -159,7 +166,7 @@ public class Registry {
 		return dateofPDF;
 	}
 	
-	
+	// Method that saves the expiration date of to a user's pdf file, containing their covid-certificate from the database
 	public void setPdfDate(String email, String newWalletDate) { 
 		try {
 			String addWalletDateQuery = "UPDATE usertable SET walletDate=? WHERE email=" + "'"+ email + "'" +";";
@@ -175,7 +182,7 @@ public class Registry {
 		}
 	}
 	
-	
+	 // Method that saves a user's seat-information in the database
 	public void uploadSeat(String email, int classID, int seatId, String start, String end, String date) {
 		try {
 			String addSeatQuery = "INSERT INTO seatlog (email, classID, seatID, starttime, endtime, date)" + "VALUES (?,?,?,?,?,?)";
@@ -197,7 +204,7 @@ public class Registry {
 	}
 	
 	
-	
+	// Method that saves a user's date of infection in the database
 	public void setInfectionDate(String email, String date) {
 		try {
 			String addInfectionDateQuery = "UPDATE usertable SET infectionDate=? WHERE email=" + "'"+ email + "'" +";";
@@ -213,7 +220,7 @@ public class Registry {
 		}
 	}
 	
-	
+	// Method that returns a user's date of infection from the database
 	public String getInfectionDate(String email){
 		String dateofInfection=null;
 		try {
@@ -233,12 +240,13 @@ public class Registry {
 	}
 	
 	
-	
+	// Method that fetches all the previous seats the user has sat on, 3 days before they where diagnosed with covid
+	// from the database
 	public  ArrayList<String> getPreviousSeats(String email) {
 		
 		
-		//Classroom c1= new Classroom(1);
-		 ArrayList<String> UserCodes = new ArrayList<String>() ;
+		
+		ArrayList<String> UserCodes = new ArrayList<String>() ;// array that stores all the user's seat-info 3 days before diagnosis
 		String code= null;
 		String[] date = getInfectionDate(email).split("/");
 		
@@ -246,7 +254,7 @@ public class Registry {
 	   	 Calendar cal_of= new GregorianCalendar(); //MERA POY NOSISE
 		 
 	   	     ArrayList<Calendar> cals= new ArrayList<Calendar>();
-			 cal_of.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[0]));						 
+			 cal_of.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[0])); // MERA NOSISIS			 
 			 cal_of.set(Calendar.MONTH, Integer.parseInt(date[1]) -1);
 			 cal_of.set(Calendar.YEAR, Integer.parseInt(date[2]));
 			 cals.add(cal_of);
@@ -281,7 +289,7 @@ public class Registry {
 	     			
 	     			}
 	     			statement.close();
-	     			//UserCodes.add(code);
+	     			
 	     		}
 
 	        	 catch (SQLException e) {
@@ -298,7 +306,7 @@ public class Registry {
 	         }
 		
 		
-	
+	// method that notifies other users of the app that were sat next to the infected user, it stores messages in the database
 	public ArrayList <String> notifyPotentiallyInfected(ArrayList <String> UserCodes, String email) {
 		Classroom c1= new Classroom(1);
 		String[] data;
@@ -320,7 +328,7 @@ public class Registry {
 			seat=c1.getSeatInfo(seatID,classID).toString();
 			
 			nearSeats= seat.replace("[", "").replace("]", "").replace(" ", "").replace(" ", "").split(",");
-			//KANE PRINT NA DEIS
+			
 			for (int i1=0; i1< nearSeats.length; i1++) {
 				
 				if (Integer.parseInt(nearSeats[i1])!=0) {
@@ -372,7 +380,7 @@ public class Registry {
 		
 	}
 	
-	
+	// Method that updates the notifications stored in the database
 	public void updateNotification(String email, String message, int type) {  
 		String updateQuery;
 		try {
@@ -380,7 +388,8 @@ public class Registry {
 			if (type==3) {  //for types check Notification class
 				String existedNotification = getNotification(type, email);
 				if(existedNotification!= null) {
-					message = existedNotification + " $$" + message;
+					message = existedNotification + " $$" + message; // the different type 3 messages are stored in the same
+					                                                 //string, so we split them wherever there is "$$" in between
 				}
 			}
 			updateQuery = "UPDATE usertable SET notiftype"+type+ "=" +"'" + message+ "'" + "WHERE email=" +"'" + email + "'" + ";";				
@@ -395,7 +404,7 @@ public class Registry {
 		}
 		
 	}
-	
+	// Method that fetches the notifications stored from the database
 	public String getNotification(int type, String email){
 		String message=null;
 		try {

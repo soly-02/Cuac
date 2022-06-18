@@ -21,7 +21,7 @@ public class SignUp_Register extends JFrame {
 
 	private JPanel contentPane;
 	//To email kai to password molis patietai kapoio koympi(sign in/ register) stelnontai ston server.
-	// an ola einai komple vazei mesa ton xristi alliws error kai 3anadokimazei
+	
 	private JTextField emailField;
 	private JPasswordField passwordField;
 	private String email;
@@ -78,10 +78,10 @@ public class SignUp_Register extends JFrame {
 		signIn.setBounds(73, 297, 161, 36);
 		panel.add(signIn);
 		
-		JLabel lblNewLabel = new JLabel("Enter Email");
-		lblNewLabel.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 24));
-		lblNewLabel.setBounds(170, 34, 161, 27);
-		panel.add(lblNewLabel);
+		JLabel lblEmail = new JLabel("Enter Email");
+		lblEmail.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 24));
+		lblEmail.setBounds(170, 34, 161, 27);
+		panel.add(lblEmail);
 		
 		JButton Register = new JButton("Register");
 		Register.setForeground(Color.WHITE);

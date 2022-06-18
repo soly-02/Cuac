@@ -38,6 +38,7 @@ public class MainScreen extends JFrame {
 	 * Create the frame.
 	 */
 	public MainScreen(User u) {
+		// adding gui components
 		setResizable(false);
 		this.u = u;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
@@ -179,7 +180,7 @@ public class MainScreen extends JFrame {
 		 
 		 public void countdown() {
 			 
-			 //GIA NA ARXISEI TO COUNTDOWN
+			 //countdown of days of user's quarantine begins
 			 Thread clock= new Thread() {
 				 String dateInfection;
 				 public void run() {
@@ -201,9 +202,9 @@ public class MainScreen extends JFrame {
 								                     
 								}
 							 
-						 Calendar cal_now= new GregorianCalendar();
-						 Calendar cal_of= new GregorianCalendar();
-						 Calendar cal_end= new GregorianCalendar();
+						 Calendar cal_now= new GregorianCalendar();  //calendar of current date
+						 Calendar cal_of= new GregorianCalendar();    //calendar of date of infection
+						 Calendar cal_end= new GregorianCalendar();   //calendar of date when quarantine ends
 						 
 						 int now_day = cal_now.get(Calendar.DAY_OF_MONTH);
 						 int now_month = cal_now.get(Calendar.MONTH ) ;
@@ -229,19 +230,16 @@ public class MainScreen extends JFrame {
 						 cal_end.add(Calendar.DAY_OF_MONTH, 5);
 						 
 						
-					//	 System.out.println("Date now: "+ cal_now.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_now.get(Calendar.MONTH )+1)+"/"+ cal_now.get(Calendar.YEAR)+
-					//			                      "Date of: "+ cal_of.get(Calendar.DAY_OF_MONTH)+"/"+(cal_of.get(Calendar.MONTH )+1)+"/"+ cal_of.get(Calendar.YEAR) +
-					//	                              "Date end: "+ cal_end.get(Calendar.DAY_OF_MONTH)+"/"+ (cal_end.get(Calendar.MONTH )+1)+"/"+ cal_end.get(Calendar.YEAR)); 
-						 
+					
 						 long noOfDaysBetween = ChronoUnit.DAYS.between(cal_now.toInstant(), cal_end.toInstant());
-					//	 System.out.println("AAA "+noOfDaysBetween);
-						 if (noOfDaysBetween>0)
+				
+						 if (noOfDaysBetween>0) //checks how many days are left and updates the countdown label accordingly 
 							  Quarantine_Countdown.setText("Μέρες Καραντίνας Που Απομένουν: "+noOfDaysBetween);
 						
 						 if (noOfDaysBetween==0)
 							    Quarantine_Countdown.setText("");
 						 
-						 if (previousData!= noOfDaysBetween ) {
+						 if (previousData!= noOfDaysBetween ) { // if a date has changed, updates the info on the database
 							 u.getUserNotifications().updateMessage(2,"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες" );
 							 u.updateNotification(2,u.getEmail(),"Η καραντίνα σας λήγει σε : "+noOfDaysBetween+ " μέρες");
 						 }

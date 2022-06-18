@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 public class User {
-	
+	// class for all the user's information
 	private String email;
 	private String password;
 	private String myPDFPath;
@@ -33,7 +33,7 @@ public class User {
 	
 	
 	
-	
+	// sends credentials of a new account to the database
 	public boolean sendRegCredentials() {
 		if(registry.register(email, password)) {
 			return true;
@@ -41,7 +41,7 @@ public class User {
 			return false;
 		}
 	
-	
+	// checks credentials of an account attempting to login to the database
 	public boolean sendLogCredentials() {
 		if(registry.login(email, password)) {
 			return true;
@@ -52,13 +52,13 @@ public class User {
 	
 	
 	
-	
+	// fetches the saved path of a pdf file(covid certificate) in a users computer from the database
 	public String getmyPdfPath() {
 		myPDFPath=registry.getFilePath(email);
 		
 		return myPDFPath;
 	}
-	
+	// Updates the previous path to pdf file in the database
 	public void updatePDFPath(String newPath) {
 		myPDFPath = newPath;
 		registry.setFilePath(email, myPDFPath);
@@ -72,13 +72,13 @@ public class User {
 	
 	
 	
-	
+	//returns path to pdf file
 	public String getmyPdfDate() {
 		walletExpirDate=registry.getPdfDate(email);
 		
 		return walletExpirDate;
 	}
-	
+	// updates the pdf certificate expiration date
 	public void updatePDFDate(String newDate) {
 		walletExpirDate = newDate;
 		registry.setPdfDate(email, newDate);
@@ -112,7 +112,7 @@ public class User {
 		
 	}
 	
-	
+	// Method that scans the database for people seated nearby our infected user, and send them a message with a warning
 	public void findPeopleToNotify(String date) {
 		String[] info;
 		String[] personalInfo;
@@ -145,32 +145,32 @@ public class User {
 	
 	
 	
-	
+	// Method that saves the date the user was infected in the database
 public void setInfectionDate(String date) {
 		registry.setInfectionDate(email, date);
 		
 		
 	}
 	
-	
+//Method that returns the date the user was infected from the database
 	public String getInfectionDate() {
 		
 		return registry.getInfectionDate(email);
 		
 		
 	}
-	
+	// Method that updates the notifications in the database
 	public void updateNotification( int type, String someEmail, String message) {
 	registry.updateNotification(someEmail, message, type);
 	}
 	
-	
+	// Method that returns a certain type of message from the database
 	public String getNotifFromDB(int type) {
 		return registry.getNotification(type, email);
 			
 	}
 	
-	
+	// Saves a user's seat-info
 	public void sendSeatLog(String Email, String classId,String startTime, String endTime,  String date, 
 			String seatEnter ) {
 		

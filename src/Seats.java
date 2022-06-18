@@ -1,6 +1,6 @@
 import java.sql.Time;
 import java.util.Date;
-
+//Helper class for managing the seats
 public class Seats {
 	private Integer seatNum;
 	private Date date;

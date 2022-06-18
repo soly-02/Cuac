@@ -4,11 +4,11 @@ public class Classroom {
 
 	private int classId;
 	private int classSize;
-	private ArrayList <SeatInfo> classInfo = new ArrayList();
+	private ArrayList <SeatInfo> classInfo = new ArrayList(); // Array in which the information of each seat in a classroom is stored
 	
-	public Classroom(int classId) {
-		this.classId= classId;
-		if (classId==1) {
+	public Classroom(int classId) {   // The construction of the classrooms, 
+		this.classId= classId; // class id indicates which one of the 3 classrooms was chosen
+		if (classId==1) {  // if the chosen classroom was 1 (Amfitheatro 12)
 			this.classSize=88;
 			
 			//Making of class 1 (aithousa 1)
@@ -16,7 +16,7 @@ public class Classroom {
 
 			// ****************1ST ROW****************
 			
-			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);
+			SeatInfo s1= new SeatInfo(1,2,3,12,13,0,0,0,0,0,0);  
 			classInfo.add(s1);
 			SeatInfo s2= new SeatInfo(2,1,3,4,12,13,14,0,0,0,0);
 			classInfo.add(s2);
@@ -218,7 +218,7 @@ public class Classroom {
 		
 		
 		
-		else if (classId==2) {
+		else if (classId==2) {  // if the chosen classroom was 2 (lab 234)
 			this.classSize=35;
 			
 			//Making of class 2 (aithousa 2)
@@ -308,7 +308,7 @@ public class Classroom {
 		
 		//Making of class 1 (aithousa 3)
 		
-		else if (classId==3) {
+		else if (classId==3) { // if the chosen classroom was 3 (KYD)
 			this.classSize=64;
 			
 		// ****************1ST LAB****************
@@ -495,8 +495,8 @@ public class Classroom {
 	}
 	
 	
-	public class SeatInfo{
-		private int seatId;
+	public class SeatInfo{  // SeatInfo is a class that stores the information of each seat, that includes the id number of the seat(seatId),
+		private int seatId;// and also the nearby seats that would need to be tested if the student who sat on seatId was infected (ns1~ns10)
 		private ArrayList <Integer> nearbySeats= new ArrayList<Integer>();
 		
 		public SeatInfo (int seatId, int ns1, int ns2, int ns3, int ns4,
@@ -541,11 +541,11 @@ public class Classroom {
 			
 		}
 	
-	public ArrayList <Integer> getSeatInfo(int SeatId,int ClassId ){
+	public ArrayList <Integer> getSeatInfo(int SeatId,int ClassId ){ // if a person was infected this method calculates the seats than need to be notified
 		Classroom c= new Classroom(ClassId);
 		for (int i=0; i<c.getclassInfo(ClassId).size();i++) {
 			if (c.getclassInfo(ClassId).get(i).getSeatId()== SeatId) {
-				System.out.println(c.getclassInfo(ClassId).get(i).getNearSeatInfo().toString());
+				//System.out.println(c.getclassInfo(ClassId).get(i).getNearSeatInfo().toString());
 				return c.getclassInfo(ClassId).get(i).getNearSeatInfo();
 				
 			}

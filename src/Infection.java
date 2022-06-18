@@ -1,5 +1,5 @@
 
-public class Infection {
+public class Infection { // stores current infection data
 
 	private boolean covidStatus;
 	private String date;
