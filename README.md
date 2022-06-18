@@ -57,6 +57,8 @@
 3. Τρέξτε το αρχείο "Couac1.0.jar"
 4. Καλώς ήρθατε στην εφαρμογή μας!
 
+_(demo credentials: dummy@gmail.com/Passw0rd)_
+
 Αν προτιμάτε την εκτέλεση κατευθείαν από τον πηγαίο κώδικα θα ήταν προτιμότερο να είσαγετε ολόκληρο το repository ως ένα [Eclipse](https://www.eclipse.org/downloads/) project.
 1. `git clone https://github.com/soly-02/Cuac`
 2. Εφόσον ανοίξετε το Eclipse εισάγετε τον φακελο Cuac  (_File->Import->General->Existing Project into Workspace_)
