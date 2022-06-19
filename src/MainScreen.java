@@ -137,7 +137,7 @@ public class MainScreen extends JFrame {
 				
 				String action = e.getActionCommand();
 				if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u0398\u03AD\u03C3\u03B7\u03C2"))
-				{// anoigw thn dhlwsh thesewn
+				{// opens a window for the user to save their seat
 					
 					EnterSeat eSeat= new EnterSeat(u);   
 				    eSeat.setVisible(true);
@@ -145,7 +145,7 @@ public class MainScreen extends JFrame {
 				
 				
 				else if (action.equals("Covid Wallet"))
-					// anoigw to covid wallet
+					// opens covid wallet
                  {
 					
 					CovidWallet CovWal= new CovidWallet(u);
@@ -154,7 +154,7 @@ public class MainScreen extends JFrame {
 					
 					
 				else if (action.equals("\u0394\u03AE\u03BB\u03C9\u03C3\u03B7 \u039D\u03CC\u03C3\u03B7\u03C3\u03B7\u03C2"))
-					// anoigw to infection page
+					// opens infection page
                       {
 					
 					InfectionScreen InfScr= new InfectionScreen(u);
@@ -164,7 +164,7 @@ public class MainScreen extends JFrame {
 				
 				
 				else if (action.equals("\u0395\u03B9\u03B4\u03BF\u03C0\u03BF\u03B9\u03AE\u03C3\u03B5\u03B9\u03C2"))
-					// anoigw ths notifications 
+					// opens notifications 
                 {
 					
 				NotificationsScreen NotScr= new NotificationsScreen(u);

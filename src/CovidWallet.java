@@ -58,10 +58,16 @@ public class CovidWallet extends JFrame{
 			this.file = new File(filePath);
 		}
 		pdfDate = u.getmyPdfDate();//IT CAN BE NULL too
-		if(!pdfDate.equals("null")) {
+		if (!(pdfDate==(null))) {
+		if(!(pdfDate.equals("null"))) {
 			expirDateField.setText(pdfDate);
 			countdown();
 		}
+		
+		
+		
+		}
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("images\\UOMLOGOGR22.png"));
 		setTitle("Cuac");
 		frame.setTitle("Covid Wallet"); //Sets the title.
