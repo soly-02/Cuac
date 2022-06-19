@@ -26,7 +26,7 @@ public class SignUp_Register extends JFrame {
 	private JPasswordField passwordField;
 	private String email;
 	private String password;
-	private String passRegex = "^(?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,12}$";
+	private String passRegex = "^(?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{6,12}$";
 	private Pattern pattern =Pattern.compile(passRegex);
 	
 	private Infection i;
